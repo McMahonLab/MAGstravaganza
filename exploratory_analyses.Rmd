@@ -1,0 +1,37 @@
+---
+title: "MAG_exploratory_analyses"
+author: "Alex Linz"
+date: "May 16, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# Packages
+
+# Path - change as needed
+path2repo <- "C:/Users/amlin/Desktop/MAGstravaganza/"
+
+# Files
+coverage <- read.table(paste(path2repo, "combined_MAGS_pathwaycoverage.txt", sep=""), sep = "\t", header = T)
+rxns <- read.table(paste(path2repo, "combinedMAGS_pws_rxns.orfs.txt", sep=""), sep = "\t", header = T)
+metadata <- read.csv(paste(path2repo, "MAG_metadata.csv", sep=""))
+pathways <- read.csv(paste(path2repo, "redox_pathways.csv", sep=""))
+
+```
+
+## Approach
+Ultimately, the data I want to generate is a map of correlation strength between pathways in the MAGs. In other words, how often are specific nutrient cycling pathways found in the same genome?
+
+First, I will parse my list of pathways to just the ones I'm interested in using the "rxns" dataset. Next, I will use "coverage" to screen pathways based on their completeness. I will then make a dataset of presence/absence in the MAGs for each pathway, and weight absences by the completeness estimates of the MAGs in "metadata". I will correlate the presence/absence data to identify significant connections between pathways, then quantify how often they are found together in our MAGS.
+
+
+```{r cars}
+summary(cars)
+```
+
+
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
