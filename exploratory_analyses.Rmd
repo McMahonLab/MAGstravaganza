@@ -24,14 +24,36 @@ Ultimately, the data I want to generate is a map of correlation strength between
 
 First, I will parse my list of pathways to just the ones I'm interested in using the "rxns" dataset. Next, I will use "coverage" to screen pathways based on their completeness. I will then make a dataset of presence/absence in the MAGs for each pathway, and weight absences by the completeness estimates of the MAGs in "metadata". I will correlate the presence/absence data to identify significant connections between pathways, then quantify how often they are found together in our MAGS.
 
+## Parse pathways
 
-```{r cars}
-summary(cars)
+Based on reading the Metacyc website, I've chosen pathways associated with the inorganic nitrogen, carbon and sulfur cycles. Interestingly, no nitrite reduction was identified in the MAGs, despite being present in IMG. Are nitrate and nitrite reduction indistinguishable in Metapathways? 
+
+There are many, many other pathways involved in the carbon cycle, but because of the high number of pathways, I chose to include only carbon fixation. This is an area where the project could be expanded. 
+
+```{r, parse}
+# Keep only pathways in "coverage" and "rxns" that are present in "pathways"
+
+parse_coverage <- coverage[which(coverage$PWY_COMMON_NAME %in% pathways$PWY_COMMON_NAME == T), ]
+parse_rxns <- rxns[which(rxns$PWY_COMMON_NAME %in% pathways$PWY_COMMON_NAME == T), ]
 ```
 
+## Screen pathways based on coverage
 
+What is the distribution of how complete these pathways are?
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r, dist}
+hist(parse_coverage$NUM_COVERED_REACTIONS / parse_coverage$NUM_REACTIONS, main = "Coverage of nutrient cycling pathways")
+```
+
+I'd also like to incorporate which reactions are present, as the presence or absence of a unique, required step can change our judgement calls about the presence or absence of a pathway. For example, the presence of "RIBULOSE-BISPHOSPHATE-CARBOXYLASE-RXN", also known as the Rubisco step, is required and unique to carbon fixation. If only this gene was present, you could still conclude with reasonable confidence that the organism fixes carbon. If the rest of the pathway but not this gene was present, it would be more difficult, as many of these reactions overlap with other pathways.
+
+I'll go digging on MetaCyc to identify the key reactions for the pathways I'm interested in and add them to the metadata file.
+
+The parameters I'm going to specify are 
+- If key enzyme is present, 50% of pathway must be covered
+- If key enzyme is not present, 70% of pathway must be covered
+
+```{r, coverage, echo=FALSE}
+
 ```
 
