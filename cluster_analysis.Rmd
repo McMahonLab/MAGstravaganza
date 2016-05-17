@@ -1,0 +1,65 @@
+---
+title: "cluster_analysis"
+author: "Alex Linz"
+date: "May 17, 2016"
+output: html_document
+---
+
+```{r setup, }
+# Packages
+library(reshape2)
+library(vegan)
+
+# Path - change as needed
+path2repo <- "C:/Users/amlin/Desktop/MAGstravaganza/"
+
+# Files
+coverage <- read.table(paste(path2repo, "combined_MAGS_pathwaycoverage.txt", sep=""), sep = "\t", header = T, colClasses = c(rep("character", 3), rep("numeric", 3)))
+rxns <- read.table(paste(path2repo, "combinedMAGS_pws_rxns.orfs.txt", sep=""), sep = "\t", header = T, colClasses = c("character"))
+metadata <- read.csv(paste(path2repo, "MAG_metadata.csv", sep=""), colClasses = c("character", "numeric", "numeric", "character"))
+pathways <- read.csv(paste(path2repo, "redox_pathways.csv", sep=""), colClasses = c("character"))
+
+```
+
+#### Questions I want to answer with cluster analysis of pathway presence/absence:
+* Do genomes cluster by lake or by phylum (or at all?)
+* Do pathways cluster at all? (could indicate organism-level trends in physiology)
+
+## Approach
+
+Create a presence absence table of every pathway for every gene. Then perform ordination using Bray-Curtis as the distance metric.
+
+```{r}
+# keep only pathways with at least 50% coverage
+
+percent_coverage <- coverage$NUM_COVERED_REACTIONS / coverage$NUM_REACTIONS
+parsed_coverage <- coverage[which(percent_coverage > .5), c(1, 3)]
+pa_table <- dcast(parsed_coverage, SAMPLE ~ PWY_COMMON_NAME, fun.aggregate = length)
+rownames(pa_table) <- pa_table[,1]
+pa_table <- pa_table[,2:dim(pa_table)[2]]
+
+# Try out some PCoAs
+
+# by pathway
+pcoa <- betadisper(vegdist(pa_table, method = "bray"), group = factor(rep("pathway", dim(pa_table)[1]), levels = c("pathway")))
+plot(scores(pcoa)$sites[,c(1,2)])
+# by genome
+pcoa <- betadisper(vegdist(t(pa_table), method = "bray"), group = factor(rep("pathway", dim(pa_table)[2]), levels = c("pathway")))
+plot(scores(pcoa)$sites[,c(1,2)])
+
+# Looks like there are two clusters by genome. Add lake designation and color code
+metadata$Lake <- substr(metadata$Genome_Name, start = 1, stop = 2)
+lakekey <- rep(NA, dim(pa_table)[1])
+hits <- match(substr(rownames(pa_table), start = 2, stop = 11), metadata$IMG_Genome_ID)
+lakekey[which(is.na(hits) == F)] <- metadata$Lake[hits]
+
+scores <- scores(pcoa)
+
+plot.pcoa <- data.frame(scores$sites, lakekey)
+colnames(plot.pcoa) <- c("PCoA1", "PCoA2", "Lake")
+
+axis1 <- round(pcoa$eig[1]/sum(pcoa$eig), digits = 2)
+axis2 <- round(pcoa$eig[2]/sum(pcoa$eig), digits = 2)
+
+
+ggplot(data=plot.pcoa, aes(x = PCoA1, y = PCoA2, color = Lake)) + geom_point() 
