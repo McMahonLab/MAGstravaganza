@@ -62,4 +62,4 @@ axis1 <- round(pcoa$eig[1]/sum(pcoa$eig), digits = 2)
 axis2 <- round(pcoa$eig[2]/sum(pcoa$eig), digits = 2)
 
 
-ggplot(data=plot.pcoa, aes(x = PCoA1, y = PCoA2, color = Lake)) + geom_point() 
+ggplot(data=plot.pcoa, aes(x = PCoA1, y = PCoA2)) + geom_point() 
