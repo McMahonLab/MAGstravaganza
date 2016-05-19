@@ -1,0 +1,46 @@
+---
+title: "Functional Analysis"
+author: "Alex Linz"
+date: "May 19, 2016"
+output: html_document
+---
+
+```{r, setup}
+path2repo <- "C:/Users/amlin/Desktop/MAGstravaganza/"
+
+# Files - using curated sets
+rxns <- read.csv(paste(path2repo, "curated_rxns.csv", sep=""), header = T, colClasses = c("character"))
+metadata <- read.csv(paste(path2repo, "revised_MAG_metadata.csv", sep=""), colClasses = c("character", "numeric", "numeric", "character"))
+pathways <- read.csv(paste(path2repo, "metacyc_pathway_tree.csv", sep=""), colClasses = c("character"))
+```
+
+### Research Questions
+
+What pathways are in each lake, and how many representatives of each pathway are there?
+Are there groups of pathways often found together on the same genome?
+Are pathways indicative of phylogeny?
+
+```{r, lakes}
+
+sample_pwy <- paste(rxns$SAMPLE, rxns$PWY_COMMON_NAME)
+unique_sample_pwy <- unique(sample_pwy)
+genomes <- substr(unique_sample_pwy, start = 2, stop = 11)
+pwys <- substr(unique_sample_pwy, start = 13, stop = 100)
+
+# For each genome, I want to know which lake it came from and what general category it has (level 2)
+
+pathway_table <- matrix(NA, nrow = dim(metadata)[1], ncol = length(unique(pathways$Level2)))
+rownames(pathway_table) <- metadata$IMG_Genome_ID
+colnames(pathway_table) <- unique(pathways$Level2)
+
+pasted_pathways <- apply(pathways, 1 ,paste ,collapse="_")
+
+for(i in 1:dim(pathway_table)[1]){
+  genome_table <- rxns[grep(rownames(pathway_table)[i], rxns$SAMPLE), ]
+  genome_pwys <- unique(genome_table$PWY_COMMON_NAME)
+  genome_cats <- pathways$Level2[grep(genome_pwys, pasted_pathways)]
+  for(j in 1:dim(pathway_table)[2]){
+    hits <- pasted_pathways[grep(colnames(pathway_table)[j], pasted_pathways)]
+    pathway_table[i, j] <- length(grep())
+    }
+}
