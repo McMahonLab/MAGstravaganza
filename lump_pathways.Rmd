@@ -12,6 +12,8 @@ path2repo <- "C:/Users/amlin/Desktop/MAGstravaganza/"
 rxns <- read.csv(paste(path2repo, "curated_rxns.csv", sep=""), header = T, colClasses = c("character"))
 metadata <- read.csv(paste(path2repo, "revised_MAG_metadata.csv", sep=""), colClasses = c("character", "numeric", "numeric", "character"))
 pathways <- read.csv(paste(path2repo, "metacyc_pathway_tree.csv", sep=""), colClasses = c("character"))
+
+library(ggplot2)
 ```
 
 ### Research Questions
@@ -21,26 +23,126 @@ Are there groups of pathways often found together on the same genome?
 Are pathways indicative of phylogeny?
 
 ```{r, lakes}
+# add columsn for lake and for level2 in Metacyc.
 
-sample_pwy <- paste(rxns$SAMPLE, rxns$PWY_COMMON_NAME)
-unique_sample_pwy <- unique(sample_pwy)
-genomes <- substr(unique_sample_pwy, start = 2, stop = 11)
-pwys <- substr(unique_sample_pwy, start = 13, stop = 100)
+rxns$LAKE <- substr(metadata$Genome_Name, start = 1, stop = 2)[match(substr(rxns$SAMPLE, start = 2, stop = 11), metadata$IMG_Genome_ID)]
 
-# For each genome, I want to know which lake it came from and what general category it has (level 2)
+pasted_pathways <- do.call(paste, c(pathways, sep = "_"))
 
-pathway_table <- matrix(NA, nrow = dim(metadata)[1], ncol = length(unique(pathways$Level2)))
-rownames(pathway_table) <- metadata$IMG_Genome_ID
-colnames(pathway_table) <- unique(pathways$Level2)
+# escape special regex characters in the common name
 
-pasted_pathways <- apply(pathways, 1 ,paste ,collapse="_")
+rxns$PWY_COMMON_NAME <- gsub("\\(", "\\\\(", rxns$PWY_COMMON_NAME)
+rxns$PWY_COMMON_NAME <- gsub("\\[", "\\\\[", rxns$PWY_COMMON_NAME)
+rxns$PWY_COMMON_NAME <- gsub("\\\\", "\\\\\\", rxns$PWY_COMMON_NAME)
+rxns$PWY_COMMON_NAME <- gsub("<sup>", "", rxns$PWY_COMMON_NAME)
+rxns$PWY_COMMON_NAME <- gsub("</sup>", "", rxns$PWY_COMMON_NAME)
 
-for(i in 1:dim(pathway_table)[1]){
-  genome_table <- rxns[grep(rownames(pathway_table)[i], rxns$SAMPLE), ]
-  genome_pwys <- unique(genome_table$PWY_COMMON_NAME)
-  genome_cats <- pathways$Level2[grep(genome_pwys, pasted_pathways)]
-  for(j in 1:dim(pathway_table)[2]){
-    hits <- pasted_pathways[grep(colnames(pathway_table)[j], pasted_pathways)]
-    pathway_table[i, j] <- length(grep())
-    }
+level2 <- c()
+missing <- c()
+for(i in 1:dim(rxns)[1]){
+  x <- grep(rxns$PWY_COMMON_NAME[i], pasted_pathways)
+  if(length(x) == 1){
+    level2[i] <- pathways[x, 2]
+  }else if (length(x) > 1){
+    level2[i] <- pathways[x[1], 2]
+  }else{
+    missing <- append(missing, rxns$PWY_COMMON_NAME[i], length(missing))
+  }
+  if(i %% 100 == 0){
+     print(i)
+  }
 }
+
+# 9 reactions missing. Not bad! I'll go back later and add these in manually.
+
+rxns$CATEGORY <- level2
+
+length(unique(level2)) # 51 categories, pretty manageable. Make a heatmap of counts by category by lake
+
+lake_table <- table(rxns$CATEGORY, rxns$LAKE)
+lake_table <- prop.table(lake_table, 2)
+
+ggplot(data = melt(lake_table), aes(x = Var2, y = Var1, fill = value)) + geom_tile() + scale_fill_gradient2(low = "red", mid = "white", high = "green", midpoint = 0.05)
+
+# 4 categories dominate all groups  - amino acid biosynthesis, nucleoside/tide biosynthesis, cofactors and vitamins synthesis, and fatty acid and lipid biosynthesis. Makes sense, but I'm interested inpathways that are not so central.
+melted_lake <- melt(lake_table)
+ggplot(data = melted_lake[which(melted_lake$value < 0.06), ], aes(x = Var2, y = Var1, fill = value)) + geom_tile() + scale_fill_gradient2(low = "red", mid = "white", high = "green", midpoint = 0.02)
+
+
+# Try comparing two lakes at a time
+
+barplot(abs(lake_table[,1] - lake_table[,2]), name.args = rownames(lake_table), main = "ME vs TE", las = 2)
+
+lake_table * 100
+
+# It looks like gene content in genomes from different lakes is remarkably similar at this level. Nothing is more than 3% apart, and most are far less.
+
+# If I move to level 3, do I get the same results?
+
+level3 <- c()
+missing <- c()
+for(i in 1:dim(rxns)[1]){
+  x <- grep(rxns$PWY_COMMON_NAME[i], pasted_pathways)
+  if(length(x) == 1){
+    level3[i] <- pathways[x, 3]
+  }else if (length(x) > 1){
+    level3[i] <- pathways[x[1], 3]
+  }else{
+    missing <- append(missing, rxns$PWY_COMMON_NAME[i], length(missing))
+  }
+  if(i %% 100 == 0){
+     print(i)
+  }
+}
+
+rxns$CATEGORY <- level3
+lake_table <- table(rxns$CATEGORY, rxns$LAKE)
+lake_table <- prop.table(lake_table, 2)
+lake_table * 100
+
+# Still very similar across lakes
+```
+
+What about at the gneome level?
+
+```{r, genomelevel}
+
+genome_table <- table(rxns$CATEGORY, rxns$SAMPLE)
+
+# what proportion of the time are pathways found together?
+
+pwy_together <- matrix(NA, dim(genome_table)[1], dim(genome_table)[1])
+for(i in 1:dim(genome_table)[1]){
+  for(j in 1:dim(genome_table)[1]){
+    pwy1 <- genome_table[i,]
+    pwy2 <- genome_table[j,]
+    pwy_together[i,j] <- length(which(pwy1 > 0 & pwy2 > 0))/ length(pwy1)
+  }
+}
+rownames(pwy_together) <- colnames(pwy_together) <- rownames(genome_table)
+hist(pathway_together)
+
+x <- rownames(pwy_together)[arrayInd(which(pwy_together > 0.75), dim(pwy_together))[,1]]
+y <- colnames(pwy_together)[arrayInd(which(pwy_together > 0.75), dim(pwy_together))[,2]]
+
+strong_pwy <- data.frame(x, y)
+# all pretty central - nucleotides, sugars, and amino acids
+
+# what proportion of the time time to genomes share pathways?
+
+genome_together <- matrix(NA, dim(genome_table)[2], dim(genome_table)[2])
+for(i in 1:dim(genome_table)[2]){
+  for(j in 1:dim(genome_table)[2]){
+    gen1 <- genome_table[,i]
+    gen2 <- genome_table[,j]
+    genome_together[i,j] <- length(which(gen1 > 0 & gen2 > 0))/ length(gen1)
+  }
+}
+rownames(genome_together) <- colnames(genome_together) <- colnames(genome_table)
+hist(genome_together)
+
+x <- rownames(genome_together)[arrayInd(which(genome_together > 0.35), dim(genome_together))[,1]]
+y <- colnames(genome_together)[arrayInd(which(genome_together > 0.35), dim(genome_together))[,2]]
+
+strong_genomes <- data.frame(x, y)
+write.csv(strong_genomes, file = paste(path2repo, "associated_genomes.csv", sep = ""), row.names = F)
