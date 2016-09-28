@@ -1,0 +1,51 @@
+LIT REVIEW
+05/18/2016
+
+After running exploratory_analyses.Rmd, I found that I do not have the necessary power to test my original hypothesis.
+The issues are:
+- Not enough pathways identified
+- Incomplete genomes makes confirming absence of pathways nearly impossible
+- Epilimnia have lower diversity of pathways than hypolimnia
+- Huge numbers of pairwise comparisons
+
+I next tried cluster analysis via ordination. I found that genomes did not cluster by lake. There were two dispersed clusters of pathways, but I couldn't tell why they were different.
+
+My goal for today is to do a lit review and see if anyone else has run MetaPathways on MAGS, or if there are any ideas for using MetaPathways that I haven't encountered before.
+I'm starting my search at Web of Science, looking at papers that have cited the MetaPathways publications.
+
+http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4729913/pdf/fmicb-06-01531.pdf
+Metagenomics of Pavilon Lake
+- could make venn diagrams of pathways shared and unique in sampling sites
+- could analyze differences in pathway content by phylogeny
+
+http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4616946/pdf/zam7924.pdf
+Chris' coalbed paper
+- identify weird pathways and focus on those
+- Group organisms by important pathways (aromatic degradation, fermentation, cellulose degradation)
+
+The other papers I've found deal with only metagenomes (not MAGs) or genomes of cultured isolates. 
+
+It seems like publishing 270 genomes with pathway predictions and interpretations of what those pathways mean ecologically would be a nice paper.
+Are there any pathways or groups of pathways in the identification table that stick out to me?
+- lots of amino acid biosynthesis/degradation
+- chitin degradataion
+- sulfur and nitrogen cycling
+- vitamin biosynthesis/degradation
+- ethanol, methyloglyoxal, glycerol , ethanolamine degradation
+- methanogenesis/methylotrophy
+- photosynthesis
+- carbon/nitrogen fixation
+- cellulose/vanillin degradation
+- cyanophycin
+- aromatic compound degradation
+- and of course, central metabolism - things like respiration, fermentation, reductive TCA
+
+Plan of action:
+- Take only pathways that are 50% complete
+- Manually go through them and add a category designation (for example, central metabolism, cellulose degradation, sulfur reduction)
+- For each genome and lake, condense down to # of pathways in each category
+Note: need to look up the lakes of the genomes not in the metadata file
+
+
+
+

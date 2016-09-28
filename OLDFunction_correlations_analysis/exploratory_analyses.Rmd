@@ -1,0 +1,330 @@
+---
+title: "MAG_exploratory_analyses"
+author: "Alex Linz"
+date: "May 16, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# Packages
+
+# Path - change as needed
+path2repo <- "C:/Users/Alex/Desktop/MAGstravaganza/"
+
+# Files
+coverage <- read.table(paste(path2repo, "combined_MAGS_pathwaycoverage.txt", sep=""), sep = "\t", header = T, colClasses = c(rep("character", 3), rep("numeric", 3)))
+rxns <- read.table(paste(path2repo, "combinedMAGS_pws_rxns.orfs.txt", sep=""), sep = "\t", header = T, colClasses = c("character"))
+metadata <- read.csv(paste(path2repo, "MAG_metadata.csv", sep=""), colClasses = c("character", "numeric", "numeric", "character"))
+pathways <- read.csv(paste(path2repo, "redox_pathways.csv", sep=""), colClasses = c("character"))
+
+```
+
+## Approach
+Ultimately, the data I want to generate is a map of correlation strength between pathways in the MAGs. In other words, how often are specific nutrient cycling pathways found in the same genome?
+
+First, I will parse my list of pathways to just the ones I'm interested in using the "rxns" dataset. Next, I will use "coverage" to screen pathways based on their completeness. I will then make a dataset of presence/absence in the MAGs for each pathway, and weight absences by the completeness estimates of the MAGs in "metadata". I will correlate the presence/absence data to identify significant connections between pathways, then quantify how often they are found together in our MAGS.
+
+## Parse pathways
+
+Based on reading the Metacyc website, I've chosen pathways associated with the inorganic nitrogen, carbon and sulfur cycles. Interestingly, no nitrite reduction was identified in the MAGs, despite being present in IMG. Are nitrate and nitrite reduction indistinguishable in Metapathways? 
+
+There are many, many other pathways involved in the carbon cycle, but because of the high number of pathways, I chose to include only carbon fixation. This is an area where the project could be expanded. 
+
+```{r, parse}
+# Keep only pathways in "coverage" and "rxns" that are present in "pathways"
+
+parse_coverage <- coverage[which(coverage$PWY_COMMON_NAME %in% pathways$PWY_COMMON_NAME == T), ]
+parse_rxns <- rxns[which(rxns$PWY_COMMON_NAME %in% pathways$PWY_COMMON_NAME == T), ]
+```
+
+## Screen pathways based on coverage
+
+What is the distribution of how complete these pathways are?
+
+```{r, dist}
+hist(parse_coverage$NUM_COVERED_REACTIONS / parse_coverage$NUM_REACTIONS, main = "Coverage of nutrient cycling pathways")
+```
+
+I'd also like to incorporate which reactions are present, as the presence or absence of a unique, required step can change our judgement calls about the presence or absence of a pathway. For example, the presence of "RIBULOSE-BISPHOSPHATE-CARBOXYLASE-RXN", also known as the Rubisco step, is required and unique to carbon fixation. If only this gene was present, you could still conclude with reasonable confidence that the organism fixes carbon. If the rest of the pathway but not this gene was present, it would be more difficult, as many of these reactions overlap with other pathways.
+
+I'll go digging on MetaCyc to identify the key reactions for the pathways I'm interested in and add them to the redox_pathways file.
+
+The parameters I'm going to specify are 
+- If key enzyme is present, 50% of pathway must be covered
+- If key enzyme is not present, 70% of pathway must be covered
+
+I can always change these later if necessary.
+
+```{r, coverage, echo=FALSE}
+keep <- c()
+for(i in 1:dim(parse_rxns)[1]){
+  
+  reaction <- parse_rxns[i,]
+  coverage_data <- parse_coverage[which(parse_coverage$SAMPLE == reaction$SAMPLE & parse_coverage$PWY_COMMON_NAME == reaction$PWY_COMMON_NAME), ]
+  percent <- coverage_data$NUM_COVERED_REACTIONS / coverage_data$NUM_REACTIONS * 100
+  # looks like 2 reactions are missing from the coverage data - will look into this later. For now, here's a workaround.
+  if(length(percent) == 0){
+    print(i)
+    percent <- c(0)
+  }
+  key_step <- grep(reaction$RXN, pathways$KEY_RXN[which(pathways$PWY_COMMON_NAME == reaction$PWY_COMMON_NAME)])
+  
+  if(length(key_step) == 0){
+    if(percent > 50){
+      keep <- append(keep, i, length(keep))
+    }
+  }else if(length(key_step) == 1){
+    if(percent > 70){
+      keep <- append(keep, i, length(keep))
+    }
+  }
+}
+
+good_pathways <- parse_rxns[keep,]
+
+# Add column for the more general reaction type
+
+good_pathways$CATEGORY <- pathways$CATEGORY[match(good_pathways$PWY_COMMON_NAME, pathways$PWY_COMMON_NAME)]
+
+```
+
+## Presence/absence table
+
+Next, I will make a table with presence or absence of each of the cateogories I'm investigating for each genome. I want to weight absences by genome completeness, so in this case 0 will indicate presence, and 1 will indicate absence. I will then multiple the absence indicator by the completeness estimate of that genome.
+
+The final results should look like this:
+- If a pathway is present in a genome of any completeness, it is assigned "0"
+- If a pathway is absent in a 90% complete genome, it is assigned "0.9"
+- If a pathway is absent in a 50% complete genome, it is assigned "0.5"
+
+This method may make picking out trends difficult, but I think it most accurately reflects the judgement call I would make when looking at an incomplete genome. I'll try it out and run some diagnostics to see how it works.
+
+```{r, PA}
+# Make a table where 0 = present and 1 = absent, with genomes as row names and categories as column names
+
+genomes <- unique(good_pathways$SAMPLE)
+cats <- unique(pathways$CATEGORY)
+
+pa_table <- matrix(NA, length(genomes), length(cats))
+rownames(pa_table) <- genomes
+colnames(pa_table) <- cats
+
+for(i in 1:length(genomes)){
+  genome_pathways <- good_pathways[grep(genomes[i], good_pathways$SAMPLE),]
+  pa_table[i,] <- match(cats, genome_pathways$CATEGORY)
+}
+
+pa_table[which(pa_table >= 1)] <- 0
+pa_table[which(is.na(pa_table) == T)] <- 1
+
+# Now multiply the ones in each row by the completeness estimate for that row
+
+oids <- substr(rownames(pa_table), start = 2, stop = 11)
+search <- match(oids, metadata$IMG_Genome_ID)
+
+for(i in 1:length(search)){
+  if(is.na(search[i]) == F){
+    pa_table[i,] <- pa_table[i,] * metadata$Est_Completeness[search[i]] / 100
+  }
+}
+
+# Several of the MAGS are not in the metadata file Josh sent me. Will manually add these in later.
+
+```
+
+Diagnostics
+
+```{r, pa_table_diagnostics}
+# How many zeros (presences) per column?
+count_zeros <- function(vector){
+  x <- length(which(vector == 0))
+  return(x)
+}
+
+apply(pa_table, 2, count_zeros)
+
+plot(pa_table[,1], pa_table[,3])
+length(which(pa_table[,1] == 0 & pa_table[,3] == 0))
+
+plot(pa_table[,1], pa_table[,4])
+length(which(pa_table[,1] == 0 & pa_table[,4] == 0))
+
+plot(pa_table[,1], pa_table[,5])
+length(which(pa_table[,1] == 0 & pa_table[,5] == 0))
+
+plot(pa_table[,1], pa_table[,7])
+length(which(pa_table[,1] == 0 & pa_table[,7] == 0))
+
+```
+
+I've learned two things from these diagnostics:
+- the completeness estimates are not helpful. Either it's there or it's not.
+- There are way less pathways found than I found using IMG. I was mainly focusing on key enzymes.
+
+I'll change my screening parameters and try again.
+
+I've copied and pasted the screening code block below. I will now say 25% coverage if the unique, key enzyme is present, and 50% if not.
+
+```{r, coverage2, echo=FALSE}
+keep <- c()
+for(i in 1:dim(parse_rxns)[1]){
+  
+  reaction <- parse_rxns[i,]
+  coverage_data <- parse_coverage[which(parse_coverage$SAMPLE == reaction$SAMPLE & parse_coverage$PWY_COMMON_NAME == reaction$PWY_COMMON_NAME), ]
+  percent <- coverage_data$NUM_COVERED_REACTIONS / coverage_data$NUM_REACTIONS * 100
+  # looks like 2 reactions are missing from the coverage data - will look into this later. For now, here's a workaround.
+  if(length(percent) == 0){
+    print(i)
+    percent <- c(0)
+  }
+  key_step <- grep(reaction$RXN, pathways$KEY_RXN[which(pathways$PWY_COMMON_NAME == reaction$PWY_COMMON_NAME)])
+  
+  if(length(key_step) == 0){
+    if(percent > 25){
+      keep <- append(keep, i, length(keep))
+    }
+  }else if(length(key_step) == 1){
+    if(percent > 50){
+      keep <- append(keep, i, length(keep))
+    }
+  }
+}
+
+good_pathways <- parse_rxns[keep,]
+
+# Add column for the more general reaction type
+
+good_pathways$CATEGORY <- pathways$CATEGORY[match(good_pathways$PWY_COMMON_NAME, pathways$PWY_COMMON_NAME)]
+
+# Make a table where 0 = present and 1 = absent, with genomes as row names and categories as column names
+
+genomes <- unique(good_pathways$SAMPLE)
+cats <- unique(pathways$CATEGORY)
+
+pa_table <- matrix(NA, length(genomes), length(cats))
+rownames(pa_table) <- genomes
+colnames(pa_table) <- cats
+
+for(i in 1:length(genomes)){
+  genome_pathways <- good_pathways[grep(genomes[i], good_pathways$SAMPLE),]
+  pa_table[i,] <- match(cats, genome_pathways$CATEGORY)
+}
+
+pa_table[which(pa_table >= 1)] <- 0
+pa_table[which(is.na(pa_table) == T)] <- 1
+
+# Several of the MAGS are not in the metadata file Josh sent me. Will manually add these in later.
+
+count_zeros <- function(vector){
+  x <- length(which(vector == 0))
+  return(x)
+}
+
+apply(pa_table, 2, count_zeros)
+```
+
+Still a little low on some numbers, but a decent representation.
+
+
+## Correlation
+
+I hypothesized that there will be strong trends in the presence or absences of pathways appearing together (or never together). This was true for my preliminary IMG analysis - is it still true now?
+
+After doing some reading, I think I'd rather use Fisher's Exact Test. This tests for independence between two categorical variables. If p < 0.05, the two variables are presumed to be dependent.
+
+```{r, correlations}
+
+# Make a for loop that will create a contigency table for each combination of variables, then store the p-value produced by fisher.test()
+
+# Make two vectors of variables to call - 36 combos total
+# Remove groups with less than 10 instances of that pathway
+combos <- combn(colnames(pa_table)[c(1, 3, 5, 6, 8)], 2)
+
+pval <- c()
+for(i in 1:dim(combos)[2]){
+  var1 <- pa_table[, which(colnames(pa_table) == combos[1, i])]
+  var2 <- pa_table[, which(colnames(pa_table) == combos[2, i])]
+  
+  contigency <- matrix(NA, 2, 2)
+  contigency[1, 1] <- length(which(var1 == 0 & var2 == 0))
+  contigency[1, 2] <- length(which(var1 == 0 & var2 == 1))
+  contigency[2, 1] <- length(which(var1 == 1 & var2 == 0))
+  contigency[2, 2] <- length(which(var1 == 1 & var2 == 1))
+  result <- fisher.test(contigency, alternative = "two.sided")
+  pval[i] <- result$p.value
+}
+
+fisher_results <- data.frame(t(combos), pval)
+
+hist(pval, main = "P-values from Fisher Exact Testing on All Data", breaks = 20)
+```
+
+
+My analysis shows that there are 3 combinations of pathways that have p-values of less than 0.1. This isn't great, especially considering I'm doing 36 pairwise comparisons, but it's not bad either. It may be that the inclusion of three lakes muddles the results.
+
+
+```{r, split by lakes}
+
+# Repeat above analysis, but only with genomes from the same lake
+
+metadata$Lake <- substr(metadata$Genome_Name, start = 1, stop = 2)
+
+# Mendota
+ME_genomes <- metadata$IMG_Genome_ID[which(metadata$Lake == "ME")]
+ME_table <- pa_table[substr(rownames(pa_table), start = 2, stop = 11) %in% ME_genomes,]
+apply(ME_table, 2, count_zeros)
+# Only carbon fixation and sulfate reduction have more than 10 instances
+
+
+# Trout Bog hypo
+TH_genomes <- metadata$IMG_Genome_ID[which(metadata$Lake == "TH")]
+TH_table <- pa_table[substr(rownames(pa_table), start = 2, stop = 11) %in% TH_genomes,]
+apply(TH_table, 2, count_zeros)
+
+THcombos <- combn(colnames(TH_table)[c(3, 5, 6, 8)], 2)
+
+pval <- c()
+for(i in 1:dim(THcombos)[2]){
+  var1 <- TH_table[, which(colnames(TH_table) == THcombos[1, i])]
+  var2 <- TH_table[, which(colnames(TH_table) == THcombos[2, i])]
+  
+  contigency <- matrix(NA, 2, 2)
+  contigency[1, 1] <- length(which(var1 == 0 & var2 == 0))
+  contigency[1, 2] <- length(which(var1 == 0 & var2 == 1))
+  contigency[2, 1] <- length(which(var1 == 1 & var2 == 0))
+  contigency[2, 2] <- length(which(var1 == 1 & var2 == 1))
+  result <- fisher.test(contigency, alternative = "two.sided")
+  pval[i] <- result$p.value
+}
+
+TH_fisher_results <- data.frame(t(THcombos), pval)
+
+hist(pval, main = "P-values from Fisher Exact Testing on All Data", breaks = 20)
+
+# Trout Bog epi
+TE_genomes <- metadata$IMG_Genome_ID[which(metadata$Lake == "TE")]
+TE_table <- pa_table[substr(rownames(pa_table), start = 2, stop = 11) %in% TE_genomes,]
+apply(TE_table, 2, count_zeros)
+
+TEcombos <- combn(colnames(TE_table)[c(3, 5, 6, 8)], 2)
+
+pval <- c()
+for(i in 1:dim(TEcombos)[2]){
+  var1 <- TE_table[, which(colnames(TE_table) == TEcombos[1, i])]
+  var2 <- TE_table[, which(colnames(TE_table) == TEcombos[2, i])]
+  
+  contigency <- matrix(NA, 2, 2)
+  contigency[1, 1] <- length(which(var1 == 0 & var2 == 0))
+  contigency[1, 2] <- length(which(var1 == 0 & var2 == 1))
+  contigency[2, 1] <- length(which(var1 == 1 & var2 == 0))
+  contigency[2, 2] <- length(which(var1 == 1 & var2 == 1))
+  result <- fisher.test(contigency, alternative = "two.sided")
+  pval[i] <- result$p.value
+}
+
+TE_fisher_results <- data.frame(t(TEcombos), pval)
+
+hist(pval, main = "P-values from Fisher Exact Testing on All Data", breaks = 20)
+```
+
+There are too few genes to draw any conclusions from, and only Trout Bog hypo has a nice diversity of redox pathways to use. A different approach may be needed.
