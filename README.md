@@ -48,7 +48,15 @@ Repo Structure
 	- 02master_table_script.R			Converts to wide format in master_table.csv
 - /TB_vs_ME_analysis
 	- combined_assembly_read_abundances.R		Plots IMG phylogeny BLAST data
-	- More to come when I get off tree making in my Unix environment!
+	- /Tree_building
+		- 00MoveFastaFiles.sh			Script to move fasta files out of zipped IMG folders
+		- 01FastaSequenceMerger.pl		From J.Hamilton at McMahonLab/Scripts repo. Combines contigs into a single sequence
+		- 02RunPhylosift.pl			From J.Hamilton at McMahonLab/Scripts repo. Runs search and alignment steps of Phylosift on multiple sequences
+		- 03CreateAlignmentFile.pl		From J.Hamilton at McMahonLab/Scripts repo. Creates a single alignment file of all genomes for input into FastTree
+		- ME_MAGS.nwk				Output of FastTree on Mendota MAGS
+		- TBE_MAGS.nwk				Output of FastTree on Trout Bog Epi MAGS
+		- TBH_MAGS.nwk				Output of FastTree on Trout Bog Hypo MAGS
+		- test_tree.R				First pass at code for plotting the trees with pathway presence/absence indicators
 - /OLDFunction_correlation_analysis
 	My original plan was to correlated presence/absence of function on genomes.
 	However, we don't have enough datapoints for this.
