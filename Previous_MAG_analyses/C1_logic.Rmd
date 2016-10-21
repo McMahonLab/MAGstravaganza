@@ -1,0 +1,504 @@
+---
+title: "Methylotroph figures"
+author: "amlinz16 Linz"
+date: "Friday, January 15, 2016"
+output: html_document
+---
+
+Hypothesis: the genome sweep in Chlorobi TH111 leads to large scale community change, particularly influencing other C1 users by fixing CO2 and releasing formaldehyde.
+
+1. TH111 and TE211 are the same population (ANI == 99.86%)
+2. TH111/TE211 are equivalent to OTU0332 (unclassified Chlorobiales 1) in the tag data
+  - note: Chlorobiales are identical in the V4 region, so I can't classify the tag any further than that
+  
+```{r, echo = FALSE}
+library(ggplot2)
+library(OTUtable)
+
+#These files of read coverage for MAGs were created by averaging all contigs binned as the same MAG that had > 0.9 correlation with the other contigs in that bin. If it did not have > .9 correlation, it was considered a potentially separate population and gets its own row.
+epi_readcoverage <- read.csv(file="C:/Users/amlinz16/Desktop/TroutBog-Methylotrophs/Metadata/TBE_averaged_readcoverage.csv", row.names=1)
+hypo_readcoverage <- read.csv(file="C:/Users/amlinz16/Desktop/TroutBog-Methylotrophs/Metadata/TBH_averaged_readcoverage.csv", row.names=1)
+
+#Get the Chlorobi OTUs from the Trout Bog tag data
+
+data(taxonomy)
+data(otu_table)
+TBE <- bog_subset("TBE", otu_table)
+TBH <- bog_subset("TBH", otu_table)
+
+TBE_chlorobi <- grab_group("Chlorobi", "Phylum", TBE, taxonomy)
+TBH_chlorobi <- grab_group("Chlorobi", "Phylum", TBH, taxonomy)
+
+#There are only 2 reasonably abundant Chlorobiales OTUs in Trout Bog. 
+otu.E1 <- TBE_chlorobi[3,]
+otu.H1 <- TBH_chlorobi[3,]
+
+otu.E2 <- TBE_chlorobi[1,]
+otu.H2 <- TBH_chlorobi[1,]
+
+#Get Chlorobiales MAGs
+TE211 <- epi_readcoverage[grep("TE00211", rownames(epi_readcoverage)),]
+TH111 <- hypo_readcoverage[grep("TH00111", rownames(hypo_readcoverage)),]
+#TE2493 and TH3520 are also likely the same population (ANI = 99.78%)
+TE2493 <- epi_readcoverage[grep("TE02493", rownames(epi_readcoverage)),]
+TH3520 <- hypo_readcoverage[grep("TH03520", rownames(hypo_readcoverage)),]
+
+otu.E.dates <- extract_date(colnames(otu.E1))
+otu.H.dates <- extract_date(colnames(otu.H1))
+mag.E.dates <- as.Date(substr(colnames(TE211), start=2, stop=12), format = "%m.%d.%Y")
+mag.H.dates <- extract_date(colnames(TH111))
+
+#check proportions of abundances of the OTUs and MAGs
+totals <- c(sum(otu.E1), sum(otu.E2), sum(TE211), sum(TE2493), sum(otu.H1), sum(otu.H2), sum(TH111), sum(TH3520))
+labels <- c("OTU.E1", "OTU.E2", "TE211", "TE2493", "OTU.H1", "OTU.H2", "TH111", "TH3520")
+labels <- factor(labels, levels=labels)
+plot.totals <- data.frame(labels, totals)
+ggplot(data=plot.totals, aes(x=labels, y=totals)) + geom_bar(stat="identity")
+
+#Proportions look pretty good
+
+#Now check abundances over time. Hard to tell because sample dates are different, but when I only have two options and preliminary abundance data, I can pick the one that matches best.
+abun <- c(as.numeric(otu.E1),as.numeric(TE211))
+group <- c(rep("OTU_Epi1", length(otu.E1)), rep("TE211", length(TE211)))
+date <- c(otu.E.dates, mag.E.dates)
+plot.epi <- data.frame(date, group, abun)
+ggplot(data=plot.epi, aes(x=date, y=abun, color=group)) + geom_line() + coord_cartesian(xlim=extract_date(c("TBE01Jun07", "TBE01Sep09")))
+
+abun <- c(as.numeric(otu.H1), as.numeric(TH111))
+group <- c(rep("OTU_Hypo1", length(otu.H1)), rep("TH111", length(TH111)))
+date <- c(otu.H.dates, mag.H.dates)
+plot.hypo <- data.frame(date, group, abun)
+ggplot(data=plot.hypo, aes(x=date, y=abun, color=group)) + geom_line()
+
+abun <- c(as.numeric(otu.E2),as.numeric(TE2493))
+group <- c(rep("OTU_Epi2", length(otu.E1)), rep("TE2493", length(TE2493)))
+date <- c(otu.E.dates, mag.E.dates)
+plot.epi <- data.frame(date, group, abun)
+ggplot(data=plot.epi, aes(x=date, y=abun, color=group)) + geom_line() + coord_cartesian(xlim=extract_date(c("TBE01Jun07", "TBE01Sep09")))
+
+abun <- c(as.numeric(otu.H2), as.numeric(TH3520))
+group <- c(rep("OTU_Hypo2", length(otu.H1)), rep("TH3520", length(TH3520)))
+date <- c(otu.H.dates, mag.H.dates)
+plot.hypo <- data.frame(date, group, abun)
+ggplot(data=plot.hypo, aes(x=date, y=abun, color=group)) + geom_line()
+
+```
+
+Based on both the relative abundance of OTUs and MAGs in both the epilimnion and hypolimnion, as well as relatively decent matching trends over time, I conclude that:
+- TE211 + TH111 = OTU0332, (unclassified Chlorobiales 1)
+- TE2493 + TH3520 = OTU0180, (unclassified Chlorobiales 0)
+
+3. The abundance of TH111 (and therefore TE211, and therefore OTU0332) increases after the genome sweep.
+- I'll use tag abundance for this, since it has the finest resolution
+
+```{r, echo = FALSE}
+#Plot OTU0332 over 2005 - 2009
+plot.otu <- data.frame(otu.E.dates, as.numeric(otu.E1))
+colnames(plot.otu) <- c("Date", "Abundance")
+ggplot(data=plot.otu, aes(x=Date, y=Abundance)) + geom_line() + labs(title = "Epiliminion")
+
+plot.otu <- data.frame(otu.H.dates, as.numeric(otu.H1))
+colnames(plot.otu) <- c("Date", "Abundance")
+ggplot(data=plot.otu, aes(x=Date, y=Abundance)) + geom_line() + labs(title = "Hypoliminion")
+```
+
+In the epilimnion, OTU0332 is not very abundant in 2005, becomes highly abundant at the end of 2007, abundant all of 2008, and only at the end of 2009. I would bet that there was a sharp decrease in SNP diversity right at the end of 2007, between Sep 17 and Sep 24. My previous indicator analyses showed that Chlorobiales was an indicator of the 2008 epilimnion.
+
+In the hypolimnion, OTU0332 blooms in 2005, slow increase to mixing in 2007, pretty abundant in 2008 with a decrease towards the end of the year, and less in 2009 with a bloom at the end.
+
+What is Chlorobi doing in the epilimnion? Chlorobi actually likes to hang out at the metalimnion, in thick mats right between the layers. Abundance in the epilimnion may indicate that the mat was thick enough to extend upwards.
+
+4. Of course, tag data can be misleading because it is relativised. If there truly was a higherabundance/thick mat of Chlorobiales at the metalimnion, we should be able to see that in chlorophyll data.
+
+```{r, echo = FALSE}
+chlorophyll <- read.csv("C:/Users/amlinz16/Desktop/TroutBog-Methylotrophs/Metadata/tb_chlorophyll2.csv")
+
+chlo <- chlorophyll[,c(4,7,8)]
+
+wide.chlo <- reshape(chlo, idvar="depth", timevar="sampledate", direction = "wide" )
+
+wide.chlo <- wide.chlo[c(1:5),]
+
+chlorophyll$sampledate <- as.Date(chlorophyll$sampledate, format = "%m/%d/%y")
+y <- format(chlorophyll$sampledate, format = "%m-%d-%y")
+chlorophyll$sampledate <- ordered(y, level=y)
+chlorophyll$depth <- factor(chlorophyll$depth, levels = c("7", "5", "4", "3", "2", "1", "0"))
+chlorophyll <- chlorophyll[which(is.na(chlorophyll$depth) == F),]
+ggplot(data=chlorophyll, aes(x=sampledate, y=depth, fill=chlor)) + geom_tile(color="black") + scale_fill_gradient2(low = "lightblue", mid = "yellow", high = "darkgreen", midpoint=250) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+There are indeed higher chlorophyll concentrations at the metalimnion in 08 and 09. This does suggest a higher abundance of Chlorobiales.
+
+5. The higher abundance of Chlorobi leads to higher abundance of certain functional genes - specifically, nifH (nitrogen fixation), sulfite reductase (sulfur reduction), cytochrome c (aerobic respiration), and citrate lyase (reductive TCA)
+- these genes were chosen based on the output of Metapathways/Pathways Tools
+
+```{r, echo = FALSE}
+epi.data <- read.csv("C:/Users/amlinz16/Dropbox/Methylotroph_analysis/epi_metagenome_genesurvey.csv", row.names=1)
+
+hypo.data <- read.csv("C:/Users/amlinz16/Dropbox/Methylotroph_analysis/hypo_metagenome_genesurvey.csv", row.names=1)
+
+genes <- c("nitrogenase", "sulfite reductase", "cytochrome c", "citrate lyase")
+
+find <- grep(genes[1], rownames(epi.data))
+nif <- epi.data[find,]
+total.nif <- colSums(nif)/colSums(epi.data)
+
+find <- grep(genes[2], rownames(epi.data))
+sulfite <- epi.data[find,]
+total.sulfite <- colSums(sulfite)/colSums(epi.data)
+
+find <- grep(genes[3], rownames(epi.data))
+cytc <- epi.data[find,]
+total.cytc <- colSums(cytc)/colSums(epi.data)
+
+find <- grep(genes[4], rownames(epi.data))
+cit <- epi.data[find,]
+total.cit <- colSums(cit)/colSums(epi.data)
+
+totals <- c(total.nif, total.sulfite, total.cytc, total.cit)
+dates <- rep(as.Date(substr(names(total.sulfite), start=2, stop=12), format = "%Y.%m.%d"), 4)
+key <- rep(genes, each=45)
+
+data <- data.frame(key, dates, totals)
+
+ggplot(data, aes(x=dates, y=totals, color=key)) + geom_line(size=1.5)
+
+#all appear to show strong correlation to 211 read coverage except cytc, which is not surprising. 
+
+#n=45
+cor(as.numeric(total.nif), as.numeric(TE211)) #0.80
+cor(as.numeric(total.sulfite), as.numeric(TE211)) #0.83
+cor(as.numeric(total.cit), as.numeric(TE211)) #0.85
+
+#Repeat with hypolimnion
+
+find <- grep(genes[1], rownames(hypo.data))
+nif <- hypo.data[find,]
+total.nif <- colSums(nif)/colSums(hypo.data)
+
+find <- grep(genes[2], rownames(hypo.data))
+sulfite <- hypo.data[find,]
+total.sulfite <- colSums(sulfite)/colSums(hypo.data)
+
+find <- grep(genes[3], rownames(hypo.data))
+cytc <- hypo.data[find,]
+total.cytc <- colSums(cytc)/colSums(hypo.data)
+
+find <- grep(genes[4], rownames(hypo.data))
+cit <- hypo.data[find,]
+total.cit <- colSums(cit)/colSums(hypo.data)
+
+totals <- c(total.nif, total.sulfite, total.cytc, total.cit)
+dates <- rep(as.Date(substr(names(total.sulfite), start=2, stop=12), format = "%Y.%m.%d"), 4)
+key <- rep(genes, each=45)
+
+data <- data.frame(key, dates, totals)
+
+ggplot(data, aes(x=dates, y=totals, color=key)) + geom_line(size=1.5)
+ 
+
+TH111_trim <- TH111[,order(mag.H.dates)]
+TH111_trim <- TH111_trim[,which(substr(colnames(TH111_trim), start=9, stop=10) != "05")]
+
+#n=45
+cor(as.numeric(total.nif), as.numeric(TH111_trim)) #0.63
+cor(as.numeric(total.sulfite), as.numeric(TH111_trim)) #0.72
+cor(as.numeric(total.cit), as.numeric(TH111_trim)) #0.79
+```
+
+Strong correlations between genes identified in the Chlorobiales MAGs and the read coverage of those MAGs. This suggests that the increased abundance of these MAGs leads to increased function of these genes (nitrogen fixation, carbon fixation, and sulfur reduction)
+
+We also see a trend of increasing over a single season in these genes, which makes sense if they are inhibited by oxygen (nitrogenase) or no longer advantageous (sulfur reduction, reductive TCA), as oxygen is depleted from the hypolimnion while sulfide is produced and ammonia consumed. However, 2008 breaks this pattern. 
+
+6. The thick mat of chlorobi produces formaldehyde, which is consumed by Methylophilaceae
+- Formaldehyde is sort of assumed to be a byproduct of central metabolism
+- Chlorobiales MAGs have no formaldehyde degradation or detoxification mechanisms.
+```{r, echo=FALSE}
+hypo.genomes <- c("TH00111", "TH00545", "TH00953", "TH02902")
+epi.genomes <- c("TE00211", "TE02167", "TE00913")
+
+
+TH111 <- hypo_readcoverage[grep(hypo.genomes[1], rownames(hypo_readcoverage)),]
+TH545 <- hypo_readcoverage[grep(hypo.genomes[2], rownames(hypo_readcoverage)),]
+TH953 <- hypo_readcoverage[grep(hypo.genomes[3], rownames(hypo_readcoverage)),]
+TH2902 <- hypo_readcoverage[grep(hypo.genomes[4], rownames(hypo_readcoverage)),]
+cor(as.numeric(TH111), as.numeric(TH545)) 
+cor(as.numeric(TH111), as.numeric(TH953)) 
+cor(as.numeric(TH111), as.numeric(TH2902)) 
+cor(as.numeric(TH953), as.numeric(TH545)) 
+cor(as.numeric(TH2902), as.numeric(TH545)) 
+cor(as.numeric(TH953), as.numeric(TH2902)) 
+
+TE211 <- epi_readcoverage[grep(epi.genomes[1], rownames(epi_readcoverage)),]
+TE2167 <- epi_readcoverage[grep(epi.genomes[2], rownames(epi_readcoverage)),]
+TE913 <- epi_readcoverage[grep(epi.genomes[3], rownames(epi_readcoverage)),]
+cor(as.numeric(TE211), as.numeric(TE2167)) 
+cor(as.numeric(TE211), as.numeric(TE913)) 
+cor(as.numeric(TE913), as.numeric(TE2167)) 
+
+hypo_readcoverage08 <- year_subset("08", hypo_readcoverage)
+TH111.08 <- hypo_readcoverage08[grep(hypo.genomes[1], rownames(hypo_readcoverage08)),]
+TH545.08 <- hypo_readcoverage08[grep(hypo.genomes[2], rownames(hypo_readcoverage08)),]
+TH953.08 <- hypo_readcoverage08[grep(hypo.genomes[3], rownames(hypo_readcoverage08)),]
+TH2902.08 <- hypo_readcoverage08[grep(hypo.genomes[4], rownames(hypo_readcoverage08)),]
+
+#n = 11
+cor(as.numeric(TH111.08), as.numeric(TH545.08)) #0.05
+cor(as.numeric(TH111.08), as.numeric(TH953.08)) #0.41, p = 0.2
+cor(as.numeric(TH111.08), as.numeric(TH2902.08)) #0.11
+cor(as.numeric(TH953.08), as.numeric(TH545.08)) #0.75
+cor(as.numeric(TH2902.08), as.numeric(TH545.08)) #0.87
+cor(as.numeric(TH953.08), as.numeric(TH2902.08)) #0.82
+
+#No significant correlations between Methylophil and Chlorobi, but all of the Methylophil are highly correlated
+
+#Repeat with epi
+epi_readcoverage08 <- year_subset("08", epi_readcoverage)
+TE211.08 <- epi_readcoverage08[grep(epi.genomes[1], rownames(epi_readcoverage08)),]
+TE2167.08 <- epi_readcoverage08[grep(epi.genomes[2], rownames(epi_readcoverage08)),]
+TE913.08 <- epi_readcoverage08[grep(epi.genomes[3], rownames(epi_readcoverage08)),]
+
+#n = 13
+cor(as.numeric(TE211.08), as.numeric(TE2167.08)) #0.90
+cor(as.numeric(TE211.08), as.numeric(TE913.08)) #0.06
+cor(as.numeric(TE913.08), as.numeric(TE2167.08)) #0.29
+
+#Only TE211 and TE2167 are significantly correlated. This is one of the versatilis groups.
+
+#Only some of the Methylophilaceae are correlated, and only one significantly - vesatilis (2167 in the epilimnion). 953 in hypolimnion is next closest (p=.2). However, all of the hypolimnion MPs are highly correlated.
+
+#Repeat with 2007
+hypo_readcoverage07 <- year_subset("07", hypo_readcoverage)
+TH111.07 <- hypo_readcoverage07[grep(hypo.genomes[1], rownames(hypo_readcoverage07)),]
+TH545.07 <- hypo_readcoverage07[grep(hypo.genomes[2], rownames(hypo_readcoverage07)),]
+TH953.07 <- hypo_readcoverage07[grep(hypo.genomes[3], rownames(hypo_readcoverage07)),]
+TH2902.07 <- hypo_readcoverage07[grep(hypo.genomes[4], rownames(hypo_readcoverage07)),]
+
+
+#n = 12
+cor(as.numeric(TH111.07), as.numeric(TH545.07)) #0.46, p=.13
+cor(as.numeric(TH111.07), as.numeric(TH953.07)) #0.66
+cor(as.numeric(TH111.07), as.numeric(TH2902.07)) #-0.43
+cor(as.numeric(TH953.07), as.numeric(TH545.07)) #0.61
+cor(as.numeric(TH2902.07), as.numeric(TH545.07)) #0.47
+cor(as.numeric(TH953.07), as.numeric(TH2902.07)) #0.07
+
+#953 and 2902 barely have any abundance in 2007. Correlations likely spurious
+
+#Repeat with epi
+epi_readcoverage07 <- year_subset("07", epi_readcoverage)
+TE211.07 <- epi_readcoverage07[grep(epi.genomes[1], rownames(epi_readcoverage07)),]
+TE2167.07 <- epi_readcoverage07[grep(epi.genomes[2], rownames(epi_readcoverage07)),]
+TE913.07 <- epi_readcoverage07[grep(epi.genomes[3], rownames(epi_readcoverage07)),]
+
+#n = 10
+cor(as.numeric(TE211.07), as.numeric(TE2167.07)) #0.36
+cor(as.numeric(TE211.07), as.numeric(TE913.07)) #0.15
+cor(as.numeric(TE913.07), as.numeric(TE2167.07)) #-0.19
+
+#No significant correlations
+
+#In conclusion, hypo meth are only correlated in 08, not in 07.
+#Only significant correlation between chlorobi and meth is epi 2167 in 08
+#However, this may be an artifact of highly different abundances
+abun <- c(as.numeric(TH953), as.numeric(TH2902), as.numeric(TH545), as.numeric(TH111))
+group <- c(rep("TH953", length(TH953)), rep("TH2902", length(TH2902)), rep("TH545", length(TH545)), rep("TH111", length(TH111)))
+plot.meth <- data.frame(mag.H.dates, group, abun)
+ggplot(data=plot.meth, aes(x=mag.H.dates, y=abun, color=group)) + geom_line() + labs(main = "Hypolimnion") + coord_cartesian(ylim=c(0, 50))
+
+abun <- c(as.numeric(TE2167), as.numeric(TE913), as.numeric(TE211))
+group <- c(rep("TE2167", length(TE2167)), rep("TE913", length(TE913)), rep("TE211", length(TE211)))
+plot.meth <- data.frame(mag.E.dates, group, abun)
+ggplot(data=plot.meth, aes(x=mag.E.dates, y=abun, color=group)) + geom_line() + labs(main = "Epilimnion")
+```
+
+Methylophilaceae groups are highly correlated starting in 2008, although not with the Chlorobiales groups. I suspect they are all responding to the same variable. Do the tags show the same trend?
+
+```{r, echo=FALSE}
+TBE_meth <- rbind(grab_group("Methylophilaceae", "Lineage", TBE, taxonomy), grab_group("betIV", "Lineage", TBE, taxonomy))
+TBH_meth <- rbind(grab_group("Methylophilaceae", "Lineage", TBH, taxonomy), grab_group("betIV", "Lineage", TBH, taxonomy))
+
+abun <- c(colSums(TBE_meth), as.numeric(otu.E1))
+group <- c(rep("Methylophilaceae", length(colSums(TBE_meth))), rep("Chlorobiales", length(otu.E1)))
+date <- c(otu.E.dates, otu.E.dates)
+plot.epi.tags <- data.frame(date, group, abun)
+ggplot(data=plot.epi.tags, aes(x=date, y=abun, color=group)) + geom_line() + labs(main = "Epilimnion")
+
+abun <- c(colSums(TBH_meth), as.numeric(otu.H1))
+group <- c(rep("Methylophilaceae", length(colSums(TBH_meth))), rep("Chlorobiales", length(otu.H1)))
+date <- c(otu.H.dates, otu.H.dates)
+plot.hypo.tags <- data.frame(date, group, abun)
+ggplot(data=plot.hypo.tags, aes(x=date, y=abun, color=group)) + geom_line() + labs(main = "Hypolimnion")
+
+TBE_meth08 <- year_subset("08", TBE_meth)
+otu.E108 <- year_subset("08", otu.E1)
+#n=46
+cor(as.numeric(otu.E108), colSums(TBE_meth08)) #0.28
+
+TBH_meth08 <- year_subset("08", TBH_meth)
+otu.H108 <- year_subset("08", otu.H1)
+#n=50
+cor(as.numeric(otu.H108), colSums(TBH_meth08)) #-0.18
+```
+Methylophilaceae and chlorobiales are significantly correlated, but only in the epilimnion. Could MP be hanging out at the metalimnion?
+So far I know that all the MP in the hypo are responding to the same factor, and that MP in the epi are correlated to chlorobi
+
+7. Formaldehyde assimilation genes will be correlated with Methylphilaceae.
+- Based on Metapathways, MP uses RuMP assimilation, while MC uses the serine cycle
+- RumP uses hexulose-6-phosphate synthase and 6-phospho-3-hexuloisomerase
+- Serine uses malate thiokinase and malyl-CoA lyase
+
+```{r, echo=FALSE}
+genes <- c("hexulose-6-phosphate synthase", "6-phospho-3-hexuloisomerase", "malate thiokinase", "malyl-CoA lyase")
+
+find <- grep(genes[1], rownames(epi.data))
+rump1 <- epi.data[find,]
+total.rump1 <- colSums(rump1)/colSums(epi.data)
+
+find <- grep(genes[2], rownames(epi.data))
+rump2 <- epi.data[find,]
+total.rump2 <- colSums(rump2)/colSums(epi.data)
+
+find <- grep(genes[3], rownames(epi.data))
+ser1 <- epi.data[find,]
+total.ser1 <- colSums(ser1)/colSums(epi.data)
+
+find <- grep(genes[4], rownames(epi.data))
+ser2 <- epi.data[find,]
+total.ser2 <- colSums(ser2)/colSums(epi.data)
+
+totals <- c(total.rump1, total.rump2, total.ser1, total.ser2)
+dates <- rep(as.Date(substr(names(total.rump1), start=2, stop=12), format = "%Y.%m.%d"), 4)
+key <- rep(genes, each=45)
+
+data <- data.frame(key, dates, totals)
+
+ggplot(data, aes(x=dates, y=totals, color=key)) + geom_line(size=1.5)
+
+#Correlate to MAGs
+TE1149 <- epi_readcoverage[grep("TE01149", rownames(epi_readcoverage)),]
+#TE5136 <- epi_readcoverage[grep("TE5136", rownames(epi_readcoverage)),]
+#TE8031 <- epi_readcoverage[grep("TE8031", rownames(epi_readcoverage)),]
+
+#n=45
+cor(as.numeric(total.rump1), as.numeric(TE2167)) #.26
+cor(as.numeric(total.rump1), as.numeric(TE913))#-0.006
+cor(as.numeric(total.ser1), as.numeric(TE1149))#0.67
+
+#Repeat with hypo
+find <- grep(genes[1], rownames(hypo.data))
+rump1 <- hypo.data[find,]
+total.rump1 <- colSums(rump1)/colSums(hypo.data)
+
+find <- grep(genes[2], rownames(hypo.data))
+rump2 <- hypo.data[find,]
+total.rump2 <- colSums(rump2)/colSums(hypo.data)
+
+find <- grep(genes[3], rownames(hypo.data))
+ser1 <- hypo.data[find,]
+total.ser1 <- colSums(ser1)/colSums(hypo.data)
+
+find <- grep(genes[4], rownames(hypo.data))
+ser2 <- hypo.data[find,]
+total.ser2 <- colSums(ser2)/colSums(hypo.data)
+
+totals <- c(total.rump1, total.rump2, total.ser1, total.ser2)
+dates <- rep(as.Date(substr(names(total.rump1), start=2, stop=12), format = "%Y.%m.%d"), 4)
+key <- rep(genes, each=45)
+
+data <- data.frame(key, dates, totals)
+
+ggplot(data, aes(x=dates, y=totals, color=key)) + geom_line(size=1.5)
+
+#Correlate to MAGs
+TH2062 <- hypo_readcoverage[grep("TH02062", rownames(hypo_readcoverage)),]
+#TH1380 <- hypo_readcoverage[grep("TH01380", rownames(hypo_readcoverage)),]
+TH3552 <- hypo_readcoverage[grep("TH03552", rownames(hypo_readcoverage)),]
+
+#n=45
+#cor(as.numeric(total.rump1), as.numeric(TH545)) #.26
+#cor(as.numeric(total.rump1), as.numeric(TE913))#-0.006
+#cor(as.numeric(total.ser1), as.numeric(TH2062))#0.67
+```
+
+Formaldehyde actually looks like it is going the way of methane, ie decreasing as Chlorobiales increases. Is there another carbon source that Chlorobi produces and MP consumes?
+Could be nitrogen fixation. With chlorobi going nuts, MC would be at a disadvantage. But doesn't explain why both formaldehyde pathways decrease.
+
+Are there any genes that correlate really well with MP?
+
+```{r}
+TH953_trim <-TH953[,order(mag.H.dates)]
+TH953_trim <- TH953_trim[,which(substr(colnames(TH953_trim), start=9, stop=10) != "05")] 
+
+correlations <- c()
+for(i in 1:dim(hypo.data)[1]){
+  correlations[i] <- cor(as.numeric(hypo.data[i,]), as.numeric(TH953_trim))
+}
+```
+Lots of things, but formate dehydrogenase is one of them. Formate seems to be made by fermentation though, which none of my C1 bugs have.
+Several sulfur genes - specifically oxidation via Sox genes. MP oxidizes, while MC and Chlorobi reduce. Could Chlorobi be reducing all of the sulfur to hydrogen sulfide, which only MP can use?
+
+New hypothesis: Chlorobi is taking reduced sulfur compounds and using them as electron acceptors for photosynthesis, then spewing elemental sulfur out of the cell. MP, which has no way to reduce or oxidize its own sulfur, depends on this.
+
+TEst: Desulfobulbus was another indicator of 2008 epi. does this correlate with MP?
+```{r, echo=FALSE}
+TBE_sulf <- grab_group("Desulfobulbus", "Clade", TBE, taxonomy)
+TBH_sulf <- grab_group("Desulfobulbus", "Clade", TBH, taxonomy)
+
+abun <- c(colSums(TBE_meth), colSums(TBE_sulf))
+group <- c(rep("Methylophilaceae", length(colSums(TBE_meth))), rep("Desulfobulbus", length(colSums(TBE_sulf))))
+date <- c(otu.E.dates, otu.E.dates)
+plot.epi.tags <- data.frame(date, group, abun)
+ggplot(data=plot.epi.tags, aes(x=date, y=abun, color=group)) + geom_line() + labs(main = "Epilimnion")
+
+abun <- c(colSums(TBH_meth), colSums(TBH_sulf))
+group <- c(rep("Methylophilaceae", length(colSums(TBH_meth))), rep("Desulfobulbus", length(colSums(TBH_sulf))))
+date <- c(otu.H.dates, otu.H.dates)
+plot.hypo.tags <- data.frame(date, group, abun)
+ggplot(data=plot.hypo.tags, aes(x=date, y=abun, color=group)) + geom_line() + labs(main = "Hypolimnion")
+
+abun <- c(colSums(TBH_sulf), as.numeric(otu.H1))
+group <- c(rep("Desulfobulbus", length(colSums(TBH_sulf))), rep("Chlorobiales", length(otu.H1)))
+date <- c(otu.H.dates, otu.H.dates)
+plot.hypo.tags <- data.frame(date, group, abun)
+ggplot(data=plot.hypo.tags, aes(x=date, y=abun, color=group)) + geom_line() + labs(main = "Hypolimnion")
+
+abun <- c(colSums(TBE_sulf), as.numeric(otu.E1))
+group <- c(rep("Desulfobulbus", length(colSums(TBE_sulf))), rep("Chlorobiales", length(otu.E1)))
+date <- c(otu.E.dates, otu.E.dates)
+plot.epi.tags <- data.frame(date, group, abun)
+ggplot(data=plot.epi.tags, aes(x=date, y=abun, color=group)) + geom_line() + labs(main = "Epilimnion")
+
+
+TBE_sulf08 <- year_subset("08", TBE_sulf)
+otu.E108 <- year_subset("08", otu.E1)
+#n=46
+cor(as.numeric(otu.E108), colSums(TBE_sulf08)) #0.80
+
+TBH_sulf08 <- year_subset("08", TBH_sulf)
+otu.H108 <- year_subset("08", otu.H1)
+#n=50
+cor(as.numeric(otu.H108), colSums(TBH_sulf08)) #-0.37
+```
+Desulfobulbus is highly correlated in the epilimnion, but not the hypolimnion
+
+Sulfur hypothesis explains a lot but not why formaldehyde assimilation is doing great. Could be  that other the blast for formaldehyde genes hits other things, since a lot of the substrates are part of central metabolism
+
+Test the other methanol users?
+```{r, echo = FALSE}
+TE439 <- epi_readcoverage[grep("TE00439", rownames(epi_readcoverage)),]
+
+abun <- c(as.numeric(TE211), as.numeric(TE439))
+group <- c(rep("TE211", length(TE211)), rep("TE439", length(TE439)))
+plot.new <- data.frame(mag.E.dates, group, abun)
+ggplot(data=plot.new, aes(x=mag.E.dates, y=abun, color=group)) + geom_line() + labs(main = "Epilimnion")
+
+
+TH2159 <- hypo_readcoverage[grep("TH02159", rownames(hypo_readcoverage)),]
+TH2160 <- hypo_readcoverage[grep("TH02160", rownames(hypo_readcoverage)),]
+TH4645 <- hypo_readcoverage[grep("TH04645", rownames(hypo_readcoverage)),]
+
+abun <- c(as.numeric(TH953), as.numeric(colSums(TH2160)), as.numeric(TH2159), as.numeric(TH111), as.numeric(colSums(TH4645)))
+group <- c(rep("TH953", length(TH953)), rep("TH2160", length(TH2902)), rep("TH2159", length(TH545)), rep("TH111", length(TH111)), rep("TH4645", length(TH4645)))
+plot.new <- data.frame(mag.H.dates, group, abun)
+ggplot(data=plot.new, aes(x=mag.H.dates, y=abun, color=group)) + geom_line() + labs(main = "Hypolimnion")
