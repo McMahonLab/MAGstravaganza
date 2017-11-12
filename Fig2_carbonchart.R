@@ -55,10 +55,10 @@ to.plot$label <- factor(to.plot$label, levels = c("Cyanobacteria", "Chlorobi", "
 
 v1 <- ggplot(data = to.plot, aes(x = label, y = carbon, fill = counts)) + geom_tile() + labs(x = "", y = "") + scale_fill_gradient2(low = "white", mid = "#9ebcda", high = "#88419d", midpoint = 0.4) + theme(axis.text.x = element_text(angle = 270))
 
-v2 <- ggplot(data = to.plot, aes(x = label, y = carbon, fill = counts)) + geom_tile() + labs(x = "", y = "") + scale_fill_gradient2(low = "white", mid = "#a6bddb", high = "#02818a", midpoint = 0.4) + theme(axis.text.x = element_text(angle = 270))
+v2 <- ggplot(data = to.plot, aes(x = label, y = carbon, fill = counts)) + geom_tile() + labs(x = "", y = "") + scale_fill_gradient2(low = "white", high = "#5ab4ac", midpoint = 0.4) + theme(axis.text.x = element_text(angle = 270))
 
 save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Plots/fig2_me.pdf", v2, base_height = 10, base_width = 7)
 save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Plots/fig2_tb.pdf", v1, base_height = 10, base_width = 7)
 
-v3 <- ggplot(data = to.plot, aes(x = label, y = carbon, fill = counts)) + geom_tile() + labs(x = "", y = "") + scale_fill_gradient2(low = "#02818a", mid = "white", high = "#88419d", midpoint = 0) + theme(axis.text.x = element_text(angle = 270))
+v3 <- ggplot(data = to.plot, aes(x = label, y = carbon, fill = counts)) + geom_tile() + labs(x = "", y = "") + scale_fill_gradient2(low = "#d8b365", mid = "white", high = "#5ab4ac", midpoint = 0) + theme(axis.text.x = element_text(angle = 270))
 save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Plots/fig2.pdf", v3, base_height = 10, base_width = 7)

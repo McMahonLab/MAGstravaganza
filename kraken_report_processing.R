@@ -14,7 +14,7 @@ samples[which(samplenames$site == "ME_epi")] <- paste(samples[which(samplenames$
 
 
 for (i in 1:length(samples)){
-  results <- read.table(paste(path2results, samples[i], ".fasta.report", sep = ""), header = F, sep = "\t")
+  results <- read.table(paste(path2results, samples[i], ".fasta.report", sep = ""), header = F, sep = "\t", quote = "")
   colnames(results) <- c("Percent_reads", "Num_reads_root", "Num_reads_direct", "Rank_code", "NCBI_taxonomy", "Scientific_name")
   assign(samples[i], results)
 }
@@ -39,9 +39,9 @@ agg_class$Percent_reads[which(agg_class$Lake == "ME_epi")] <- agg_class$Percent_
 agg_class$Percent_reads[which(agg_class$Lake == "TB_epi")] <- agg_class$Percent_reads[which(agg_class$Lake == "TB_epi")]/num_TE
 agg_class$Percent_reads[which(agg_class$Lake == "TB_hypo")] <- agg_class$Percent_reads[which(agg_class$Lake == "TB_hypo")]/num_TH
 
-agg_class_reduced <- agg_class[which(agg_class$Percent_reads > 0.05), ]
+agg_class_reduced <- agg_class[which(agg_class$Percent_reads > 0.01), ]
 
-ggplot(data = agg_class_reduced, aes(x = Lake, y = Percent_reads, fill = Scientific_name)) + geom_bar(stat = "identity")
+ggplot(data = agg_class_reduced, aes(x = Lake, y = Percent_reads, fill = Scientific_name)) + geom_bar(stat = "identity") + scale_fill_brewer(palette = "Paired")
 
 # Repeat by order
 order_data <- CSNA.len150[which(CSNA.len150$Rank_code == "O" & CSNA.len150$Percent_reads > 0), c(1, 6)]
@@ -60,9 +60,9 @@ agg_order$Percent_reads[which(agg_order$Lake == "ME_epi")] <- agg_order$Percent_
 agg_order$Percent_reads[which(agg_order$Lake == "TB_epi")] <- agg_order$Percent_reads[which(agg_order$Lake == "TB_epi")]/num_TE
 agg_order$Percent_reads[which(agg_order$Lake == "TB_hypo")] <- agg_order$Percent_reads[which(agg_order$Lake == "TB_hypo")]/num_TH
 
-agg_order_reduced <- agg_order[which(agg_order$Percent_reads > 0.025), ]
+agg_order_reduced <- agg_order[which(agg_order$Percent_reads > 0.02), ]
 
-myplot <- ggplot(data = agg_order_reduced, aes(x = Lake, y = Percent_reads, fill = Scientific_name)) + geom_bar(stat = "identity") + labs(x = NULL, y = "Mean Percent Reads", title = "kraken classification") + theme(legend.title = element_blank())
+myplot <- ggplot(data = agg_order_reduced, aes(x = Lake, y = Percent_reads, fill = Scientific_name)) + geom_bar(stat = "identity") + labs(x = NULL, y = "Mean Percent Reads", title = "Read Classifications") + theme(legend.title = element_blank()) + scale_fill_brewer(palette = "Paired")
 save_plot("C:/Users/Alex/Desktop/MAGstravaganza/plots/kraken_results.pdf", myplot, base_height = 3, base_aspect_ratio = 2)
 
 

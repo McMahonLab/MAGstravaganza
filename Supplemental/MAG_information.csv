@@ -1,203 +1,203 @@
-IMG_OID,Genome_Name,Taxonomy,Genome_Size,Est_Completeness,GC_Content,Codon_Usage,Amino_Acid_Bias
-2582580512,ME10020,Planctomycetes;Planctomycetia;Planctomycetales;;;,2684295,65.53,,0.168827,
-2582580513,ME10152,Actinobacteria;Actinobacteria;Actinomycetales;;;,2093635,57.05,,0.374611,
-2582580514,ME10417,Tenericutes;Mollicutes;Mycoplasmatales;;;,852268,83.91,,0.2853,
-2582580515,ME10739,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,2631188,84.01,,0.145344,
-2582580516,ME10873,Proteobacteria;Deltaproteobacteria;[Blank];;;,2235809,90.09,,0.289078,
-2582580517,ME01091,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1782609,84.14,,0.184785,
-2582580518,ME00112,Cyanobacteria;[Blank];[Blank];;;,3123153,80.02,,0.305154,
-2582580519,ME11260,Bacteroidetes;Cytophagia;Cytophagales;;;,1580367,61.62,,0.207436,
-2582580520,ME11576,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1204534,66.86,,0.232165,
-2582580521,ME12173,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,2103165,67.4,,0.209736,
-2582580522,ME12555,Planctomycetes;[Blank];[Blank];;;,3371651,89.36,,0.385592,
-2582580523,ME12612,Verrucomicrobia;[Blank];[Blank];;;,2234628,82.86,,0.307211,
-2582580524,ME12657,Verrucomicrobia;Opitutae;Puniceicoccales;;;,1945716,80.08,,0.478912,
-2582580525,ME01300,Cyanobacteria;[Blank];[Blank];;;,2333569,86.65,,0.468073,
-2582580526,ME13165,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,3312293,93.05,,0.337541,
-2582580527,ME13530,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2376430,88.56,,0.297966,
-2582580528,ME01363,Actinobacteria;Actinobacteria;[Blank];;;,911592,62.71,,0.222708,
-2582580529,ME14003,Planctomycetes;Planctomycetia;Planctomycetales;;;,3213612,70.74,,0.17071,
-2582580530,ME14260,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1498931,66.78,,0.180713,
-2582580531,ME14445,Cyanobacteria;[Blank];[Blank];;;,3309584,90.79,,0.258171,
-2582580532,ME14726,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2512767,87.12,,0.165805,
-2582580533,ME15216,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2272733,67.04,,0.150075,
-2582580534,ME15468,[Blank];[Blank];[Blank];;;,684826,44.87,,0.339522,
-2582580535,ME15824,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1897505,86.88,,0.178081,
-2582580536,ME15954,Planctomycetes;Planctomycetia;Planctomycetales;;;,4122388,73.15,,0.154795,
-2582580537,ME01627,Cyanobacteria;[Blank];[Blank];;;,4154717,93.36,,0.308769,
-2582580538,ME16806,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,3110597,82.17,,0.306702,
-2582580539,ME01719,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1793743,80.69,,0.177582,
-2582580540,ME17476,[Blank];[Blank];[Blank];;;,5340721,95.28,,0.143534,
-2582580541,ME17509,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1553935,75.73,,0.18979,
-2582580542,ME18138,Planctomycetes;Planctomycetia;Planctomycetales;;;,2122990,53.34,,0.427813,
-2582580543,ME18233,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,1798465,68.82,,0.184929,
-2582580544,ME01953,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,2350389,90.6,,0.343182,
-2582580545,ME19941,[Blank];[Blank];[Blank];;;,1439254,65.34,,0.205339,
-2582580546,ME02014,Verrucomicrobia;Opitutae;[Blank];;;,1851081,80.4,,0.455841,
-2582580547,ME20494,Planctomycetes;Planctomycetia;Planctomycetales;;;,4364939,72.12,,0.322964,
-2582580548,ME22738,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2326823,90.52,,0.161823,
-2582580549,ME02278,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2610574,86.14,,0.315476,
-2582580550,ME02297,Actinobacteria;Actinobacteria;[Blank];;;,1366118,76.72,,0.188416,
-2582580551,ME02353,Cyanobacteria;[Blank];[Blank];;;,3350202,87.92,,0.368305,
-2582580552,ME02384,Cyanobacteria;[Blank];[Blank];;;,4193130,81.55,,0.269943,
-2582580553,ME02538,Actinobacteria;Actinobacteria;Actinomycetales;;;,1050638,65.74,,0.20157,
-2582580554,ME02729,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1671027,71,,0.190393,
-2582580555,ME00283,Actinobacteria;Actinobacteria;[Blank];;;,734855,59.7,,0.255212,
-2582580556,ME28789,Proteobacteria;Betaproteobacteria;Rhodocyclales;;;,2829293,80.42,,0.367802,
-2582580557,ME02898,Proteobacteria;Betaproteobacteria;[Blank];;;,860016,56.27,,0.179002,
-2582580558,ME02907,Planctomycetes;Planctomycetia;Planctomycetales;;;,4006763,68.13,,0.189079,
-2582580559,ME30509,Verrucomicrobia;[Blank];[Blank];;;,1236889,55.47,,0.293459,
-2582580560,ME03061,Planctomycetes;Planctomycetia;Planctomycetales;;;,4808660,94.12,,0.15158,
-2582580561,ME03080,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1320940,68.97,,0.235606,
-2582580562,ME30805,[Blank];[Blank];[Blank];;;,1047154,54.86,,0.29659,
-2582580563,ME03085,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1783923,78.99,,0.358626,
-2582580564,ME03119,Actinobacteria;Actinobacteria;[Blank];;;,1072419,71.12,,0.21254,
-2582580565,ME03163,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1785483,73.79,,0.188977,
-2582580566,ME03293,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,2331128,77.19,,0.279904,
-2582580567,ME33807,Cyanobacteria;[Blank];[Blank];;;,2003587,64.47,,0.23555,
-2582580568,ME34551,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2923340,86.01,,0.160426,
-2582580569,ME03611,Planctomycetes;Planctomycetia;Planctomycetales;;;,3284619,51.3,,0.19919,
-2582580571,ME03713,Bacteroidetes;Sphingobacteriia;[Blank];;;,1740562,79.38,,0.194234,
-2582580572,ME03864,Actinobacteria;Actinobacteria;[Blank];;;,786155,55.44,,0.182934,
-2582580573,ME03880,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,1581403,72.84,,0.283999,
-2582580574,ME00422,Chloroflexi;[Blank];[Blank];;;,749473,47.69,,0.257201,
-2582580575,ME04252,Actinobacteria;Actinobacteria;[Blank];;;,1144269,69.31,,0.199156,
-2582580576,ME04498,Cyanobacteria;[Blank];[Blank];;;,2772794,92.14,,0.321237,
-2582580577,ME04500,Cyanobacteria;[Blank];[Blank];;;,2819350,94.63,,0.433521,
-2582580578,ME04620,Planctomycetes;Planctomycetia;Planctomycetales;;;,4653018,85.81,,0.16753,
-2582580579,ME46339,[Blank];[Blank];[Blank];;;,733334,80.88,,0.337409,
-2582580580,ME05184,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,1284389,60.27,,0.192021,
-2582580581,ME05338,Proteobacteria;Alphaproteobacteria;Sphingomonadales;;;,1691699,67.67,,0.205259,
-2582580582,ME05344,Bacteroidetes;[Blank];[Blank];;;,1533163,81.61,,0.197542,
-2582580583,ME05466,Bacteroidetes;Sphingobacteriia;[Blank];;;,2085652,77.23,,0.182827,
-2582580584,ME00548,Cyanobacteria;[Blank];[Blank];;;,4099996,83.22,,0.304923,
-2582580585,ME05493,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2257317,60.66,,0.22936,
-2582580586,ME05513,Bacteroidetes;[Blank];[Blank];;;,2170171,66.79,,0.292296,
-2582580587,ME05895,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1297462,53.36,,0.321748,
-2582580588,ME05983,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2908334,88.48,,0.227439,
-2582580589,ME05999,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2930247,90.14,,0.206264,
-2582580590,ME06031,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1331396,50.25,,0.356009,
-2582580591,ME06097,Cyanobacteria;[Blank];[Blank];;;,1913277,84.53,,0.250741,
-2582580592,ME06180,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2716659,95.87,,0.31638,
-2582580593,ME06381,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,2354802,64.57,,0.214092,
-2582580594,ME06450,Chlamydiae;Chlamydiia;Chlamydiales;;;,2759591,88.26,,0.207912,
-2582580595,ME06647,Actinobacteria;Actinobacteria;Actinomycetales;;;,906713,58.68,,0.224806,
-2582580596,ME06777,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2325963,87.65,,0.27149,
-2582580597,ME06778,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,1868933,65.14,,0.218707,
-2582580598,ME00068,Proteobacteria;Betaproteobacteria;Methylophilales;;;,593228,50.67,,0.277093,
-2582580599,ME06813,Bacteroidetes;[Blank];[Blank];;;,3400639,89.34,,0.260133,
-2582580600,ME07043,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,2550905,88.2,,0.366544,
-2582580601,ME07198,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2736634,74.87,,0.164579,
-2582580602,ME07257,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,1284442,58.88,,0.223349,
-2582580603,ME07484,Bacteroidetes;Cytophagia;Cytophagales;;;,3659184,87.49,,0.187063,
-2582580604,ME07672,Planctomycetes;Planctomycetia;Planctomycetales;;;,2429640,44,,0.27662,
-2582580605,ME07690,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1813804,86.27,,0.154283,
-2582580606,ME07803,Planctomycetes;Planctomycetia;Planctomycetales;;;,2973502,80.4,,0.453905,
-2582580607,ME08366,Verrucomicrobia;Spartobacteria;[Blank];;;,3551150,84.72,,0.361666,
-2582580608,ME00885,Actinobacteria;Actinobacteria;[Blank];;;,866493,61.64,,0.208092,
-2582580609,ME09104,Proteobacteria;Gammaproteobacteria;Xanthomonadales;;;,2143680,84.6,,0.225246,
-2582580610,ME09147,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2074546,89.62,,0.206451,
-2582580611,ME09166,Planctomycetes;Planctomycetia;Planctomycetales;;;,5467700,98.7,,0.191879,
-2582580612,ME09351,Tenericutes;[Blank];[Blank];;;,799895,68.12,,0.290445,
-2582580613,ME09495,Bacteroidetes;[Blank];[Blank];;;,2153459,79.94,,0.249434,
-2582580614,ME09830,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2317383,91.47,,0.209774,
-2582580615,TE01149,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,2573146,74.56,,0.259046,
-2582580616,TE01301,Verrucomicrobia;Opitutae;[Blank];;;,2036179,95.3,,0.218159,
-2582580617,TE00149,Actinobacteria;[Blank];[Blank];;;,764032,64.1,,0.200514,
-2582580620,TE02093,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1458458,66.38,,0.182323,
-2582580621,TE02094,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,2210814,78.62,,0.188588,
-2582580622,TE00211,Chlorobi;Chlorobia;Chlorobiales;;;,2469065,93.99,,0.183515,
-2582580623,TE02167,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1423270,87.89,,0.202779,
-2582580624,TE02443,Proteobacteria;Deltaproteobacteria;Bdellovibrionales;;;,1640808,75.17,,0.25003,
-2582580625,TE02493,Chlorobi;Chlorobia;Chlorobiales;;;,2371355,89.07,,0.189232,
-2582580627,TE02754,Actinobacteria;Actinobacteria;[Blank];;;,1361355,82.27,,0.159261,
-2582580628,TE02973,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1010358,72.41,,0.186936,
-2582580629,TE03083,Proteobacteria;Alphaproteobacteria;Rickettsiales;;;,1401432,99.06,,0.275613,
-2582580630,TE03207,Actinobacteria;Actinobacteria;[Blank];;;,1245790,75.56,,0.163069,
-2582580631,TE03256,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1750488,85.78,,0.322819,
-2582580632,TE03475,Actinobacteria;Actinobacteria;[Blank];;;,949240,69.46,,0.205869,
-2582580633,TE03838,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1727630,62.07,,0.189688,
-2582580634,TE04163,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1267473,69.62,,0.173876,
-2582580635,TE04208,Actinobacteria;Actinobacteria;[Blank];;;,992136,68.53,,0.210265,
-2582580637,TE04548,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,2999617,76,,0.335048,
-2582580638,TE04605,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,4671051,92.3,,0.272607,
-2582580639,TE05136,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,2778362,91.73,,0.239409,
-2582580640,TE05144,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1999931,91.34,,0.298943,
-2582580641,TE05243,Acidobacteria;Solibacteres;Solibacterales;;;,2517309,65.82,,0.342593,
-2582580642,TE00567,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1660228,71.9,,0.186027,
-2582580643,TE05716,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1575342,62.83,,0.271477,
-2582580644,TE00755,Proteobacteria;Alphaproteobacteria;Rickettsiales;;;,1521491,98.58,,0.258,
-2582580646,TE08031,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,1642485,72.81,,0.25913,
-2582580647,TE08052,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2139573,81.49,,0.261176,
-2582580648,TE00911,Acidobacteria;Holophagae;Holophagales;;;,3001284,95.72,,0.455867,
-2582580649,TE00913,Proteobacteria;Betaproteobacteria;Methylophilales;;;,942700,76.06,,0.295895,
-2582580650,TE09727,Proteobacteria;Alphaproteobacteria;[Blank];;;,899066,82.58,,0.393642,
-2582580651,TH00111,Chlorobi;Chlorobia;Chlorobiales;;;,2314202,91.75,,0.184971,
-2582580652,TH01225,[Blank];[Blank];[Blank];;;,915278,63.39,,0.21399,
-2582580653,TH01542,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,3722418,95.19,,0.321277,
-2582580654,TH01998,Proteobacteria;Epsilonproteobacteria;Campylobacterales;;;,2301184,98.33,,0.262946,
-2582580657,TH02152,Actinobacteria;Actinobacteria;[Blank];;;,845311,61.59,,0.196254,
-2582580658,TH02159,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,3815911,92.49,,0.306937,
-2582580659,TH02160,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,3407684,65.67,,0.341426,
-2582580662,TH00254,Acidobacteria;Holophagae;Holophagales;;;,2981798,80.22,,0.455371,
-2582580663,TH02565,[Blank];[Blank];[Blank];;;,843861,65.35,,0.2790121,
-2582580664,TH02746,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,6521824,75.65,,0.310199,
-2582580665,TH02747,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,5159489,92.82,,0.286163,
-2582580668,TH03004,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,4497082,93.29,,0.262791,
-2582580669,TH03063,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,3174086,89.94,,0.281602,
-2582580670,TH03180,Actinobacteria;[Blank];[Blank];;;,1149636,67.24,,0.187349,
-2582580671,TH03219,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1170081,80.73,,0.191591,
-2582580672,TH03273,Acidobacteria;Holophagae;Holophagales;;;,3335528,81.74,,0.437303,
-2582580673,TH03311,Bacteroidetes;Bacteroidia;Bacteroidales;;;,3778915,97.86,,0.156813,
-2582580674,TH03415,Proteobacteria;Betaproteobacteria;Gallionellales;;;,2657023,97.16,,0.204571,
-2582580675,TH03463,Actinobacteria;Actinobacteria;[Blank];;;,1214182,76.77,,0.167173,
-2582580677,TH03552,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,2227372,97.22,,0.253801,
-2582580679,TH03772,[Blank];[Blank];[Blank];;;,823317,79.81,,0.268219,
-2582580680,TH03815,Actinobacteria;Actinobacteria;Solirubrobacterales;;;,2533346,75.14,,0.507306,
-2582580682,TH04093,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,4730745,81.28,,0.203779,
-2582580683,TH04247,Proteobacteria;Alphaproteobacteria;Rickettsiales;;;,1544655,98.58,,0.258554,
-2582580684,TH00433,Proteobacteria;Deltaproteobacteria;Desulfobacterales;;;,3073408,77.19,,0.202471,
-2582580685,TH04436,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,3044346,94.87,,0.256372,
-2582580686,TH04491,Proteobacteria;Gammaproteobacteria;Legionellales;;;,1738602,81.79,,0.270892,
-2582580687,TH04565,Acidobacteria;Holophagae;Holophagales;;;,3680673,79.39,,0.540968,
-2582580688,TH04590,Verrucomicrobia;Opitutae;[Blank];;;,3289830,88.67,,0.397039,
-2582580689,TH04645,Proteobacteria;Deltaproteobacteria;Desulfuromonadales;;;,5793761,88.42,,0.337515,
-2582580690,TH04697,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2035176,63.93,,0.342292,
-2582580691,TH04820,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,2963500,57.26,,0.368452,
-2582580692,TH04848,Bacteroidetes;Bacteroidia;Bacteroidales;;;,2833050,61.78,,0.239407,
-2582580693,TH04964,Proteobacteria;[Blank];[Blank];;;,819508,60.66,,0.206619,
-2582580694,TH05247,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2536172,63.95,,0.160729,
-2582580695,TH05354,Ignavibacteria;[Blank];[Blank];;;,4310034,96.94,,0.244055,
-2582580697,TH05629,Ignavibacteria;Ignavibacteria;Ignavibacteriales;;;,4397594,97.22,,0.220948,
-2582580698,TH05702,Proteobacteria;Alphaproteobacteria;Rickettsiales;;;,1348795,95.28,,0.276707,
-2582580699,TH05737,Proteobacteria;Deltaproteobacteria;Bdellovibrionales;;;,1679340,81.36,,0.247049,
-2582580700,TH05891,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,3181706,91.23,,0.221034,
-2582580701,TH06070,Proteobacteria;Gammaproteobacteria;Pseudomonadales;;;,878995,79.65,,0.319742,
-2582580702,TH06286,Bacteroidetes;Bacteroidia;Bacteroidales;;;,5154715,90.91,,0.190934,
-2582580703,TH06717,Proteobacteria;Alphaproteobacteria;Rhizobiales;;;,1942197,83.49,,0.357283,
-2582580704,TH06736,Elusimicrobia;Elusimicrobia;Elusimicrobiales;;;,1511669,43.51,,0.364224,
-2582580705,TH00680,Actinobacteria;Actinobacteria;[Blank];;;,1257796,72.7,,0.162387,
-2582580706,TH07795,[Blank];[Blank];[Blank];;;,819610,72.22,,0.235234,
-2582580707,TH07925,Proteobacteria;Alphaproteobacteria;Rhodospirillales;;;,1117672,31.49,,0.354759,
-2582580708,TH07934,Bacteroidetes;Bacteroidia;Bacteroidales;;;,2314650,64.1,,0.25373,
-2582580709,TH08362,Proteobacteria;[Blank];[Blank];;;,495687,48.91,,0.255929,
-2582580711,TH00944,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1737056,69.83,,0.193204,
-2582580712,TH00953,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1556854,93.3,,0.218587,
-2582580714,TH09906,Actinobacteria;Actinobacteria;[Blank];;;,795830,39.5,,0.36392,
-2593339176,TH00545v2,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1431993,89.68,,0.201092,
-2593339177,TH00941v2,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1496525,57.24,,0.187258,
-2593339178,TH02062v2,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,3124798,94.05,,0.258984,
-2593339179,TH02086v2,Bacteroidetes;Bacteroidia;Bacteroidales;;;,3680027,72.41,,0.157443,
-2593339181,TH02519v2,Verrucomicrobia;Opitutae;[Blank];;;,1808963,71.73,,0.203209,
-2593339182,TH02902v2,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1002927,62.07,,0.29165,
-2593339183,TH02922v2,Proteobacteria;Deltaproteobacteria;Desulfobacterales;;;,3798404,93.36,,0.187665,
-2593339184,TH03520v2,Chlorobi;Chlorobia;Chlorobiales;;;,2156671,89.34,,0.190601,
-2593339185,TH03765v2,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1315659,76.07,,0.168511,
-2593339186,TH03838v2,Actinobacteria;Actinobacteria;[Blank];;;,468462,37.07,,0.182383,
-2593339187,TE00439v2,Proteobacteria;Betaproteobacteria;Nitrosomonadales;;;,996711,67.67,,0.222607,
-2593339188,TE00788v2,Proteobacteria;Betaproteobacteria;[Blank];;;,990006,56.9,,0.183109,
-2593339189,TE01800v2,Verrucomicrobia;Opitutae;[Blank];;;,2186907,89.53,,0.203843,
-2593339190,TE02057v2,Actinobacteria;Actinobacteria;[Blank];;;,971617,74.31,,0.183621,
-2593339191,TH01380,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,2299825,69.3,,0.230925,
-2593339192,TH01381,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1077715,50,,0.208275,
-2593339193,TE02668v2,Proteobacteria;Gammaproteobacteria;[Blank];;;,1258960,37.24,,0.268442,
+IMG_OID,Genome_Name,Lake,Taxonomy,Genome_Size,Est_Completeness,GC_Content,Codon_Usage,Amino_Acid_Bias,Nucleotide_Bias
+2582580512,ME10020,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,2684295,65.53,0.5441,0.168827,1.723,3.772
+2582580513,ME10152,Mendota,Actinobacteria;Actinobacteria;Actinomycetales;;;,2093635,57.05,0.67,0.374611,1.67,3.834
+2582580514,ME10417,Mendota,Tenericutes;Mollicutes;Mycoplasmatales;;;,852268,83.91,0.3942,0.2853,1.636,3.698
+2582580515,ME10739,Mendota,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,2631188,84.01,0.5312,0.145344,1.731,3.764
+2582580516,ME10873,Mendota,Proteobacteria;Deltaproteobacteria;[Blank];;;,2235809,90.09,0.3494,0.289078,1.653,3.671
+2582580517,ME01091,Mendota,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1782609,84.14,0.5383,0.184785,1.664,3.765
+2582580518,ME00112,Mendota,Cyanobacteria;[Blank];[Blank];;;,3123153,80.02,0.3721,0.305154,1.671,3.688
+2582580519,ME11260,Mendota,Bacteroidetes;Cytophagia;Cytophagales;;;,1580367,61.62,0.4124,0.207436,1.643,3.705
+2582580520,ME11576,Mendota,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1204534,66.86,0.5984,0.232165,1.713,3.799
+2582580521,ME12173,Mendota,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,2103165,67.4,0.5194,0.209736,1.699,3.763
+2582580522,ME12555,Mendota,Planctomycetes;[Blank];[Blank];;;,3371651,89.36,0.6718,0.385592,1.77,3.836
+2582580523,ME12612,Mendota,Verrucomicrobia;[Blank];[Blank];;;,2234628,82.86,0.5945,0.307211,1.695,3.8
+2582580524,ME12657,Mendota,Verrucomicrobia;Opitutae;Puniceicoccales;;;,1945716,80.08,0.6782,0.478912,1.728,3.845
+2582580525,ME01300,Mendota,Cyanobacteria;[Blank];[Blank];;;,2333569,86.65,0.6878,0.468073,1.747,3.844
+2582580526,ME13165,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,3312293,93.05,0.608,0.337541,1.689,3.803
+2582580527,ME13530,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2376430,88.56,0.341,0.297966,1.64,3.669
+2582580528,ME01363,Mendota,Actinobacteria;Actinobacteria;[Blank];;;,911592,62.71,0.4513,0.222708,1.624,3.721
+2582580529,ME14003,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,3213612,70.74,0.5173,0.17071,1.706,3.758
+2582580530,ME14260,Mendota,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1498931,66.78,0.5083,0.180713,1.674,3.755
+2582580531,ME14445,Mendota,Cyanobacteria;[Blank];[Blank];;;,3309584,90.79,0.5768,0.258171,1.702,3.792
+2582580532,ME14726,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2512767,87.12,0.4447,0.165805,1.649,3.721
+2582580533,ME15216,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2272733,67.04,0.4699,0.150075,1.669,3.732
+2582580534,ME15468,Mendota,[Blank];[Blank];[Blank];;;,684826,44.87,0.338,0.339522,1.636,3.688
+2582580535,ME15824,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1897505,86.88,0.4049,0.178081,1.647,3.7
+2582580536,ME15954,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,4122388,73.15,0.5207,0.154795,1.724,3.763
+2582580537,ME01627,Mendota,Cyanobacteria;[Blank];[Blank];;;,4154717,93.36,0.3971,0.308769,1.666,3.698
+2582580538,ME16806,Mendota,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,3110597,82.17,0.6358,0.306702,1.718,3.819
+2582580539,ME01719,Mendota,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1793743,80.69,0.5136,0.177582,1.648,3.755
+2582580540,ME17476,Mendota,[Blank];[Blank];[Blank];;;,5340721,95.28,0.5217,0.143534,1.729,3.759
+2582580541,ME17509,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1553935,75.73,0.4066,0.18979,1.656,3.706
+2582580542,ME18138,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,2122990,53.34,0.6881,0.427813,1.722,3.843
+2582580543,ME18233,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,1798465,68.82,0.4138,0.184929,1.626,3.705
+2582580544,ME01953,Mendota,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,2350389,90.6,0.6731,0.343182,1.657,3.836
+2582580545,ME19941,Mendota,[Blank];[Blank];[Blank];;;,1439254,65.34,0.5418,0.205339,1.695,3.769
+2582580546,ME02014,Mendota,Verrucomicrobia;Opitutae;[Blank];;;,1851081,80.4,0.6573,0.455841,1.718,3.823
+2582580547,ME20494,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,4364939,72.12,0.6582,0.322964,1.768,3.821
+2582580548,ME22738,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2326823,90.52,0.4135,0.161823,1.652,3.704
+2582580549,ME02278,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2610574,86.14,0.3315,0.315476,1.617,3.651
+2582580550,ME02297,Mendota,Actinobacteria;Actinobacteria;[Blank];;;,1366118,76.72,0.4709,0.188416,1.625,3.739
+2582580551,ME02353,Mendota,Cyanobacteria;[Blank];[Blank];;;,3350202,87.92,0.6514,0.368305,1.747,3.824
+2582580552,ME02384,Mendota,Cyanobacteria;[Blank];[Blank];;;,4193130,81.55,0.4197,0.269943,1.677,3.711
+2582580553,ME02538,Mendota,Actinobacteria;Actinobacteria;Actinomycetales;;;,1050638,65.74,0.4631,0.20157,1.603,3.732
+2582580554,ME02729,Mendota,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1671027,71,0.5357,0.190393,1.652,3.77
+2582580555,ME00283,Mendota,Actinobacteria;Actinobacteria;[Blank];;;,734855,59.7,0.3978,0.255212,1.62,3.695
+2582580556,ME28789,Mendota,Proteobacteria;Betaproteobacteria;Rhodocyclales;;;,2829293,80.42,0.6355,0.367802,1.715,3.814
+2582580557,ME02898,Mendota,Proteobacteria;Betaproteobacteria;[Blank];;;,860016,56.27,0.4643,0.179002,1.684,3.729
+2582580558,ME02907,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,4006763,68.13,0.5525,0.189079,1.726,3.777
+2582580559,ME30509,Mendota,Verrucomicrobia;[Blank];[Blank];;;,1236889,55.47,0.6251,0.293459,1.735,3.813
+2582580560,ME03061,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,4808660,94.12,0.525,0.15158,1.722,3.766
+2582580561,ME03080,Mendota,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1320940,68.97,0.4975,0.235606,1.653,3.748
+2582580562,ME30805,Mendota,[Blank];[Blank];[Blank];;;,1047154,54.86,0.3465,0.29659,1.643,3.677
+2582580563,ME03085,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1783923,78.99,0.3108,0.358626,1.641,3.66
+2582580564,ME03119,Mendota,Actinobacteria;Actinobacteria;[Blank];;;,1072419,71.12,0.4375,0.21254,1.629,3.723
+2582580565,ME03163,Mendota,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1785483,73.79,0.5239,0.188977,1.658,3.765
+2582580566,ME03293,Mendota,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,2331128,77.19,0.4019,0.279904,1.654,3.701
+2582580567,ME33807,Mendota,Cyanobacteria;[Blank];[Blank];;;,2003587,64.47,0.3955,0.23555,1.681,3.7
+2582580568,ME34551,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2923340,86.01,0.4401,0.160426,1.625,3.717
+2582580569,ME03611,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,3284619,51.3,0.4344,0.19919,1.66,3.723
+2582580571,ME03713,Mendota,Bacteroidetes;Sphingobacteriia;[Blank];;;,1740562,79.38,0.4582,0.194234,1.656,3.727
+2582580572,ME03864,Mendota,Actinobacteria;Actinobacteria;[Blank];;;,786155,55.44,0.4802,0.182934,1.654,3.739
+2582580573,ME03880,Mendota,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,1581403,72.84,0.5814,0.283999,1.724,3.786
+2582580574,ME00422,Mendota,Chloroflexi;[Blank];[Blank];;;,749473,47.69,0.6255,0.257201,1.669,3.807
+2582580575,ME04252,Mendota,Actinobacteria;Actinobacteria;[Blank];;;,1144269,69.31,0.4488,0.199156,1.615,3.721
+2582580576,ME04498,Mendota,Cyanobacteria;[Blank];[Blank];;;,2772794,92.14,0.6405,0.321237,1.737,3.816
+2582580577,ME04500,Mendota,Cyanobacteria;[Blank];[Blank];;;,2819350,94.63,0.6756,0.433521,1.763,3.839
+2582580578,ME04620,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,4653018,85.81,0.5208,0.16753,1.718,3.757
+2582580579,ME46339,Mendota,[Blank];[Blank];[Blank];;;,733334,80.88,0.3198,0.337409,1.638,3.659
+2582580580,ME05184,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,1284389,60.27,0.4337,0.192021,1.645,3.715
+2582580581,ME05338,Mendota,Proteobacteria;Alphaproteobacteria;Sphingomonadales;;;,1691699,67.67,0.558,0.205259,1.673,3.781
+2582580582,ME05344,Mendota,Bacteroidetes;[Blank];[Blank];;;,1533163,81.61,0.5314,0.197542,1.738,3.766
+2582580583,ME05466,Mendota,Bacteroidetes;Sphingobacteriia;[Blank];;;,2085652,77.23,0.4319,0.182827,1.654,3.718
+2582580584,ME00548,Mendota,Cyanobacteria;[Blank];[Blank];;;,4099996,83.22,0.3805,0.304923,1.669,3.691
+2582580585,ME05493,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2257317,60.66,0.3704,0.22936,1.634,3.687
+2582580586,ME05513,Mendota,Bacteroidetes;[Blank];[Blank];;;,2170171,66.79,0.3358,0.292296,1.619,3.674
+2582580587,ME05895,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1297462,53.36,0.3307,0.321748,1.628,3.676
+2582580588,ME05983,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2908334,88.48,0.404,0.227439,1.667,3.697
+2582580589,ME05999,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2930247,90.14,0.4183,0.206264,1.657,3.71
+2582580590,ME06031,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1331396,50.25,0.3119,0.356009,1.621,3.668
+2582580591,ME06097,Mendota,Cyanobacteria;[Blank];[Blank];;;,1913277,84.53,0.3583,0.250741,1.645,3.674
+2582580592,ME06180,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2716659,95.87,0.3356,0.31638,1.616,3.673
+2582580593,ME06381,Mendota,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,2354802,64.57,0.5673,0.214092,1.72,3.783
+2582580594,ME06450,Mendota,Chlamydiae;Chlamydiia;Chlamydiales;;;,2759591,88.26,0.4049,0.207912,1.685,3.703
+2582580595,ME06647,Mendota,Actinobacteria;Actinobacteria;Actinomycetales;;;,906713,58.68,0.4396,0.224806,1.624,3.72
+2582580596,ME06777,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2325963,87.65,0.3567,0.27149,1.635,3.678
+2582580597,ME06778,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,1868933,65.14,0.4031,0.218707,1.642,3.699
+2582580598,ME00068,Mendota,Proteobacteria;Betaproteobacteria;Methylophilales;;;,593228,50.67,0.3689,0.277093,1.658,3.692
+2582580599,ME06813,Mendota,Bacteroidetes;[Blank];[Blank];;;,3400639,89.34,0.34,0.260133,1.625,3.66
+2582580600,ME07043,Mendota,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,2550905,88.2,0.6564,0.366544,1.747,3.83
+2582580601,ME07198,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2736634,74.87,0.4694,0.164579,1.667,3.737
+2582580602,ME07257,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,1284442,58.88,0.3931,0.223349,1.642,3.695
+2582580603,ME07484,Mendota,Bacteroidetes;Cytophagia;Cytophagales;;;,3659184,87.49,0.4175,0.187063,1.656,3.71
+2582580604,ME07672,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,2429640,44,0.6154,0.27662,1.741,3.802
+2582580605,ME07690,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1813804,86.27,0.4848,0.154283,1.678,3.755
+2582580606,ME07803,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,2973502,80.4,0.7067,0.453905,1.747,3.855
+2582580607,ME08366,Mendota,Verrucomicrobia;Spartobacteria;[Blank];;;,3551150,84.72,0.633,0.361666,1.73,3.816
+2582580608,ME00885,Mendota,Actinobacteria;Actinobacteria;[Blank];;;,866493,61.64,0.4425,0.208092,1.634,3.727
+2582580609,ME09104,Mendota,Proteobacteria;Gammaproteobacteria;Xanthomonadales;;;,2143680,84.6,0.5988,0.225246,1.745,3.799
+2582580610,ME09147,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2074546,89.62,0.3646,0.206451,1.635,3.68
+2582580611,ME09166,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,5467700,98.7,0.5797,0.191879,1.758,3.793
+2582580612,ME09351,Mendota,Tenericutes;[Blank];[Blank];;;,799895,68.12,0.3755,0.290445,1.628,3.691
+2582580613,ME09495,Mendota,Bacteroidetes;[Blank];[Blank];;;,2153459,79.94,0.3687,0.249434,1.636,3.682
+2582580614,ME09830,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2317383,91.47,0.3812,0.209774,1.64,3.689
+2582580615,TE01149,Trout Bog Epilimnion,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,2573146,74.56,0.3978,0.259046,1.651,3.697
+2582580616,TE01301,Trout Bog Epilimnion,Verrucomicrobia;Opitutae;[Blank];;;,2036179,95.3,0.5449,0.218159,1.71,3.77
+2582580617,TE00149,Trout Bog Epilimnion,Actinobacteria;[Blank];[Blank];;;,764032,64.1,0.5501,0.200514,1.649,3.775
+2582580620,TE02093,Trout Bog Epilimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1458458,66.38,0.45,0.182323,1.657,3.724
+2582580621,TE02094,Trout Bog Epilimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,2210814,78.62,0.4428,0.188588,1.652,3.72
+2582580622,TE00211,Trout Bog Epilimnion,Chlorobi;Chlorobia;Chlorobiales;;;,2469065,93.99,0.4592,0.183515,1.669,3.73
+2582580623,TE02167,Trout Bog Epilimnion,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1423270,87.89,0.4257,0.202779,1.652,3.715
+2582580624,TE02443,Trout Bog Epilimnion,Proteobacteria;Deltaproteobacteria;Bdellovibrionales;;;,1640808,75.17,0.4029,0.25003,1.709,3.695
+2582580625,TE02493,Trout Bog Epilimnion,Chlorobi;Chlorobia;Chlorobiales;;;,2371355,89.07,0.4582,0.189232,1.672,3.73
+2582580627,TE02754,Trout Bog Epilimnion,Actinobacteria;Actinobacteria;[Blank];;;,1361355,82.27,0.5018,0.159261,1.626,3.753
+2582580628,TE02973,Trout Bog Epilimnion,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1010358,72.41,0.4965,0.186936,1.641,3.748
+2582580629,TE03083,Trout Bog Epilimnion,Proteobacteria;Alphaproteobacteria;Rickettsiales;;;,1401432,99.06,0.3368,0.275613,1.63,3.671
+2582580630,TE03207,Trout Bog Epilimnion,Actinobacteria;Actinobacteria;[Blank];;;,1245790,75.56,0.4733,0.163069,1.631,3.736
+2582580631,TE03256,Trout Bog Epilimnion,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1750488,85.78,0.6435,0.322819,1.635,3.82
+2582580632,TE03475,Trout Bog Epilimnion,Actinobacteria;Actinobacteria;[Blank];;;,949240,69.46,0.5055,0.205869,1.636,3.756
+2582580633,TE03838,Trout Bog Epilimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1727630,62.07,0.4474,0.189688,1.649,3.726
+2582580634,TE04163,Trout Bog Epilimnion,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1267473,69.62,0.5637,0.173876,1.632,3.775
+2582580635,TE04208,Trout Bog Epilimnion,Actinobacteria;Actinobacteria;[Blank];;;,992136,68.53,0.4587,0.210265,1.622,3.731
+2582580637,TE04548,Trout Bog Epilimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,2999617,76,0.6273,0.335048,1.691,3.814
+2582580638,TE04605,Trout Bog Epilimnion,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,4671051,92.3,0.5924,0.272607,1.704,3.797
+2582580639,TE05136,Trout Bog Epilimnion,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,2778362,91.73,0.4124,0.239409,1.651,3.705
+2582580640,TE05144,Trout Bog Epilimnion,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1999931,91.34,0.3472,0.298943,1.619,3.676
+2582580641,TE05243,Trout Bog Epilimnion,Acidobacteria;Solibacteres;Solibacterales;;;,2517309,65.82,0.6258,0.342593,1.692,3.816
+2582580642,TE00567,Trout Bog Epilimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1660228,71.9,0.4584,0.186027,1.65,3.731
+2582580643,TE05716,Trout Bog Epilimnion,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1575342,62.83,0.3443,0.271477,1.621,3.667
+2582580644,TE00755,Trout Bog Epilimnion,Proteobacteria;Alphaproteobacteria;Rickettsiales;;;,1521491,98.58,0.3495,0.258,1.635,3.667
+2582580646,TE08031,Trout Bog Epilimnion,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,1642485,72.81,0.3878,0.25913,1.67,3.694
+2582580647,TE08052,Trout Bog Epilimnion,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2139573,81.49,0.3821,0.261176,1.645,3.685
+2582580648,TE00911,Trout Bog Epilimnion,Acidobacteria;Holophagae;Holophagales;;;,3001284,95.72,0.6737,0.455867,1.721,3.841
+2582580649,TE00913,Trout Bog Epilimnion,Proteobacteria;Betaproteobacteria;Methylophilales;;;,942700,76.06,0.3643,0.295895,1.661,3.679
+2582580650,TE09727,Trout Bog Epilimnion,Proteobacteria;Alphaproteobacteria;[Blank];;;,899066,82.58,0.2893,0.393642,1.664,3.652
+2582580651,TH00111,Trout Bog Hypolimnion,Chlorobi;Chlorobia;Chlorobiales;;;,2314202,91.75,0.4616,0.184971,1.665,3.729
+2582580652,TH01225,Trout Bog Hypolimnion,[Blank];[Blank];[Blank];;;,915278,63.39,0.4063,0.21399,1.647,3.715
+2582580653,TH01542,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,3722418,95.19,0.6254,0.321277,1.691,3.814
+2582580654,TH01998,Trout Bog Hypolimnion,Proteobacteria;Epsilonproteobacteria;Campylobacterales;;;,2301184,98.33,0.3651,0.262946,1.612,3.686
+2582580657,TH02152,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;[Blank];;;,845311,61.59,0.464,0.196254,1.63,3.728
+2582580658,TH02159,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,3815911,92.49,0.6112,0.306937,1.677,3.806
+2582580659,TH02160,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,3407684,65.67,0.6208,0.341426,1.672,3.811
+2582580662,TH00254,Trout Bog Hypolimnion,Acidobacteria;Holophagae;Holophagales;;;,2981798,80.22,0.6746,0.455371,1.721,3.832
+2582580663,TH02565,Trout Bog Hypolimnion,[Blank];[Blank];[Blank];;;,843861,65.35,0.3814,0.2790121,1.623,3.691
+2582580664,TH02746,Trout Bog Hypolimnion,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,6521824,75.65,0.6206,0.310199,1.678,3.81
+2582580665,TH02747,Trout Bog Hypolimnion,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,5159489,92.82,0.5832,0.286163,1.693,3.789
+2582580668,TH03004,Trout Bog Hypolimnion,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,4497082,93.29,0.5683,0.262791,1.68,3.782
+2582580669,TH03063,Trout Bog Hypolimnion,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,3174086,89.94,0.348,0.281602,1.635,3.669
+2582580670,TH03180,Trout Bog Hypolimnion,Actinobacteria;[Blank];[Blank];;;,1149636,67.24,0.4956,0.187349,1.642,3.746
+2582580671,TH03219,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1170081,80.73,0.5473,0.191591,1.646,3.777
+2582580672,TH03273,Trout Bog Hypolimnion,Acidobacteria;Holophagae;Holophagales;;;,3335528,81.74,0.6606,0.437303,1.703,3.83
+2582580673,TH03311,Trout Bog Hypolimnion,Bacteroidetes;Bacteroidia;Bacteroidales;;;,3778915,97.86,0.4703,0.156813,1.647,3.734
+2582580674,TH03415,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Gallionellales;;;,2657023,97.16,0.5185,0.204571,1.685,3.76
+2582580675,TH03463,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;[Blank];;;,1214182,76.77,0.4736,0.167173,1.634,3.734
+2582580677,TH03552,Trout Bog Hypolimnion,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,2227372,97.22,0.3986,0.253801,1.645,3.695
+2582580679,TH03772,Trout Bog Hypolimnion,[Blank];[Blank];[Blank];;;,823317,79.81,0.3552,0.268219,1.621,3.673
+2582580680,TH03815,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;Solirubrobacterales;;;,2533346,75.14,0.6938,0.507306,1.668,3.846
+2582580682,TH04093,Trout Bog Hypolimnion,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,4730745,81.28,0.4777,0.203779,1.661,3.741
+2582580683,TH04247,Trout Bog Hypolimnion,Proteobacteria;Alphaproteobacteria;Rickettsiales;;;,1544655,98.58,0.3493,0.258554,1.636,3.665
+2582580684,TH00433,Trout Bog Hypolimnion,Proteobacteria;Deltaproteobacteria;Desulfobacterales;;;,3073408,77.19,0.5301,0.202471,1.68,3.765
+2582580685,TH04436,Trout Bog Hypolimnion,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,3044346,94.87,0.367,0.256372,1.636,3.679
+2582580686,TH04491,Trout Bog Hypolimnion,Proteobacteria;Gammaproteobacteria;Legionellales;;;,1738602,81.79,0.3711,0.270892,1.666,3.682
+2582580687,TH04565,Trout Bog Hypolimnion,Acidobacteria;Holophagae;Holophagales;;;,3680673,79.39,0.6892,0.540968,1.709,3.843
+2582580688,TH04590,Trout Bog Hypolimnion,Verrucomicrobia;Opitutae;[Blank];;;,3289830,88.67,0.6535,0.397039,1.717,3.827
+2582580689,TH04645,Trout Bog Hypolimnion,Proteobacteria;Deltaproteobacteria;Desulfuromonadales;;;,5793761,88.42,0.6115,0.337515,1.664,3.806
+2582580690,TH04697,Trout Bog Hypolimnion,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2035176,63.93,0.3201,0.342292,1.622,3.654
+2582580691,TH04820,Trout Bog Hypolimnion,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,2963500,57.26,0.6267,0.368452,1.727,3.818
+2582580692,TH04848,Trout Bog Hypolimnion,Bacteroidetes;Bacteroidia;Bacteroidales;;;,2833050,61.78,0.36,0.239407,1.635,3.679
+2582580693,TH04964,Trout Bog Hypolimnion,Proteobacteria;[Blank];[Blank];;;,819508,60.66,0.469,0.206619,1.626,3.742
+2582580694,TH05247,Trout Bog Hypolimnion,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2536172,63.95,0.4501,0.160729,1.614,3.724
+2582580695,TH05354,Trout Bog Hypolimnion,Ignavibacteria;[Blank];[Blank];;;,4310034,96.94,0.3531,0.244055,1.619,3.668
+2582580697,TH05629,Trout Bog Hypolimnion,Ignavibacteria;Ignavibacteria;Ignavibacteriales;;;,4397594,97.22,0.3637,0.220948,1.612,3.679
+2582580698,TH05702,Trout Bog Hypolimnion,Proteobacteria;Alphaproteobacteria;Rickettsiales;;;,1348795,95.28,0.3355,0.276707,1.629,3.673
+2582580699,TH05737,Trout Bog Hypolimnion,Proteobacteria;Deltaproteobacteria;Bdellovibrionales;;;,1679340,81.36,0.4041,0.247049,1.71,3.697
+2582580700,TH05891,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,3181706,91.23,0.5419,0.221034,1.67,3.771
+2582580701,TH06070,Trout Bog Hypolimnion,Proteobacteria;Gammaproteobacteria;Pseudomonadales;;;,878995,79.65,0.3349,0.319742,1.642,3.659
+2582580702,TH06286,Trout Bog Hypolimnion,Bacteroidetes;Bacteroidia;Bacteroidales;;;,5154715,90.91,0.3985,0.190934,1.64,3.7
+2582580703,TH06717,Trout Bog Hypolimnion,Proteobacteria;Alphaproteobacteria;Rhizobiales;;;,1942197,83.49,0.6213,0.357283,1.672,3.815
+2582580704,TH06736,Trout Bog Hypolimnion,Elusimicrobia;Elusimicrobia;Elusimicrobiales;;;,1511669,43.51,0.6467,0.364224,1.757,3.82
+2582580705,TH00680,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;[Blank];;;,1257796,72.7,0.5012,0.162387,1.626,3.745
+2582580706,TH07795,Trout Bog Hypolimnion,[Blank];[Blank];[Blank];;;,819610,72.22,0.4555,0.235234,1.662,3.711
+2582580707,TH07925,Trout Bog Hypolimnion,Proteobacteria;Alphaproteobacteria;Rhodospirillales;;;,1117672,31.49,0.6369,0.354759,1.675,3.815
+2582580708,TH07934,Trout Bog Hypolimnion,Bacteroidetes;Bacteroidia;Bacteroidales;;;,2314650,64.1,0.3646,0.25373,1.638,3.678
+2582580709,TH08362,Trout Bog Hypolimnion,Proteobacteria;[Blank];[Blank];;;,495687,48.91,0.3874,0.255929,1.628,3.679
+2582580711,TH00944,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1737056,69.83,0.4607,0.193204,1.652,3.729
+2582580712,TH00953,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1556854,93.3,0.4214,0.218587,1.663,3.715
+2582580714,TH09906,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;[Blank];;;,795830,39.5,0.6407,0.36392,1.667,3.823
+2593339176,TH00545v2,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1431993,89.68,0.4261,0.201092,1.651,3.705
+2593339177,TH00941v2,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1496525,57.24,0.4483,0.187258,1.654,3.729
+2593339178,TH02062v2,Trout Bog Hypolimnion,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,3124798,94.05,0.3969,0.258984,1.653,3.699
+2593339179,TH02086v2,Trout Bog Hypolimnion,Bacteroidetes;Bacteroidia;Bacteroidales;;;,3680027,72.41,0.4338,0.157443,1.644,3.721
+2593339181,TH02519v2,Trout Bog Hypolimnion,Verrucomicrobia;Opitutae;[Blank];;;,1808963,71.73,0.4182,0.203209,1.66,3.708
+2593339182,TH02902v2,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1002927,62.07,0.3629,0.29165,1.66,3.682
+2593339183,TH02922v2,Trout Bog Hypolimnion,Proteobacteria;Deltaproteobacteria;Desulfobacterales;;;,3798404,93.36,0.5232,0.187665,1.681,3.762
+2593339184,TH03520v2,Trout Bog Hypolimnion,Chlorobi;Chlorobia;Chlorobiales;;;,2156671,89.34,0.4586,0.190601,1.666,3.733
+2593339185,TH03765v2,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1315659,76.07,0.5637,0.168511,1.637,3.777
+2593339186,TH03838v2,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;[Blank];;;,468462,37.07,0.4976,0.182383,1.638,3.756
+2593339187,TE00439v2,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Nitrosomonadales;;;,996711,67.67,0.528,0.222607,1.699,3.764
+2593339188,TE00788v2,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;[Blank];;;,990006,56.9,0.4727,0.183109,1.664,3.734
+2593339189,TE01800v2,Trout Bog Hypolimnion,Verrucomicrobia;Opitutae;[Blank];;;,2186907,89.53,0.419,0.203843,1.657,3.71
+2593339190,TE02057v2,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;[Blank];;;,971617,74.31,0.4987,0.183621,1.633,3.748
+2593339191,TH01380,Trout Bog Hypolimnion,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,2299825,69.3,0.4143,0.230925,1.65,3.705
+2593339192,TH01381,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1077715,50,0.4329,0.208275,1.653,3.716
+2593339193,TE02668v2,Trout Bog Hypolimnion,Proteobacteria;Gammaproteobacteria;[Blank];;;,1258960,37.24,0.6303,0.268442,1.708,3.816
