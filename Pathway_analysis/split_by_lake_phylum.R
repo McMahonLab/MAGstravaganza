@@ -124,7 +124,7 @@ IMGOID <- tbh$IMG_OID[which(tbh$Phylum == "Proteobacteria")]
 newnames <- tbh$ID[which(tbh$Phylum == "Proteobacteria")]
 TH_proteo <- enzymes[,match(IMGOID, colnames(enzymes))]
 colnames(TH_proteo) <- newnames
-write.csv(TH_proteo, "C:/Users/Alex/Desktop/MAGstravaganza/Pathway_analysis/TH_actino.csv")
+write.csv(TH_proteo, "C:/Users/Alex/Desktop/MAGstravaganza/Pathway_analysis/TH_proteo.csv")
 
 IMGOID <- tbh$IMG_OID[which(tbh$Phylum == "Verrucomicrobia")]
 newnames <- tbh$ID[which(tbh$Phylum == "Verrucomicrobia")]
@@ -136,6 +136,6 @@ IMGOID <- tbh$IMG_OID[which(tbh$Phylum == "Acidobacteria" | tbh$Phylum == "Chlor
 newnames <- tbh$ID[which(tbh$Phylum == "Acidobacteria" | tbh$Phylum == "Chlorobi" | tbh$Phylum == "Elusimicrobia" | tbh$Phylum == "Ignavibacteria")]
 TH_other <- enzymes[,match(IMGOID, colnames(enzymes))]
 colnames(TH_other) <- newnames
-write.csv(TH_other, "C:/Users/Alex/Desktop/MAGstravaganza/Pathway_analysis/TH_aother.csv")
+write.csv(TH_other, "C:/Users/Alex/Desktop/MAGstravaganza/Pathway_analysis/TH_other.csv")
 
 
