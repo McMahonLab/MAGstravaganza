@@ -104,6 +104,12 @@ TE_other <- enzymes[,match(IMGOID, colnames(enzymes))]
 colnames(TE_other) <- newnames
 write.csv(TE_other, "C:/Users/Alex/Desktop/MAGstravaganza/Pathway_analysis/TE_other.csv")
 
+IMGOID <- tbe$IMG_OID[which(tbe$Phylum == "[Blank]")]
+newnames <- tbe$ID[which(tbe$Phylum == "[Blank]")]
+TE_unclassified <- enzymes[,match(IMGOID, colnames(enzymes))]
+colnames(TE_unclassified) <- newnames
+write.csv(TE_unclassified, "C:/Users/Alex/Desktop/MAGstravaganza/Pathway_analysis/TE_unclassified.csv")
+
 #TBH
 tbh <- mag_data[which(mag_data$Lake == "Trout Bog Hypolimnion"), ]
 table(tbh$Phylum)
@@ -138,4 +144,8 @@ TH_other <- enzymes[,match(IMGOID, colnames(enzymes))]
 colnames(TH_other) <- newnames
 write.csv(TH_other, "C:/Users/Alex/Desktop/MAGstravaganza/Pathway_analysis/TH_other.csv")
 
-
+IMGOID <- tbh$IMG_OID[which(tbh$Phylum == "[Blank]")]
+newnames <- tbh$ID[which(tbh$Phylum == "[Blank]")]
+TH_unclassified <- enzymes[,match(IMGOID, colnames(enzymes))]
+colnames(TH_unclassified) <- newnames
+write.csv(TH_unclassified, "C:/Users/Alex/Desktop/MAGstravaganza/Pathway_analysis/TH_unclassified.csv")
