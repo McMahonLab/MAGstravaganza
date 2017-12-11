@@ -2,7 +2,7 @@
 
 # Read in list of MAGs
 
-mag_data <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
+mag_data <- read.csv("C:/Users/amlin/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
 mag_data$Taxonomy <- as.character(mag_data$Taxonomy)
 
 gh_df <- mag_data[,c(1,3,4,10)]
@@ -17,7 +17,7 @@ cazy_names_all <- rep(cazy_names, dim(mag_data)[1])
 cazy_counts <- c()
 
 for(i in 1:dim(mag_data)[1]){
-  datafile <- read.table(paste("C:/Users/Alex/Desktop/MAGstravaganza/hydrolases/", mag_data$IMG_OID[i], ".txt", sep = ""))
+  datafile <- read.table(paste("C:/Users/amlin/Desktop/MAGstravaganza/hydrolases/", mag_data$IMG_OID[i], ".txt", sep = ""))
   hits <- sub(".hmm", "", datafile$V2)
   types <- substr(hits, start = 1, stop = 2)
   
@@ -59,4 +59,9 @@ ggplot(data = gh_df, aes(x = Order, y = Density, fill = Lake)) + geom_bar(stat =
 
 ggplot(data = gh_df[which(gh_df$Order != "[Blank]" & is.na(gh_df$Order) == F), ], aes(x = Lake, y = Order, fill = Density)) + geom_tile() + scale_fill_gradient2(low = "#efedf5", mid = "#bcbddc", high = "#756bb1", midpoint = 4) + labs(title = "Mean Glucoside Hydrolase Coding Density", x = "", y = "")
 
-ggplot(data = gh_df[which(gh_df$Order != "[Blank]" & is.na(gh_df$Order) == F), ], aes(x = Lake, y = Order, fill = Diversity)) + geom_tile() + scale_fill_gradient2(low = "#d73027", mid = "#fee090", high = "#4575b4", midpoint = 40) + labs(title = "Mean Glucoside Hydrolase Coding Diversity", x = "", y = "")
+##This one top contender for figure
+ggplot(data = gh_df[which(gh_df$Order != "[Blank]" & is.na(gh_df$Order) == F), ], aes(x = Lake, y = Order, fill = Diversity)) + geom_tile() + scale_fill_gradient2(low = "#d73027", mid = "#fee090", high = "#4575b4", midpoint = 20) + labs(title = "Mean Glucoside Hydrolase Coding Diversity", x = "", y = "")
+###
+
+cazy_df$MAG <- factor(cazy_df$MAG)
+ggplot(data = cazy_df[which(cazy_df$Enzyme == "GT"),], aes(x = Lake, y = MAG, fill = Density)) + geom_tile() + scale_fill_gradient2(low = "#d73027", mid = "#fee090", high = "#4575b4", midpoint = 20) + labs(title = "GT density", x = "", y = "")
