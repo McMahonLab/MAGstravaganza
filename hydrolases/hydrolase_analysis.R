@@ -2,7 +2,7 @@
 
 # Read in list of MAGs
 
-mag_data <- read.csv("C:/Users/amlin/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
+mag_data <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
 mag_data$Taxonomy <- as.character(mag_data$Taxonomy)
 
 gh_df <- mag_data[,c(1,3,4,10)]
@@ -17,7 +17,7 @@ cazy_names_all <- rep(cazy_names, dim(mag_data)[1])
 cazy_counts <- c()
 
 for(i in 1:dim(mag_data)[1]){
-  datafile <- read.table(paste("C:/Users/amlin/Desktop/MAGstravaganza/hydrolases/", mag_data$IMG_OID[i], ".txt", sep = ""))
+  datafile <- read.table(paste("C:/Users/Alex/Desktop/MAGstravaganza/hydrolases/", mag_data$IMG_OID[i], ".txt", sep = ""))
   hits <- sub(".hmm", "", datafile$V2)
   types <- substr(hits, start = 1, stop = 2)
   
@@ -60,7 +60,12 @@ ggplot(data = gh_df, aes(x = Order, y = Density, fill = Lake)) + geom_bar(stat =
 ggplot(data = gh_df[which(gh_df$Order != "[Blank]" & is.na(gh_df$Order) == F), ], aes(x = Lake, y = Order, fill = Density)) + geom_tile() + scale_fill_gradient2(low = "#efedf5", mid = "#bcbddc", high = "#756bb1", midpoint = 4) + labs(title = "Mean Glucoside Hydrolase Coding Density", x = "", y = "")
 
 ##This one top contender for figure
-ggplot(data = gh_df[which(gh_df$Order != "[Blank]" & is.na(gh_df$Order) == F), ], aes(x = Lake, y = Order, fill = Diversity)) + geom_tile() + scale_fill_gradient2(low = "#d73027", mid = "#fee090", high = "#4575b4", midpoint = 20) + labs(title = "Mean Glucoside Hydrolase Coding Diversity", x = "", y = "")
+gh.agg <- aggregate(Diversity ~ Lake + Order, data = gh_df, mean)
+ggplot(data = gh.agg[which(gh.agg$Order != "[Blank]" & is.na(gh.agg$Order) == F), ], aes(x = Lake, y = Order, fill = Diversity)) + geom_tile() + scale_fill_gradient2(low = "white", mid = "#8c96c6", high = "#810f7c", midpoint = 40) + labs(title = "Mean Glucoside Hydrolase Coding Diversity", x = "", y = "") + background_grid(major = "xy")
+
+gh.agg <- aggregate(Density ~ Lake + Order, data = gh_df, mean)
+gh_density_plot <- ggplot(data = gh.agg[which(gh.agg$Order != "[Blank]" & is.na(gh.agg$Order) == F), ], aes(x = Lake, y = Order, fill = Density)) + geom_tile(color = "black") + scale_fill_gradient2(low = "white", mid = "#8c96c6", high = "#810f7c", midpoint = 4) + labs(x = "", y = "") + background_grid(major = "xy") + theme(axis.text.y = element_text(size = 10))
+save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Plots/GH.density.heatmap.pdf", gh_density_plot, base_height = 5, base_aspect_ratio = 1)
 ###
 
 cazy_df$MAG <- factor(cazy_df$MAG)
