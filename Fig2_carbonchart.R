@@ -65,4 +65,4 @@ TH.long <- TH.long[which(is.na(TH.long$Pathways) == F), ]
 TH.agg <- aggregate(value ~ Pathways + Taxonomy, TH.long, mean)
 
 TH.heatmap <- ggplot(data = TH.agg, aes(y = Pathways, x = Taxonomy, fill = value)) + geom_tile(color = "black") + labs(x = "", y = "") + scale_fill_gradient2(low = "white", high = "#00A287", midpoint = 25) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), axis.text.y = element_text(size = 10))
-save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Plots/TH.heatmap.pdf", TH.heatmap, base_height = 7, base_aspect_ratio = 0.67)
+save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Plots/TH.heatmap.pdf", TH.heatmap, base_height = 7, base_aspect_ratio = .73)
