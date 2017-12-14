@@ -4,6 +4,7 @@
 
 mag_data <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
 mag_data$Taxonomy <- as.character(mag_data$Taxonomy)
+mag_data$Lake <- as.character(mag_data$Lake)
 
 gh_df <- mag_data[,c(1,3,4,10)]
 
@@ -70,3 +71,57 @@ save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Plots/GH.density.heatmap.pdf", g
 
 cazy_df$MAG <- factor(cazy_df$MAG)
 ggplot(data = cazy_df[which(cazy_df$Enzyme == "GT"),], aes(x = Lake, y = MAG, fill = Density)) + geom_tile() + scale_fill_gradient2(low = "#d73027", mid = "#fee090", high = "#4575b4", midpoint = 20) + labs(title = "GT density", x = "", y = "")
+
+
+# Abundance of GHs
+gh_names <- c()
+gh_counts <- c()
+magIDs <- c()
+lakekey <- c()
+taxonomy <- c()
+
+for(i in 1:dim(mag_data)[1]){
+  datafile <- read.table(paste("C:/Users/Alex/Desktop/MAGstravaganza/hydrolases/", mag_data$IMG_OID[i], ".txt", sep = ""))
+  hits <- sub(".hmm", "", datafile$V2)
+  types <- substr(hits, start = 1, stop = 2)
+  gh_hits <- hits[which(types == "GH")]
+  gh_table <- table(gh_hits)
+  ghs <- names(gh_table)
+  genome <- rep(mag_data$IMG_OID[i], length(ghs))
+  lake <- rep(mag_data$Lake[i], length(ghs))
+  tax <- rep(mag_data$Taxonomy[i], length(ghs))
+  gh_names <- append(gh_names, ghs, length(gh_names))
+  gh_counts <- append(gh_counts, gh_table, length(gh_counts))
+  magIDs <- append(magIDs, genome, length(magIDs))
+  lakekey <- append(lakekey, lake, length(lakekey))
+  taxonomy <- append(taxonomy, tax, length(taxonomy))
+}
+
+gh_types <- data.frame(gh_names, gh_counts, magIDs, lakekey, taxonomy)
+colnames(gh_types) <- c("GH", "Counts", "OID", "Lake", "Taxonomy")
+
+#What are the 10 most aboundant GHs by lake?
+gh_lake <- aggregate(Counts ~ GH + Lake, data = gh_types, sum)
+ME <- gh_lake[which(gh_lake$Lake == "Mendota"),]
+ME <- ME[order(ME$Counts, decreasing = T), ]
+ME[1:10,]
+
+TE <- gh_lake[which(gh_lake$Lake == "Trout Bog Epilimnion"),]
+TE <- TE[order(TE$Counts, decreasing = T), ]
+TE[1:10,]
+
+TH <- gh_lake[which(gh_lake$Lake == "Trout Bog Hypolimnion"),]
+TH <- TH[order(TH$Counts, decreasing = T), ]
+TH[1:10,]
+
+#Make wide format to compare profiles
+wide_gh_lake <- reshape(gh_lake, idvar = "Lake", timevar = "GH", direction = "wide")
+for(i in 1:3){
+  row <- wide_gh_lake[i, ]
+  row[which(is.na(row) == T)] <- 0
+  wide_gh_lake[i, ] <- row
+}
+rownames(wide_gh_lake) <- wide_gh_lake$Lake
+wide_gh_lake <- wide_gh_lake[,2:177]
+wide_gh_lake <- wide_gh_lake[,which(colSums(wide_gh_lake) > 50)]
+heatmap(as.matrix(wide_gh_lake))

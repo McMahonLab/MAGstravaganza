@@ -330,8 +330,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="416.67956"
-     inkscape:cy="997.86235"
+     inkscape:cx="310.9671"
+     inkscape:cy="692.91355"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -357,7 +357,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <g
-       transform="matrix(0.35277777,0,0,-0.35277777,-9.1171784,175.31067)"
+       transform="matrix(0.35277777,0,0,-0.35277777,-4.2528731,191.96156)"
        inkscape:label="ME.heatmap"
        id="g3707"
        clip-path="url(#clipPath7405)">
@@ -3197,7 +3197,7 @@
          id="g4933" />
     </g>
     <g
-       transform="matrix(0.35277777,0,0,-0.35277777,-111.92671,259.97734)"
+       transform="matrix(0.35277777,0,0,-0.35277777,-107.0624,276.62823)"
        inkscape:label="ME.heatmap"
        id="g3707-4"
        clip-path="url(#clipPath7415)">
@@ -6037,7 +6037,7 @@
          id="g4933-3" />
     </g>
     <g
-       transform="matrix(0.35277777,0,0,-0.35277777,33.893487,175.31067)"
+       transform="matrix(0.35277777,0,0,-0.35277777,38.757792,191.96156)"
        inkscape:label="TE.heatmap"
        id="g7427"
        clip-path="url(#clipPath10357)">
@@ -8232,7 +8232,7 @@
          id="g8395" />
     </g>
     <g
-       transform="matrix(0.35277777,0,0,-0.35277777,-83.270572,259.97734)"
+       transform="matrix(0.35277777,0,0,-0.35277777,-78.406267,276.62823)"
        inkscape:label="TE.heatmap"
        id="g7427-3"
        clip-path="url(#clipPath10351)">
@@ -10427,7 +10427,7 @@
          id="g8395-2" />
     </g>
     <g
-       transform="matrix(0.35277777,0,0,-0.35277777,-67.5896,259.98087)"
+       transform="matrix(0.35277777,0,0,-0.35277777,-62.725295,276.63176)"
        inkscape:label="TH.heatmap"
        id="g10369-3"
        clip-path="url(#clipPath13809)">
@@ -13052,7 +13052,7 @@
          id="g11509-4" />
     </g>
     <g
-       transform="matrix(0.35277777,0,0,-0.35277777,62.666042,175.31067)"
+       transform="matrix(0.35277777,0,0,-0.35277777,67.530347,191.96156)"
        inkscape:label="TH.heatmap"
        id="g20711"
        clip-path="url(#clipPath22426)">
@@ -15688,7 +15688,7 @@
            x="90"
            y="-74.480316"
            style="font-size:17.33333333px;" /></flowRegion><flowPara
-         id="flowPara22444"></flowPara></flowRoot>    <flowRoot
+         id="flowPara22444" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot22458"
        style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
@@ -15698,26 +15698,26 @@
            height="156"
            x="10.5"
            y="-206.48032" /></flowRegion><flowPara
-         id="flowPara22464"></flowPara></flowRoot>    <text
+         id="flowPara22464" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:0.75;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="172.24376"
-       y="0.40208468"
+       x="177.10806"
+       y="17.052977"
        id="text22468"><tspan
          sodipodi:role="line"
-         x="172.24376"
-         y="0.40208468"
+         x="177.10806"
+         y="17.052977"
          style="font-size:2.82222223px;line-height:0.75;stroke-width:0.26458332"
          id="tspan22936">Aerobic anoxygenic </tspan><tspan
          sodipodi:role="line"
-         x="172.24376"
-         y="3.5770845"
+         x="177.10806"
+         y="20.227976"
          style="font-size:2.82222223px;line-height:0.75;stroke-width:0.26458332"
          id="tspan22950">photosynthesis</tspan></text>
     <g
        id="g22492"
        clip-path="url(#clipPath22494)"
-       transform="matrix(0.23381216,0,0,0.22368422,156.97278,15.072063)">
+       transform="matrix(0.23381216,0,0,0.22368422,161.83709,31.722954)">
       <g
          inkscape:label="Clip"
          id="g22490">
@@ -15747,11 +15747,11 @@
            x="336.5"
            y="-111.98032"
            style="font-size:10.66666667px;" /></flowRegion><flowPara
-         id="flowPara22528"></flowPara></flowRoot>    <flowRoot
+         id="flowPara22528" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot22542"
        style="font-style:normal;font-weight:normal;font-size:10.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,105.96563,37.835417)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,109.7074,54.673397)"><flowRegion
          id="flowRegion22544"
          style="font-size:10.66666698px"><rect
            id="rect22546"
@@ -15763,7 +15763,7 @@
          id="flowPara22548">Green sulfur bacteria</flowPara></flowRoot>    <g
        id="g22492-8"
        clip-path="url(#clipPath22494-3)"
-       transform="matrix(0.23381216,0,0,0.22368422,156.97278,21.715201)">
+       transform="matrix(0.23381216,0,0,0.22368422,161.83709,38.366092)">
       <g
          inkscape:label="Clip"
          id="g22490-8">
@@ -15793,7 +15793,7 @@
            x="642.14972"
            y="38.851257"
            style="font-size:10.66666667px;" /></flowRegion><flowPara
-         id="flowPara22594"></flowPara></flowRoot>    <text
+         id="flowPara22594" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:2.82222222px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
        x="180.31354"
@@ -15808,7 +15808,7 @@
        xml:space="preserve"
        id="flowRoot22600"
        style="font-style:normal;font-weight:normal;font-size:10.66666698px;line-height:1;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,113.37396,26.855208)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,118.23827,43.506099)"><flowRegion
          id="flowRegion22602"
          style="font-size:10.66666698px;line-height:1"><rect
            id="rect22604"
@@ -15821,7 +15821,7 @@
          id="flowPara22952">photosynthesis</flowPara></flowRoot>    <g
        id="g22492-8-4"
        clip-path="url(#clipPath22494-3-4)"
-       transform="matrix(0.23381216,0,0,0.46052632,156.97278,43.476179)">
+       transform="matrix(0.23381216,0,0,0.46052632,161.83709,60.12707)">
       <g
          inkscape:label="Clip"
          id="g22490-8-7">
@@ -15843,7 +15843,7 @@
        xml:space="preserve"
        id="flowRoot22674"
        style="font-style:normal;font-weight:normal;font-size:10.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,59.398958,36.5125)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,64.263263,53.163391)"><flowRegion
          id="flowRegion22676"
          style="font-size:10.66666698px"><rect
            id="rect22678"
@@ -15855,7 +15855,7 @@
          id="flowPara22680">Complex carbon</flowPara></flowRoot>    <g
        id="g22492-8-4-4"
        clip-path="url(#clipPath22494-3-4-5)"
-       transform="matrix(0.23381216,0,0,0.56578948,156.97278,62.303045)">
+       transform="matrix(0.23381216,0,0,0.56578948,161.83709,78.953936)">
       <g
          inkscape:label="Clip"
          id="g22490-8-7-9">
@@ -15877,7 +15877,7 @@
        xml:space="preserve"
        id="flowRoot22712"
        style="font-style:normal;font-weight:normal;font-size:10.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,-2.2489583,-0.13229167)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,2.615347,16.518599)"><flowRegion
          id="flowRegion22714"
          style="font-size:10.66666698px"><rect
            id="rect22716"
@@ -15889,7 +15889,7 @@
          id="flowPara22718">Nitrogen metabolism</flowPara></flowRoot>    <g
        id="g22492-8-4-4-8"
        clip-path="url(#clipPath22494-3-4-5-6)"
-       transform="matrix(0.23381216,0,0,0.92105262,156.97278,96.815496)">
+       transform="matrix(0.23381216,0,0,0.92105262,161.83709,113.46639)">
       <g
          inkscape:label="Clip"
          id="g22490-8-7-9-2">
@@ -15911,7 +15911,7 @@
        xml:space="preserve"
        id="flowRoot22750"
        style="font-style:normal;font-weight:normal;font-size:10.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,0.79375,3.3072917)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,5.6580553,19.958183)"><flowRegion
          id="flowRegion22752"
          style="font-size:10.66666698px"><rect
            id="rect22754"
@@ -15923,7 +15923,7 @@
          id="flowPara22756">Carbohydrates</flowPara></flowRoot>    <g
        id="g22492-8-4-2"
        clip-path="url(#clipPath22494-3-4-6)"
-       transform="matrix(0.23381216,0,0,0.57017544,156.97278,105.64934)">
+       transform="matrix(0.23381216,0,0,0.57017544,161.83709,122.30023)">
       <g
          inkscape:label="Clip"
          id="g22490-8-7-3">
@@ -15951,21 +15951,21 @@
            height="26.448168"
            x="662.74133"
            y="307.0715" /></flowRegion><flowPara
-         id="flowPara22794"></flowPara></flowRoot>    <text
+         id="flowPara22794" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="171.60912"
-       y="85.849754"
+       x="176.47342"
+       y="102.50065"
        id="text22798"><tspan
          sodipodi:role="line"
          id="tspan22796"
-         x="171.60912"
-         y="85.849754"
+         x="176.47342"
+         y="102.50065"
          style="font-size:2.82222223px;stroke-width:0.26458332">Central Metabolism</tspan></text>
     <g
        id="g22492-8-4-2-0"
        clip-path="url(#clipPath22494-3-4-6-2)"
-       transform="matrix(0.23580802,0,0,0.33970985,156.86241,110.41098)">
+       transform="matrix(0.23580802,0,0,0.33970985,161.72672,127.06187)">
       <g
          inkscape:label="Clip"
          id="g22490-8-7-3-8">
@@ -15986,7 +15986,7 @@
     <g
        id="g22492-8-4-2-0-6"
        clip-path="url(#clipPath22494-3-4-6-2-8)"
-       transform="matrix(0.23580802,0,0,0.44935896,156.87999,126.20334)">
+       transform="matrix(0.23580802,0,0,0.44935896,161.7443,142.85423)">
       <g
          inkscape:label="Clip"
          id="g22490-8-7-3-8-1">
@@ -16007,29 +16007,29 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="171.71458"
-       y="98.82708"
+       x="176.57889"
+       y="115.47797"
        id="text22862"><tspan
          sodipodi:role="line"
          id="tspan22860"
-         x="171.71458"
-         y="98.82708"
+         x="176.57889"
+         y="115.47797"
          style="font-size:2.82222223px;stroke-width:0.26458332">Sulfur Metabolism</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="171.38593"
-       y="110.73264"
+       x="176.25023"
+       y="127.38354"
        id="text22862-2"><tspan
          sodipodi:role="line"
          id="tspan22860-8"
-         x="171.38593"
-         y="110.73264"
+         x="176.25023"
+         y="127.38354"
          style="font-size:2.82222223px;stroke-width:0.26458332">Nitrogen Metabolism</tspan></text>
     <g
        id="g22492-4"
        clip-path="url(#clipPath22494-1)"
-       transform="matrix(0.23381216,0,0,0.22368422,156.97278,127.8625)">
+       transform="matrix(0.23381216,0,0,0.22368422,161.83709,144.51339)">
       <g
          inkscape:label="Clip"
          id="g22490-1">
@@ -16050,7 +16050,7 @@
     <g
        id="g22492-9"
        clip-path="url(#clipPath22494-15)"
-       transform="matrix(0.23381216,0,0,0.34649124,156.97278,140.83017)">
+       transform="matrix(0.23381216,0,0,0.34649124,161.83709,157.48106)">
       <g
          inkscape:label="Clip"
          id="g22490-5">
@@ -16071,24 +16071,24 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="171.3177"
-       y="120.52291"
+       x="176.18201"
+       y="137.1738"
        id="text22930"><tspan
          sodipodi:role="line"
          id="tspan22928"
-         x="171.3177"
-         y="120.52291"
+         x="176.18201"
+         y="137.1738"
          style="font-size:2.82222223px;stroke-width:0.26458332">Methylotrophy</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="171.3177"
-       y="128.98958"
+       x="176.18201"
+       y="145.64047"
        id="text22934"><tspan
          sodipodi:role="line"
          id="tspan22932"
-         x="171.3177"
-         y="128.98958"
+         x="176.18201"
+         y="145.64047"
          style="font-size:2.82222223px;stroke-width:0.26458332">Carbon fixation</tspan></text>
     <flowRoot
        xml:space="preserve"
@@ -16100,38 +16100,38 @@
            height="35"
            x="127"
            y="754.01971" /></flowRegion><flowPara
-         id="flowPara22960"></flowPara></flowRoot>    <text
+         id="flowPara22960" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:3.52777767px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="0.52916485"
-       y="137.8531"
+       x="5.3934703"
+       y="154.504"
        id="text22964"><tspan
          sodipodi:role="line"
          id="tspan22962"
-         x="0.52916485"
-         y="137.8531"
+         x="5.3934703"
+         y="154.504"
          style="font-size:3.52777767px;stroke-width:0.26458332">Mendota</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:3.52777767px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="5.9998426"
-       y="171.9099"
+       x="10.864148"
+       y="188.56079"
        id="text22968"><tspan
          sodipodi:role="line"
          id="tspan22966"
-         x="5.9998426"
-         y="171.9099"
+         x="10.864148"
+         y="188.56079"
          style="font-size:3.52777767px;stroke-width:0.26458332">Trout Bog Epilimnion</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:3.52777767px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="6.0097957"
-       y="176.13519"
+       x="21.538155"
+       y="192.41191"
        id="text22968-0"><tspan
          sodipodi:role="line"
          id="tspan22966-0"
-         x="6.0097957"
-         y="176.13519"
+         x="21.538155"
+         y="192.41191"
          style="font-size:3.52777767px;stroke-width:0.26458332">Trout Bog Hypolimnion</tspan></text>
   </g>
 </svg>
