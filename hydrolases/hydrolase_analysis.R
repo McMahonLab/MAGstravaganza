@@ -2,7 +2,7 @@
 
 # Read in list of MAGs
 
-mag_data <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
+mag_data <- read.csv("C:/Users/amlin/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
 mag_data$Taxonomy <- as.character(mag_data$Taxonomy)
 mag_data$Lake <- as.character(mag_data$Lake)
 
@@ -81,7 +81,7 @@ lakekey <- c()
 taxonomy <- c()
 
 for(i in 1:dim(mag_data)[1]){
-  datafile <- read.table(paste("C:/Users/Alex/Desktop/MAGstravaganza/hydrolases/", mag_data$IMG_OID[i], ".txt", sep = ""))
+  datafile <- read.table(paste("C:/Users/amlin/Desktop/MAGstravaganza/hydrolases/", mag_data$IMG_OID[i], ".txt", sep = ""))
   hits <- sub(".hmm", "", datafile$V2)
   types <- substr(hits, start = 1, stop = 2)
   gh_hits <- hits[which(types == "GH")]
@@ -125,3 +125,42 @@ rownames(wide_gh_lake) <- wide_gh_lake$Lake
 wide_gh_lake <- wide_gh_lake[,2:177]
 wide_gh_lake <- wide_gh_lake[,which(colSums(wide_gh_lake) > 50)]
 heatmap(as.matrix(wide_gh_lake))
+
+#Which hydrolases are unique to each region?
+
+for(i in 1:dim(ME)[1]){
+  inTE <- which(TE$GH == ME$GH[i])
+  inTH <- which(TH$GH == ME$GH[i])
+  if(length(inTE) == 0 && length(inTH) == 0){
+    print(ME[i,])
+  }
+}
+# unique (greater than 1) is largely GH13 families - 21, 5, 2, 2
+
+for(i in 1:dim(TE)[1]){
+  inME <- which(ME$GH == TE$GH[i])
+  inTH <- which(TH$GH == TE$GH[i])
+  if(length(inME) == 0 && length(inTH) == 0){
+    print(TE[i,])
+  }
+}
+
+# Only one is GH62 with 2 counts
+
+for(i in 1:dim(TH)[1]){
+  inTE <- which(TE$GH == TH$GH[i])
+  inME <- which(ME$GH == TH$GH[i])
+  if(length(inTE) == 0 && length(inME) == 0){
+    print(TH[i,])
+  }
+}
+
+#More than in the other lakes
+#GH129 (11), GH43_12, GH89, GH44, GH66, GH67 (for ones greater 4 counts but there are many more)
+
+wilcox.test(x = mag_data$Amino_Acid_Bias[which(mag_data$Lake == "Mendota")], y = mag_data$Amino_Acid_Bias[which(mag_data$Lake != "Mendota")], paired = F)
+
+wilcox.test(x = mag_data$GC_Content[which(mag_data$Lake == "Mendota")], y = mag_data$GC_Content[which(mag_data$Lake != "Mendota")], paired = F)
+
+mag_data$Est_Genome_Size <- mag_data$Genome_Size/mag_data$Est_Completeness
+wilcox.test(x = mag_data$Est_Genome_Size[which(mag_data$Lake == "Mendota")], y = mag_data$Est_Genome_Size[which(mag_data$Lake != "Mendota")], paired = F)
