@@ -104,15 +104,15 @@ colnames(gh_types) <- c("GH", "Counts", "OID", "Lake", "Taxonomy")
 gh_lake <- aggregate(Counts ~ GH + Lake, data = gh_types, sum)
 ME <- gh_lake[which(gh_lake$Lake == "Mendota"),]
 ME <- ME[order(ME$Counts, decreasing = T), ]
-ME[1:10,]
+part1 <- ME[1:10,]
 
 TE <- gh_lake[which(gh_lake$Lake == "Trout Bog Epilimnion"),]
 TE <- TE[order(TE$Counts, decreasing = T), ]
-TE[1:10,]
+part2 <- TE[1:10,]
 
 TH <- gh_lake[which(gh_lake$Lake == "Trout Bog Hypolimnion"),]
 TH <- TH[order(TH$Counts, decreasing = T), ]
-TH[1:10,]
+part3 <- TH[1:10,]
 
 #Make wide format to compare profiles
 wide_gh_lake <- reshape(gh_lake, idvar = "Lake", timevar = "GH", direction = "wide")
@@ -164,3 +164,28 @@ wilcox.test(x = mag_data$GC_Content[which(mag_data$Lake == "Mendota")], y = mag_
 
 mag_data$Est_Genome_Size <- mag_data$Genome_Size/mag_data$Est_Completeness
 wilcox.test(x = mag_data$Est_Genome_Size[which(mag_data$Lake == "Mendota")], y = mag_data$Est_Genome_Size[which(mag_data$Lake != "Mendota")], paired = F)
+
+# Make barplot of the top 10 GHs in each lake across lakes
+# from line 112ish
+
+top_gh <- c(as.character(part1$GH), as.character(part2$GH), as.character(part3$GH))
+uniq_top_gh <- unique(top_gh)
+
+#Make Mendota barplot
+Mendota_data <- ME[match(uniq_top_gh, as.character(ME$GH)), ]
+Mendota_data <- Mendota_data[order(Mendota_data$Counts, decreasing = T), ]
+Mendota_data$GH <- factor(Mendota_data$GH, levels = Mendota_data$GH)
+
+p1 <- ggplot(data = Mendota_data, aes(x = GH, y = Counts)) + geom_bar(stat = "identity", fill = "#FF0000", color = "black") + labs(x = "", y = "") + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) + scale_y_continuous(limits = c(0, 670))
+save_plot("C:/Users/amlin/Desktop/MAGstravaganza/Plots/ME_GH.pdf", p1, base_height = 4, base_aspect_ratio = 2.5) 
+
+# Repeat with TB stacked bars
+
+TH_data <- TH[match(uniq_top_gh, as.character(TH$GH)), ]
+TE_data <- TE[match(uniq_top_gh, as.character(TE$GH)), ]
+TB_data <- rbind(TH_data, TE_data)
+TB_data <- TB_data[which(is.na(TB_data$GH) == F), ]
+TB_data$GH <- factor(TB_data$GH, levels = Mendota_data$GH)
+
+p2 <- ggplot(data = TB_data, aes(x = GH, y = Counts, fill = Lake)) + geom_bar(stat = "identity", color = "black") + labs(x = "", y = "") + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) + theme(legend.position = "none") + scale_fill_manual(values = c("#8EEB00", "#00A287")) + scale_y_continuous(limits = c(0, 670))
+save_plot("C:/Users/amlin/Desktop/MAGstravaganza/Plots/TH_GH.pdf", p2, base_height = 4, base_aspect_ratio = 2.5) 
