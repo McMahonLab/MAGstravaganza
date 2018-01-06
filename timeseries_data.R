@@ -1,0 +1,47 @@
+# Plot abundance and variability of MAGs
+library(raster)
+library(ggplot2)
+library(cowplot)
+# Read data in
+Mendota_raw_input <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/Mendota_results.txt")
+
+# Convert to percent
+
+Mendota_percents <- Mendota_raw_input$V3/Mendota_raw_input$V4 * 100
+ME_results <- data.frame(Mendota_raw_input[,1:2], Mendota_percents)
+colnames(ME_results) <- c("MAG", "metaG", "perc_reads")
+
+# Calculate mean abundance and coefficient of variation
+
+ME_MAGs <- unique(ME_results$MAG)
+abundance <- c()
+variation <- c()
+
+for(i in 1:length(ME_MAGs)){
+  genome <- ME_MAGs[i]
+  data <- ME_results$perc_reads[which(ME_results$MAG == genome)]
+  abundance[i] <- mean(data)
+  variation[i] <- cv(data)
+}
+
+ME_traits <- data.frame(ME_MAGs, abundance, variation)
+
+# Overlay other traits
+MAG_info <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
+MAG_phylum <- sapply(strsplit(as.character(MAG_info$Taxonomy),";"), `[`, 1)
+
+ME_rows <- match(ME_traits$ME_MAGs, MAG_info$IMG_OID)
+ME_traits$Genome_Size <- MAG_info$Genome_Size[ME_rows]/(MAG_info$Est_Completeness[ME_rows] / 100)
+ME_traits$Codon_Usage <- MAG_info$Codon_Usage[ME_rows]
+ME_traits$Amino_Acid_Bias <- MAG_info$Amino_Acid_Bias[ME_rows]
+ME_traits$Taxonomy <- MAG_info$Taxonomy[ME_rows]
+ME_traits$Phylum <- MAG_phylum[ME_rows]
+#Keep only phyla with > 5 genomes
+ME_traits <- ME_traits[which(ME_traits$Phylum == "Actinobacteria" | ME_traits$Phylum == "Bacteroidetes" | ME_traits$Phylum == "Cyanobacteria" | ME_traits$Phylum == "Planctomycetes" | ME_traits$Phylum == "Proteobacteria" | ME_traits$Phylum == "Verrucomicrobia"),]
+
+# Plot
+ggplot(data = ME_traits, aes(y = abundance, x = variation, color = Phylum)) + geom_point(size = 2) + scale_y_continuous(limits = c(-0.01, 0.42)) + scale_x_continuous(limits = c(0, 750)) + scale_color_manual(values = c("darkgoldenrod4", "magenta3", "darkolivegreen3", "firebrick2", "orange1", "slateblue1")) + scale_fill_manual(values = c("darkgoldenrod4", "magenta3", "darkolivegreen3", "firebrick2", "orange1", "slateblue1")) + stat_density2d(geom = "polygon", aes(fill = Phylum), alpha = 0.1, bins = 4)
+
+ggplot(data = ME_traits[which(ME_traits$Phylum == "Actinobacteria" | ME_traits$Phylum == "Bacteroidetes" | ME_traits$Phylum == "Proteobacteria"),], aes(y = abundance, x = variation, color = Phylum)) + geom_point(size = 2) + scale_y_continuous(limits = c(-0.01, 0.15)) + scale_x_continuous(limits = c(0, 400)) + scale_color_manual(values = c("darkgoldenrod4", "magenta3", "orange1"))  + scale_fill_manual(values = c("darkgoldenrod4", "magenta3", "orange1"))+ stat_density2d(geom = "polygon", aes(fill = Phylum), alpha = 0.1, bins = 3)
+
+#fix colors
