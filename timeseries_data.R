@@ -40,8 +40,22 @@ ME_traits$Phylum <- MAG_phylum[ME_rows]
 ME_traits <- ME_traits[which(ME_traits$Phylum == "Actinobacteria" | ME_traits$Phylum == "Bacteroidetes" | ME_traits$Phylum == "Cyanobacteria" | ME_traits$Phylum == "Planctomycetes" | ME_traits$Phylum == "Proteobacteria" | ME_traits$Phylum == "Verrucomicrobia"),]
 
 # Plot
-ggplot(data = ME_traits, aes(y = abundance, x = variation, color = Phylum)) + geom_point(size = 2) + scale_y_continuous(limits = c(-0.01, 0.42)) + scale_x_continuous(limits = c(0, 750)) + scale_color_manual(values = c("darkgoldenrod4", "magenta3", "darkolivegreen3", "firebrick2", "orange1", "slateblue1")) + scale_fill_manual(values = c("darkgoldenrod4", "magenta3", "darkolivegreen3", "firebrick2", "orange1", "slateblue1")) + stat_density2d(geom = "polygon", aes(fill = Phylum), alpha = 0.1, bins = 4)
+tol6qualitative=c("#332288", "#88CCEE", "#117733", "#DDCC77", "#CC6677","#AA4499")
+rainbow6equal = c("#BF4D4D", "#BFBF4D", "#4DBF4D", "#4DBFBF", "#4D4DBF", "#BF4DBF")
+rich6equal = c("#000043", "#0033FF", "#01CCA4", "#BAFF12", "#FFCC00", "#FF3300")
+tim6equal = c("#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000")
+dark6equal = c("#1B9E77", "#66A61E", "#7570B3", "#D95F02", "#E6AB02", "#E7298A")
+set6equal = c("#66C2A5", "#8DA0CB", "#A6D854", "#E78AC3", "#FC8D62", "#FFD92F")
 
-ggplot(data = ME_traits[which(ME_traits$Phylum == "Actinobacteria" | ME_traits$Phylum == "Bacteroidetes" | ME_traits$Phylum == "Proteobacteria"),], aes(y = abundance, x = variation, color = Phylum)) + geom_point(size = 2) + scale_y_continuous(limits = c(-0.01, 0.15)) + scale_x_continuous(limits = c(0, 400)) + scale_color_manual(values = c("darkgoldenrod4", "magenta3", "orange1"))  + scale_fill_manual(values = c("darkgoldenrod4", "magenta3", "orange1"))+ stat_density2d(geom = "polygon", aes(fill = Phylum), alpha = 0.1, bins = 3)
+
+
+ggplot(data = ME_traits, aes(y = abundance, x = variation, color = Phylum)) + geom_point(size = 2) + scale_y_continuous(limits = c(-0.01, 0.42)) + scale_x_continuous(limits = c(0, 750)) + stat_density2d(geom = "polygon", aes(fill = Phylum), alpha = 0.1, bins = 4) + scale_color_manual(values = rich6equal)  + scale_fill_manual(values = rich6equal)
+
++ scale_color_brewer(palette = "Pastel2") + scale_fill_brewer(palette = "Pastel2")
+
++ scale_color_manual(values = c("darkgoldenrod4", "magenta3", "darkolivegreen3", "firebrick2", "orange1", "slateblue1")) + scale_fill_manual(values = c("darkgoldenrod4", "magenta3", "darkolivegreen3", "firebrick2", "orange1", "slateblue1"))
+
+rich3equal = c("#000043", "#0033FF", "#FFCC00")
+ggplot(data = ME_traits[which(ME_traits$Phylum == "Actinobacteria" | ME_traits$Phylum == "Bacteroidetes" | ME_traits$Phylum == "Proteobacteria"),], aes(y = abundance, x = variation, color = Phylum)) + geom_point(size = 2) + scale_y_continuous(limits = c(-0.01, 0.15)) + scale_x_continuous(limits = c(0, 400)) + scale_color_manual(values = rich3equal)  + scale_fill_manual(values = rich3equal)+ stat_density2d(geom = "polygon", aes(fill = Phylum), alpha = 0.1, bins = 3)
 
 #fix colors
