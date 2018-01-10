@@ -3,13 +3,16 @@ library(raster)
 library(ggplot2)
 library(cowplot)
 # Read data in
-Mendota_raw_input <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/Mendota_results.txt")
+Mendota_raw_input <- read.table("C:/Users/amlin/Desktop/MAGstravaganza/Mendota_results.txt")
+metadata <- read.csv("C:/Users/amlin/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
 
-# Convert to percent
+# Convert to RPKM (reads per kilobase per million reads)
+# general form: RPKM =   numReads / ( genomeLength/1000 * totalNumReads/1,000,000 )
+size_vector <- metadata$Genome_Size[match(Mendota_raw_input$V1, metadata$IMG_OID)]
 
-Mendota_percents <- Mendota_raw_input$V3/Mendota_raw_input$V4 * 100
-ME_results <- data.frame(Mendota_raw_input[,1:2], Mendota_percents)
-colnames(ME_results) <- c("MAG", "metaG", "perc_reads")
+Mendota_RPKM <- Mendota_raw_input$V3/(size_vector/1000 * Mendota_raw_input$V4/1000000)
+ME_results <- data.frame(Mendota_raw_input[,1:2], Mendota_RPKM)
+colnames(ME_results) <- c("MAG", "metaG", "RPKM")
 
 # Calculate mean abundance and coefficient of variation
 
@@ -19,7 +22,7 @@ variation <- c()
 
 for(i in 1:length(ME_MAGs)){
   genome <- ME_MAGs[i]
-  data <- ME_results$perc_reads[which(ME_results$MAG == genome)]
+  data <- ME_results$RPKM[which(ME_results$MAG == genome)]
   abundance[i] <- mean(data)
   variation[i] <- cv(data)
 }
@@ -27,29 +30,28 @@ for(i in 1:length(ME_MAGs)){
 ME_traits <- data.frame(ME_MAGs, abundance, variation)
 
 # Overlay other traits
-MAG_info <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
-MAG_phylum <- sapply(strsplit(as.character(MAG_info$Taxonomy),";"), `[`, 1)
+MAG_phylum <- sapply(strsplit(as.character(metadata$Taxonomy),";"), `[`, 1)
 
-ME_rows <- match(ME_traits$ME_MAGs, MAG_info$IMG_OID)
-ME_traits$Genome_Size <- MAG_info$Genome_Size[ME_rows]/(MAG_info$Est_Completeness[ME_rows] / 100)
-ME_traits$Codon_Usage <- MAG_info$Codon_Usage[ME_rows]
-ME_traits$Amino_Acid_Bias <- MAG_info$Amino_Acid_Bias[ME_rows]
-ME_traits$Taxonomy <- MAG_info$Taxonomy[ME_rows]
+ME_rows <- match(ME_traits$ME_MAGs, metadata$IMG_OID)
+ME_traits$Genome_Size <- metadata$Genome_Size[ME_rows]/(metadata$Est_Completeness[ME_rows] / 100)
+ME_traits$Codon_Usage <- metadata$Codon_Usage[ME_rows]
+ME_traits$Amino_Acid_Bias <- metadata$Amino_Acid_Bias[ME_rows]
+ME_traits$Taxonomy <- metadata$Taxonomy[ME_rows]
 ME_traits$Phylum <- MAG_phylum[ME_rows]
 #Keep only phyla with > 5 genomes
 ME_traits <- ME_traits[which(ME_traits$Phylum == "Actinobacteria" | ME_traits$Phylum == "Bacteroidetes" | ME_traits$Phylum == "Cyanobacteria" | ME_traits$Phylum == "Planctomycetes" | ME_traits$Phylum == "Proteobacteria" | ME_traits$Phylum == "Verrucomicrobia"),]
 
 # Plot
-tol6qualitative=c("#332288", "#88CCEE", "#117733", "#DDCC77", "#CC6677","#AA4499")
-rainbow6equal = c("#BF4D4D", "#BFBF4D", "#4DBF4D", "#4DBFBF", "#4D4DBF", "#BF4DBF")
+#tol6qualitative=c("#332288", "#88CCEE", "#117733", "#DDCC77", "#CC6677","#AA4499")
+#rainbow6equal = c("#BF4D4D", "#BFBF4D", "#4DBF4D", "#4DBFBF", "#4D4DBF", "#BF4DBF")
 rich6equal = c("#000043", "#0033FF", "#01CCA4", "#BAFF12", "#FFCC00", "#FF3300")
-tim6equal = c("#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000")
-dark6equal = c("#1B9E77", "#66A61E", "#7570B3", "#D95F02", "#E6AB02", "#E7298A")
-set6equal = c("#66C2A5", "#8DA0CB", "#A6D854", "#E78AC3", "#FC8D62", "#FFD92F")
+#tim6equal = c("#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000")
+#dark6equal = c("#1B9E77", "#66A61E", "#7570B3", "#D95F02", "#E6AB02", "#E7298A")
+#set6equal = c("#66C2A5", "#8DA0CB", "#A6D854", "#E78AC3", "#FC8D62", "#FFD92F")
 
 
 
-ggplot(data = ME_traits, aes(y = abundance, x = variation, color = Phylum)) + geom_point(size = 2) + scale_y_continuous(limits = c(-0.01, 0.42)) + scale_x_continuous(limits = c(0, 750)) + stat_density2d(geom = "polygon", aes(fill = Phylum), alpha = 0.1, bins = 4) + scale_color_manual(values = rich6equal)  + scale_fill_manual(values = rich6equal)
+ggplot(data = ME_traits, aes(y = abundance, x = variation, color = Phylum)) + geom_point(size = 2)  + stat_density2d(geom = "polygon", aes(fill = Phylum), alpha = 0.1, bins = 4) + scale_color_manual(values = rich6equal)  + scale_fill_manual(values = rich6equal) + scale_y_continuous(limits = c(-0.01, 2)) + scale_x_continuous(limits = c(0, 700))
 
 + scale_color_brewer(palette = "Pastel2") + scale_fill_brewer(palette = "Pastel2")
 
