@@ -57,6 +57,7 @@ IMG_OID,Genome_Name,Lake,Taxonomy,Genome_Size,Est_Completeness,GC_Content,Codon_
 2582580567,ME33807,Mendota,Cyanobacteria;[Blank];[Blank];;;,2003587,64.47,0.3955,0.23555,1.681,2054
 2582580568,ME34551,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2923340,86.01,0.4401,0.160426,1.625,2531
 2582580569,ME03611,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,3284619,51.3,0.4344,0.19919,1.66,2827
+2582580570,ME36464,Mendota,Proteobacteria;[Blank];[Blank];;;,1017159,74.47,0.3861,,,
 2582580571,ME03713,Mendota,Bacteroidetes;Sphingobacteriia;[Blank];;;,1740562,79.38,0.4582,0.194234,1.656,1551
 2582580572,ME03864,Mendota,Actinobacteria;Actinobacteria;[Blank];;;,786155,55.44,0.4802,0.182934,1.654,818
 2582580573,ME03880,Mendota,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,1581403,72.84,0.5814,0.283999,1.724,1558
