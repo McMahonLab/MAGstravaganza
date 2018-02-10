@@ -21,8 +21,6 @@ IMG_OID,Genome_Name,Lake,Taxonomy,Genome_Size,Est_Completeness,GC_Content,Codon_
 2582580531,ME14445,Mendota,Cyanobacteria;[Blank];[Blank];;;,3309584,90.79,0.5768,0.258171,1.702,3116
 2582580532,ME14726,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2512767,87.12,0.4447,0.165805,1.649,2280
 2582580533,ME15216,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2272733,67.04,0.4699,0.150075,1.669,2033
-2582580534,ME15468,Mendota,[Blank];[Blank];[Blank];;;,684826,44.87,0.338,0.339522,1.636,708
-2582580535,ME15824,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1897505,86.88,0.4049,0.178081,1.647,1863
 2582580536,ME15954,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,4122388,73.15,0.5207,0.154795,1.724,3377
 2582580537,ME01627,Mendota,Cyanobacteria;[Blank];[Blank];;;,4154717,93.36,0.3971,0.308769,1.666,3798
 2582580538,ME16806,Mendota,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,3110597,82.17,0.6358,0.306702,1.718,3077
@@ -57,11 +55,10 @@ IMG_OID,Genome_Name,Lake,Taxonomy,Genome_Size,Est_Completeness,GC_Content,Codon_
 2582580567,ME33807,Mendota,Cyanobacteria;[Blank];[Blank];;;,2003587,64.47,0.3955,0.23555,1.681,2054
 2582580568,ME34551,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,2923340,86.01,0.4401,0.160426,1.625,2531
 2582580569,ME03611,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,3284619,51.3,0.4344,0.19919,1.66,2827
-2582580570,ME36464,Mendota,Proteobacteria;[Blank];[Blank];;;,1017159,74.47,0.3861,,,
+2582580570,ME36464,Mendota,Proteobacteria;[Blank];[Blank];;;,1017159,74.47,0.3861,0.266748,1.659,1224
 2582580571,ME03713,Mendota,Bacteroidetes;Sphingobacteriia;[Blank];;;,1740562,79.38,0.4582,0.194234,1.656,1551
 2582580572,ME03864,Mendota,Actinobacteria;Actinobacteria;[Blank];;;,786155,55.44,0.4802,0.182934,1.654,818
 2582580573,ME03880,Mendota,Verrucomicrobia;Verrucomicrobiae;Verrucomicrobiales;;;,1581403,72.84,0.5814,0.283999,1.724,1558
-2582580574,ME00422,Mendota,Chloroflexi;[Blank];[Blank];;;,749473,47.69,0.6255,0.257201,1.669,788
 2582580575,ME04252,Mendota,Actinobacteria;Actinobacteria;[Blank];;;,1144269,69.31,0.4488,0.199156,1.615,1180
 2582580576,ME04498,Mendota,Cyanobacteria;[Blank];[Blank];;;,2772794,92.14,0.6405,0.321237,1.737,2887
 2582580577,ME04500,Mendota,Cyanobacteria;[Blank];[Blank];;;,2819350,94.63,0.6756,0.433521,1.763,3018
@@ -91,7 +88,6 @@ IMG_OID,Genome_Name,Lake,Taxonomy,Genome_Size,Est_Completeness,GC_Content,Codon_
 2582580601,ME07198,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,2736634,74.87,0.4694,0.164579,1.667,2686
 2582580602,ME07257,Mendota,Bacteroidetes;Flavobacteriia;Flavobacteriales;;;,1284442,58.88,0.3931,0.223349,1.642,1346
 2582580603,ME07484,Mendota,Bacteroidetes;Cytophagia;Cytophagales;;;,3659184,87.49,0.4175,0.187063,1.656,3615
-2582580604,ME07672,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,2429640,44,0.6154,0.27662,1.741,1970
 2582580605,ME07690,Mendota,Bacteroidetes;Sphingobacteriia;Sphingobacteriales;;;,1813804,86.27,0.4848,0.154283,1.678,1651
 2582580606,ME07803,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,2973502,80.4,0.7067,0.453905,1.747,2596
 2582580607,ME08366,Mendota,Verrucomicrobia;Spartobacteria;[Blank];;;,3551150,84.72,0.633,0.361666,1.73,3410
@@ -176,15 +172,11 @@ IMG_OID,Genome_Name,Lake,Taxonomy,Genome_Size,Est_Completeness,GC_Content,Codon_
 2582580701,TH06070,Trout Bog Hypolimnion,Proteobacteria;Gammaproteobacteria;Pseudomonadales;;;,878995,79.65,0.3349,0.319742,1.642,922
 2582580702,TH06286,Trout Bog Hypolimnion,Bacteroidetes;Bacteroidia;Bacteroidales;;;,5154715,90.91,0.3985,0.190934,1.64,4340
 2582580703,TH06717,Trout Bog Hypolimnion,Proteobacteria;Alphaproteobacteria;Rhizobiales;;;,1942197,83.49,0.6213,0.357283,1.672,2168
-2582580704,TH06736,Trout Bog Hypolimnion,Elusimicrobia;Elusimicrobia;Elusimicrobiales;;;,1511669,43.51,0.6467,0.364224,1.757,1484
 2582580705,TH00680,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;[Blank];;;,1257796,72.7,0.5012,0.162387,1.626,1309
 2582580706,TH07795,Trout Bog Hypolimnion,[Blank];[Blank];[Blank];;;,819610,72.22,0.4555,0.235234,1.662,844
-2582580707,TH07925,Trout Bog Hypolimnion,Proteobacteria;Alphaproteobacteria;Rhodospirillales;;;,1117672,31.49,0.6369,0.354759,1.675,1257
 2582580708,TH07934,Trout Bog Hypolimnion,Bacteroidetes;Bacteroidia;Bacteroidales;;;,2314650,64.1,0.3646,0.25373,1.638,2224
-2582580709,TH08362,Trout Bog Hypolimnion,Proteobacteria;[Blank];[Blank];;;,495687,48.91,0.3874,0.255929,1.628,570
 2582580711,TH00944,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1737056,69.83,0.4607,0.193204,1.652,1902
 2582580712,TH00953,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1556854,93.3,0.4214,0.218587,1.663,1569
-2582580714,TH09906,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;[Blank];;;,795830,39.5,0.6407,0.36392,1.667,940
 2593339176,TH00545v2,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1431993,89.68,0.4261,0.201092,1.651,1411
 2593339177,TH00941v2,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Burkholderiales;;;,1496525,57.24,0.4483,0.187258,1.654,1553
 2593339178,TH02062v2,Trout Bog Hypolimnion,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,3124798,94.05,0.3969,0.258984,1.653,2879
@@ -194,11 +186,9 @@ IMG_OID,Genome_Name,Lake,Taxonomy,Genome_Size,Est_Completeness,GC_Content,Codon_
 2593339183,TH02922v2,Trout Bog Hypolimnion,Proteobacteria;Deltaproteobacteria;Desulfobacterales;;;,3798404,93.36,0.5232,0.187665,1.681,3338
 2593339184,TH03520v2,Trout Bog Hypolimnion,Chlorobi;Chlorobia;Chlorobiales;;;,2156671,89.34,0.4586,0.190601,1.666,2194
 2593339185,TH03765v2,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;Acidimicrobiales;;;,1315659,76.07,0.5637,0.168511,1.637,1353
-2593339186,TH03838v2,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;[Blank];;;,468462,37.07,0.4976,0.182383,1.638,499
 2593339187,TE00439v2,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Nitrosomonadales;;;,996711,67.67,0.528,0.222607,1.699,1072
 2593339188,TE00788v2,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;[Blank];;;,990006,56.9,0.4727,0.183109,1.664,1104
 2593339189,TE01800v2,Trout Bog Hypolimnion,Verrucomicrobia;Opitutae;[Blank];;;,2186907,89.53,0.419,0.203843,1.657,1957
 2593339190,TE02057v2,Trout Bog Hypolimnion,Actinobacteria;Actinobacteria;[Blank];;;,971617,74.31,0.4987,0.183621,1.633,1030
 2593339191,TH01380,Trout Bog Hypolimnion,Proteobacteria;Gammaproteobacteria;Methylococcales;;;,2299825,69.3,0.4143,0.230925,1.65,2043
 2593339192,TH01381,Trout Bog Hypolimnion,Proteobacteria;Betaproteobacteria;Methylophilales;;;,1077715,50,0.4329,0.208275,1.653,1104
-2593339193,TE02668v2,Trout Bog Hypolimnion,Proteobacteria;Gammaproteobacteria;[Blank];;;,1258960,37.24,0.6303,0.268442,1.708,1202
