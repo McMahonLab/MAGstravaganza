@@ -9,7 +9,6 @@ library(cowplot)
 library(reshape2)
 library(ape)
 library(zoo)
-dadjoke::groan()
 ############
 ### Fig 1. 16S vs metagenomic read classifications
 

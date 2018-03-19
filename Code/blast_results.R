@@ -144,3 +144,28 @@ for(i in 1:length(bars)){
 x <- ggplot(pathway_rpkm2[which(pathway_rpkm2$Pathway != "Sulfide Reduction"),], aes(x = Pathway, y = RPKM, fill = Lake)) + geom_bar(stat = "identity", position = "dodge") + labs(y = "Normalized RPKM") + scale_y_log10() + coord_flip()
 
 save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Manuscript_plots/blast_results.pdf", x, base_height = 8, base_aspect_ratio = 1)
+
+
+# Aggregate by product and reshape counts back to wide to input into Lefse
+product_rpkm <- aggregate(RPKM ~ Var2 + Product, data = counts, mean)
+pathway_rpkm <- aggregate(RPKM ~ Var2 + Pathway, data = counts, mean)
+lefse_input <- dcast(pathway_rpkm, Pathway ~ Var2)
+
+# Replace NAs with 0
+
+for (i in 1:dim(lefse_input)[1]){
+  row <- lefse_input[i,]
+  row[which(is.na(row) == T)] <- 0
+  lefse_input[i,] <- row
+}
+
+# Add a 1st colum of the lake for each metagenome
+# Make products a row. since output is tabular, replace spaces with underscores
+rownames(lefse_input) <- lefse_input[,1]
+rownames(lefse_input) <- gsub(" ", "_", rownames(lefse_input))
+lefse_input <- lefse_input[,2:165]
+lakerow <- as.character(lakekey$site[match(colnames(lefse_input), as.character(lakekey$sample))])
+lefse_input <- rbind(lakerow, lefse_input)
+
+# Output
+write.table(lefse_input, file = "C:/Users/Alex/Desktop/MAGstravaganza/Data_files/lefse_input.txt", quote = F, row.names = T, col.names = T, sep = "\t")
