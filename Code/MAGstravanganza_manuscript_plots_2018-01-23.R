@@ -14,6 +14,70 @@ library(zoo)
 
 
 
+# Panel B
+
+# Get # of reads assigned to each phylum (mapped MAG) by lake-layer
+Mendota_raw_input <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/Mendota_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
+Mendota_dates <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/ME.sampledata.filtered.tsv", sep = "\t", header = T)
+Mendota_dates$sample <- as.character(Mendota_dates$sample)
+metadata <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
+
+TE_raw_input <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/TE_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
+TE_dates <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/tb_epi.sample_data.filtered.txt", header = T, sep = "\t")
+TE_dates$sample <- as.character(TE_dates$sample)
+
+TH_raw_input <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/TH_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
+TH_dates <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/tb_hyp.sample_data.filtered.txt", header = T, sep = "\t")
+TH_dates$sample <- as.character(TH_dates$sample)
+
+# Convert to RPKM (reads per kilobase per million reads)
+# general form: RPKM =   numReads / ( genomeLength/1000 * totalNumReads/1,000,000 )
+size_vector <- metadata$Genome_Size[match(Mendota_raw_input$V1, metadata$IMG_OID)]
+Mendota_RPKM <- Mendota_raw_input$V3/(size_vector/1000 * Mendota_raw_input$V4/1000000)
+ME_results <- data.frame(Mendota_raw_input[,1:2], Mendota_RPKM)
+colnames(ME_results) <- c("MAG", "metaG", "RPKM")
+ME_results$Date <- as.Date(Mendota_dates$date[match(ME_results$metaG, Mendota_dates$sample)], format = "%m/%d/%y")
+ME_results$Julian_Date <- as.numeric(format(ME_results$Date, "%j"))
+ME_results <- ME_results[which(is.na(ME_results$Date) == F),]
+
+size_vector <- metadata$Genome_Size[match(TE_raw_input$V1, metadata$IMG_OID)]
+TE_RPKM <- TE_raw_input$V3/(size_vector/1000 * TE_raw_input$V4/1000000)
+TE_results <- data.frame(TE_raw_input[,1:2], TE_RPKM)
+colnames(TE_results) <- c("MAG", "metaG", "RPKM")
+TE_results$Date <- as.Date(TE_dates$date[match(TE_results$metaG, TE_dates$sample)], format = "%m/%d/%y")
+TE_results$Julian_Date <- as.numeric(format(TE_results$Date, "%j"))
+TE_results <- TE_results[which(is.na(TE_results$Date) == F),]
+
+size_vector <- metadata$Genome_Size[match(TH_raw_input$V1, metadata$IMG_OID)]
+TH_RPKM <- TH_raw_input$V3/(size_vector/1000 * TH_raw_input$V4/1000000)
+TH_results <- data.frame(TH_raw_input[,1:2], TH_RPKM)
+colnames(TH_results) <- c("MAG", "metaG", "RPKM")
+TH_results$Date <- as.Date(TH_dates$date[match(TH_results$metaG, TH_dates$sample)], format = "%m/%d/%y")
+TH_results$Julian_Date <- as.numeric(format(TH_results$Date, "%j"))
+TH_results <- TH_results[which(is.na(TH_results$Date) == F),]
+
+# Get taxonomy
+metadata$phylum <- sapply(strsplit(as.character(metadata$Taxonomy),";"), `[`, 1)
+
+ME_results$phylum <- metadata$phylum[match(ME_results$MAG, metadata$IMG_OID)]
+TE_results$phylum <- metadata$phylum[match(TE_results$MAG, metadata$IMG_OID)]
+TH_results$phylum <- metadata$phylum[match(TH_results$MAG, metadata$IMG_OID)]
+
+ME_results$Taxonomy <- metadata$Taxonomy[match(ME_results$MAG, metadata$IMG_OID)]
+TE_results$Taxonomy <- metadata$Taxonomy[match(TE_results$MAG, metadata$IMG_OID)]
+TH_results$Taxonomy <- metadata$Taxonomy[match(TH_results$MAG, metadata$IMG_OID)]
+
+# Aggregate by phylum
+
+agg_ME_phyla <- aggregate(RPKM ~ phylum, data = ME_results, mean)
+agg_TE_phyla <- aggregate(RPKM ~ phylum, data = TE_results, mean)
+agg_TH_phyla <- aggregate(RPKM ~ phylum, data = TH_results, mean)
+
+agg_phyla <- rbind(agg_ME_phyla, agg_TE_phyla, agg_TH_phyla)
+agg_phyla$Lake <- c(rep("Mendota", dim(agg_ME_phyla)[1]), rep("Trout Bog Epilimnion", dim(agg_TE_phyla)[1]), rep("Trout Bog Hypolimnion", dim(agg_TH_phyla)[1]))
+
+ggplot(data = agg_phyla, aes(x = phylum, y = RPKM, fill = Lake)) + geom_bar(stat = "identity", position = "dodge") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(y = "Mean RPKM", x = NULL, title = "Metagenomic reads recruited by time series MAGs") + scale_fill_manual(values = c("#FF0000", "#8EEB00", "#00A287"))
+
 ############
 ### Fig 2. Metabolism chart
 
