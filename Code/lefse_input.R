@@ -49,3 +49,13 @@ colnames(lefse_input) <- gsub(".len150", "", colnames(lefse_input))
 lakerow <- as.character(lakekey$site[match(colnames(lefse_input), as.character(lakekey$sample))])
 lefse_input <- rbind(lakerow, lefse_input)
 write.table(lefse_input, file = "C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/lefse_input.txt", quote = F, row.names = T, col.names = T, sep = "\t")
+
+### karthik's version
+#load lake datasets
+
+table <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/marker_gene_table.txt", header = T, row.names = 1)
+lakerow <- as.character(lakekey$site[match(colnames(table), as.character(lakekey$sample))])
+lefse_input <- table[,2:dim(table)[2]]
+write.table(lefse_input, file = "C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/alllefse_input.txt", quote = F, row.names = T, col.names = T, sep = "\t")
+epi_input <- lefse_input[, which(lefse_input[1,] != "TB_hypo")]
+write.table(lefse_input, file = "C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/epilefse_input.txt", quote = F, row.names = T, col.names = T, sep = "\t")
