@@ -14,8 +14,8 @@ library(zoo)
 
 # Read in tag data. Note that TB and ME were amplified with different primers (ugh)
 
-mendota_tags <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/mendota_taxonomy_phylum_bacteria_archaea_L2.csv", header = T, row.names = 1)
-trout_tags <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/Trout_Bog_220_10_pyroclust.phylum_classification_percent.csv", header = T, row.names = 1, fill = TRUE)
+mendota_tags <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/Data_files/mendota_taxonomy_phylum_bacteria_archaea_L2.csv", header = T, row.names = 1)
+trout_tags <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/Data_files/Trout_Bog_220_10_pyroclust.phylum_classification_percent.csv", header = T, row.names = 1, fill = TRUE)
 trout_tags[is.na(trout_tags)] <- 0
 #Split Trout Bog data into epi and hypo
 substrRight <- function(x, n){
@@ -60,17 +60,17 @@ panelA <- ggplot(data = tag_data, aes(x = phylum_names, y = phylum_percents, fil
 # Panel B
 
 # Get # of reads assigned to each phylum (mapped MAG) by lake-layer
-Mendota_raw_input <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/time_series_mapping/Mendota_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
-Mendota_dates <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/time_series_mapping/ME.sampledata.filtered.tsv", sep = "\t", header = T)
+Mendota_raw_input <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/Mendota_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
+Mendota_dates <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/ME.sampledata.filtered.tsv", sep = "\t", header = T)
 Mendota_dates$sample <- as.character(Mendota_dates$sample)
-metadata <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
+metadata <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
 
-TE_raw_input <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/time_series_mapping/TE_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
-TE_dates <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/time_series_mapping/tb_epi.sample_data.filtered.txt", header = T, sep = "\t")
+TE_raw_input <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/TE_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
+TE_dates <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/tb_epi.sample_data.filtered.txt", header = T, sep = "\t")
 TE_dates$sample <- as.character(TE_dates$sample)
 
-TH_raw_input <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/time_series_mapping/TH_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
-TH_dates <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/time_series_mapping/tb_hyp.sample_data.filtered.txt", header = T, sep = "\t")
+TH_raw_input <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/TH_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
+TH_dates <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/tb_hyp.sample_data.filtered.txt", header = T, sep = "\t")
 TH_dates$sample <- as.character(TH_dates$sample)
 
 # Normalize (reads per kilobase MAG per million reads)
@@ -127,14 +127,14 @@ panelB <- ggplot(data = agg_phyla, aes(x = phylum, y = RPKM, fill = Lake)) + geo
 
 panelA <- panelA + theme(legend.position = "none")
 fig1 <- plot_grid(panelA, panelB, ncol = 1, labels = c("A", "B"))
-save_plot("C:/Users/Goose and Gander//Desktop/MAGstravaganza/Manuscript_plots/fig1.pdf", fig1, base_height = 8, base_aspect_ratio = 1.6)
+save_plot("C:/Users/Alex//Desktop/MAGstravaganza/Manuscript_plots/fig1.pdf", fig1, base_height = 8, base_aspect_ratio = 1.6)
 
 
 ################
 # Fig 2. Glycoside hydrolases
 
 # Load data
-mag_data <- read.csv("C:/Users/Goose and Gander//Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
+mag_data <- read.csv("C:/Users/Alex//Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
 mag_data$Taxonomy <- as.character(mag_data$Taxonomy)
 mag_data$Lake <- as.character(mag_data$Lake)
 
@@ -147,7 +147,7 @@ tophit_counts <- c()
 
 # Read in each MAG's CAZy results and store GH information
 for(i in 1:dim(mag_data)[1]){
-  datafile <- read.table(paste("C:/Users/Goose and Gander/Desktop/MAGstravaganza/dbCAN_results/", mag_data$IMG_OID[i], ".txt", sep = ""))
+  datafile <- read.table(paste("C:/Users/Alex/Desktop/MAGstravaganza/dbCAN_results/", mag_data$IMG_OID[i], ".txt", sep = ""))
   hits <- sub(".hmm", "", datafile$V2)
   types <- substr(hits, start = 1, stop = 2)
   gh_hits <- hits[which(types == "GH")]
@@ -167,7 +167,7 @@ gh_df$Order <- sapply(strsplit(mag_data$Taxonomy, ";"), "[", 3)
 gh_df$Order <- factor(gh_df$Order, levels = rev(c("Actinomycetales", "Chlamydiales", "Cytophagales", "Mycoplasmatales", "Planctomycetales", "Puniceicoccales", "Rhodocyclales", "Sphingomonadales", "Xanthomonadales", "Solibacterales", "Bdellovibrionales", "Chlorobiales", "Holophagales", "Rickettsiales", "Bacteroidales", "Campylobacterales", "Desulfobacterales", "Desulfuromonadales", "Gallionellales", "Ignavibacteriales", "Legionellales", "Nitrosomonadales", "Pseudomonadales", "Rhizobiales", "Solirubrobacterales", "Flavobacteriales", "Acidimicrobiales", "Burkholderiales", "Methylococcales", "Methylophilales", "Sphingobacteriales", "Verrucomicrobiales")))
 
 # Output data at this stage for supplemental file
-write.csv(gh_df, file = "C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/dbCANN_results.csv", quote = F, row.names = F)
+write.csv(gh_df, file = "C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/dbCANN_results.csv", quote = F, row.names = F)
 
 # Plot the heatmap
 gh.agg <- aggregate(Density ~ Lake + Order, data = gh_df, mean)
@@ -181,8 +181,10 @@ cor.test(gh_df$Gene_Count, gh_df$Density)
 ### Fig 3. Metabolism chart
 
 #Load data
-table <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Pathway_analysis/consolidated_pathway_data.csv", header = T)
-metadata <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/MAG_information.csv")
+table <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Pathway_analysis/consolidated_pathway_data.csv", header = T)
+metadata <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/MAG_information.csv")
+# Fake taxonomy data so that Proteobacterial classes function as phyla
+metadata$Taxonomy <- gsub("Proteobacteria;", "", metadata$Taxonomy)
 
 #make a long format table - for each phylum and lake, count how many times each pathway appears.
 
@@ -214,10 +216,12 @@ ME.long$Taxonomy <- phylum[match(ME.long$variable, metadata$IMG_OID)]
 ME.long$Taxonomy[which(ME.long$Taxonomy == "[Blank]")] <- "Unclassified"
 ME.long <- ME.long[which(is.na(ME.long$Pathways) == F), ]
 ME.agg <- aggregate(value ~ Pathways + Taxonomy, ME.long, mean)
+# Don't plot unclassified groups
+ME.agg <- ME.agg[which(ME.agg$Taxonomy != "Unclassified"),]
 
 ME.heatmap <- ggplot(data = ME.agg, aes(y = Pathways, x = Taxonomy, fill = value)) + geom_tile(color = "black") + labs(x = "", y = "") + scale_fill_gradient2(low = "white", high = "#FF0000", midpoint = 25) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), axis.text.y = element_text(size = 10))
 
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/ME.heatmap.pdf", ME.heatmap, base_height = 7.5, base_aspect_ratio = 0.75)
+save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Manuscript_plots/ME.heatmap.pdf", ME.heatmap, base_height = 7.75, base_aspect_ratio = 0.73)
 
 TE.MAGs <- table[,which(is.na(match(colnames(table), metadata$IMG_OID[which(metadata$Lake == "Trout Bog Epilimnion")])) == F)]
 TE.MAGs$Pathways <- make.unique(table$Pathway)
@@ -232,9 +236,10 @@ TE.agg <- aggregate(value ~ Pathways + Taxonomy, TE.long, mean)
 
 TE.agg$value[which(TE.agg$Pathways == "Calvin Cycle" & TE.agg$Taxonomy == "Chlorobi")] <- 0
 TE.agg$value[which(TE.agg$Pathways == "Dissimilatory sulfate reduction" & TE.agg$Taxonomy == "Chlorobi")] <- 0
+TE.agg <- TE.agg[which(TE.agg$Taxonomy != "Unclassified"),]
 
 TE.heatmap <- ggplot(data = TE.agg, aes(y = Pathways, x = Taxonomy, fill = value)) + geom_tile(color = "black") + labs(x = "", y = "") + scale_fill_gradient2(low = "white", high = "#8EEB00", midpoint = 25) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), axis.text.y = element_text(size = 10))
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/TE.heatmap.pdf", TE.heatmap, base_height = 7.5, base_aspect_ratio = 0.67)
+save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Manuscript_plots/TE.heatmap.pdf", TE.heatmap, base_height = 7.75, base_aspect_ratio = 0.69)
 
 TH.MAGs <- table[,which(is.na(match(colnames(table), metadata$IMG_OID[which(metadata$Lake == "Trout Bog Hypolimnion")])) == F)]
 TH.MAGs$Pathways <- make.unique(table$Pathway)
@@ -250,8 +255,10 @@ TH.agg <- aggregate(value ~ Pathways + Taxonomy, TH.long, mean)
 TH.agg$value[which(TH.agg$Pathways == "Dissimilatory sulfate reduction" & TH.agg$Taxonomy == "Chlorobi")] <- 0
 TH.agg$value[which(TH.agg$Pathways == "Calvin Cycle" & TH.agg$Taxonomy == "Chlorobi")] <- 0
 
+TH.agg <- TH.agg[which(TH.agg$Taxonomy != "Unclassified"),]
+
 TH.heatmap <- ggplot(data = TH.agg, aes(y = Pathways, x = Taxonomy, fill = value)) + geom_tile(color = "black") + labs(x = "", y = "") + scale_fill_gradient2(low = "white", high = "#00A287", midpoint = 25) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), axis.text.y = element_text(size = 10))
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/TH.heatmap.pdf", TH.heatmap, base_height = 7.5, base_aspect_ratio = .73)
+save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Manuscript_plots/TH.heatmap.pdf", TH.heatmap, base_height = 7.75, base_aspect_ratio = .73)
 
 #################
 # Fig 4 - Nitrogen and Sulfur Metabolisms
@@ -260,17 +267,17 @@ save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/TH.
 
 # Read in datasets - marker gene counts + LEfSe significance
 
-table <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/marker_gene_table.txt", header = T, row.names = 1)
-lakekey <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/metagenome_metadata.csv", header = T)
+table <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/Data_files/marker_gene_table.txt", header = T, row.names = 1)
+lakekey <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Data_files/metagenome_metadata.csv", header = T)
 lakerow <- as.character(lakekey$site[match(colnames(table), as.character(lakekey$sample))])
 
-epilefse <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/marker_genes_LDA_significance.csv", header = T)
-TBlefse <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/TBmarker_genes_LDA_significance.csv", header = T)
+epilefse <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/marker_genes_LDA_significance.csv", header = T)
+TBlefse <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/TBmarker_genes_LDA_significance.csv", header = T)
 
-genedata <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/metabolic_gene_info.txt", fill = TRUE)
+genedata <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/Data_files/metabolic_gene_info.txt", fill = TRUE)
 # for my selected marker genes, get the number of hits of each one by lake-layer
 
-genes2keep <- genedata$V1[c(grep("rubisco", genedata$V3), grep("citrate_lyase", genedata$V3), grep("nitrogenase", genedata$V3), grep("Sox", genedata$V3), grep("dissimilatory_sulfite_reductase", genedata$V3), grep("urease", genedata$V3), grep("^sulfite_reductase", genedata$V3), grep("sulfate_adenylyltransferase", genedata$V3), grep("methylamine", genedata$V3), grep("nitrate_reductase", genedata$V3), grep("methane_monooxygenase", genedata$V3), grep("methanol_dehydrogenase", genedata$V3), grep("nitrite_reductase", genedata$V3), grep("nitric_oxide_reductase", genedata$V3), grep("nitrous_oxide_reductase", genedata$V3), grep("ammonia_monooxygenase", genedata$V3), grep("sulfide_quinone_reductase", genedata$V3))]
+genes2keep <- genedata$V1[c(grep("rubisco", genedata$V3), grep("citrate_lyase", genedata$V3), grep("nitrogenase", genedata$V3), grep("Sox", genedata$V3), grep("dissimilatory_sulfite_reductase", genedata$V3), grep("urease", genedata$V3), grep("^sulfite_reductase", genedata$V3), grep("sulfate_adenylyltransferase", genedata$V3), grep("nitrate_reductase", genedata$V3), grep("nitrite_reductase", genedata$V3), grep("nitric_oxide_reductase", genedata$V3), grep("nitrous_oxide_reductase", genedata$V3), grep("sulfide_quinone_reductase", genedata$V3))]
 
 table2keep <- table[match(genes2keep, rownames(table)),]
 table2keep$genes <- rownames(table2keep)
@@ -293,39 +300,60 @@ table2keep$annotations <- gsub("nitrogenase_VaFe", "nitrogenase", table2keep$ann
 table2keep$annotations <- gsub("nitrogenase_MoFe", "nitrogenase", table2keep$annotations)
 table2keep$annotations <- gsub("Fe-only_nitrogenase", "nitrogenase", table2keep$annotations)
 table2keep$annotations <- gsub("nitrogenase_iron_protein", "nitrogenase", table2keep$annotations)
-table2keep$annotations <- gsub("methane_monooxygenase", "methane_ammonia_monooxygenase", table2keep$annotations)
-table2keep$annotations <- gsub("NDMA-dependent_methanol_dehydrogenase", "methanol_dehydrogenase", table2keep$annotations)
+table2keep$annotations <- gsub("_", " ", table2keep$annotations)
+table2keep$annotations <- factor(table2keep$annotations, levels = c("rubisco", "citrate lyase", "methane ammonia monooxygenase", "methanol dehydrogenase", "urease", "nitrogenase", "nitrate reductase", "nitrite reductase", "nitric oxide reductase", "nitrous oxide reductase", "SOX", "sulfate adenylyltransferase", "sulfide quinone reductase", "sulfite reductase"))
 
-marker_sums <- aggregate(value ~ lake + annotations, table2keep, sum)
-marker_sums$value[which(marker_sums$lake == "ME_epi")] <- marker_sums$value[which(marker_sums$lake == "ME_epi")]/length(which(lakekey$site == "ME_epi"))
-marker_sums$value[which(marker_sums$lake == "TB_epi")] <- marker_sums$value[which(marker_sums$lake == "TB_epi")]/length(which(lakekey$site == "TB_epi"))
-marker_sums$value[which(marker_sums$lake == "TB_hypo")] <- marker_sums$value[which(marker_sums$lake == "TB_hypo")]/length(which(lakekey$site == "TB_hypo"))
+# marker_sums <- aggregate(value ~ lake + annotations, table2keep, sum)
+# marker_sums$value[which(marker_sums$lake == "ME_epi")] <- marker_sums$value[which(marker_sums$lake == "ME_epi")]/length(which(lakekey$site == "ME_epi"))
+# marker_sums$value[which(marker_sums$lake == "TB_epi")] <- marker_sums$value[which(marker_sums$lake == "TB_epi")]/length(which(lakekey$site == "TB_epi"))
+# marker_sums$value[which(marker_sums$lake == "TB_hypo")] <- marker_sums$value[which(marker_sums$lake == "TB_hypo")]/length(which(lakekey$site == "TB_hypo"))
+# 
+# # Remove categories that are too low in abundance to see on the plot
+# marker_sums <- marker_sums[which(marker_sums$annotations != "soluble_methane_ammonia_monooxygenase"), ]
+# marker_sums <- marker_sums[which(marker_sums$annotations != "methylamine_dehydrogenase"), ]
+# 
+# # Remove underscore separators and use factors to order properly
+# marker_sums$annotations <- gsub("_", " ", marker_sums$annotations)
+# marker_sums$annotations <- factor(marker_sums$annotations, levels = c("rubisco", "citrate lyase", "methane ammonia monooxygenase", "methanol dehydrogenase", "urease", "nitrogenase", "nitrate reductase", "nitrite reductase", "nitric oxide reductase", "nitrous oxide reductase", "SOX", "sulfate adenylyltransferase", "sulfide quinone reductase", "sulfite reductase"))
 
-# Remove categories that are too low in abundance to see on the plot
-marker_sums <- marker_sums[which(marker_sums$annotations != "soluble_methane_ammonia_monooxygenase"), ]
-marker_sums <- marker_sums[which(marker_sums$annotations != "methylamine_dehydrogenase"), ]
+plot.boxes <- aggregate(value ~ variable + annotations + lake, table2keep, sum)
+plot.boxes1 <- plot.boxes[which(plot.boxes$annotations == "sulfide quinone reductase" | plot.boxes$annotations == "sulfate adenylyltransferase" | plot.boxes$annotations == "SOX"), ]
+plot.boxes2 <- plot.boxes[which(plot.boxes$annotations != "sulfide quinone reductase" & plot.boxes$annotations != "sulfate adenylyltransferase" & plot.boxes$annotations != "SOX"), ]
 
-# Remove underscore separators and use factors to order properly
-marker_sums$annotations <- gsub("_", " ", marker_sums$annotations)
-marker_sums$annotations <- factor(marker_sums$annotations, levels = c("rubisco", "citrate lyase", "methane ammonia monooxygenase", "methanol dehydrogenase", "urease", "nitrogenase", "nitrate reductase", "nitrite reductase", "nitric oxide reductase", "nitrous oxide reductase", "SOX", "sulfate adenylyltransferase", "sulfide quinone reductase", "sulfite reductase"))
+p1 <- ggplot(data = plot.boxes1, aes(x = annotations, y = value, fill = lake)) + geom_boxplot() + scale_fill_manual(values = c("#FF0000", "#8EEB00", "#00A287")) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = NULL, y = "Counts per Metagenome") + coord_flip()
+p2 <- ggplot(data = plot.boxes2, aes(x = annotations, y = value, fill = lake)) + geom_boxplot() + scale_fill_manual(values = c("#FF0000", "#8EEB00", "#00A287")) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = NULL, y = "Counts per Metagenome") + coord_flip()
 
-p1 <- ggplot(data = marker_sums, aes(x = annotations, y = value, fill = lake)) + geom_bar(stat = "identity", position = "dodge") + scale_fill_manual(values = c("#FF0000", "#8EEB00", "#00A287")) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = NULL, y = "Mean Hits per Metagenome") + coord_flip()
+fig4 <- plot_grid(p1, p2, nrow = 2, axis = "l", rel_heights = c(1.75, 4), align = "v")
 
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/marker_gene_hits.pdf", p1, base_height = 3.5, base_aspect_ratio = 2)
+save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Manuscript_plots/marker_gene_hits.pdf", fig4, base_height = 8, base_aspect_ratio = 1)
 
-# Use this code to look at significance between lakes
-searchterm <- "rubisco"
-epilefse[grep(searchterm, epilefse$annotation),]
-TBlefse[grep(searchterm, TBlefse$annotation),]
+# # Use this code to look at significance between lakes
+# searchterm <- "rubisco"
+# epilefse[grep(searchterm, epilefse$annotation),]
+# TBlefse[grep(searchterm, TBlefse$annotation),]
+# 
+# # Output a wide version for testing averages in lefse
+# sample_sums <- aggregate(value ~ variable + annotations, table2keep, sum)
+# sample_sums <- sample_sums[which(sample_sums$annotations != "soluble_methane_ammonia_monooxygenase"), ]
+# sample_sums <- sample_sums[which(sample_sums$annotations != "methylamine_dehydrogenase"), ]
+# wide_sample_sums <- dcast(sample_sums, annotations ~ variable)
+# lakerow <- as.character(lakekey$site[match(colnames(wide_sample_sums), as.character(lakekey$sample))])
+# wide_sample_sums <- rbind(lakerow, wide_sample_sums)
+# write.table(wide_sample_sums, "C:/Users/Alex/Desktop/MAGstravaganza/Data_files/funcational_lefse_input.txt")
 
-# Output a wide version for testing averages in lefse
-sample_sums <- aggregate(value ~ variable + annotations, table2keep, sum)
-sample_sums <- sample_sums[which(sample_sums$annotations != "soluble_methane_ammonia_monooxygenase"), ]
-sample_sums <- sample_sums[which(sample_sums$annotations != "methylamine_dehydrogenase"), ]
-wide_sample_sums <- dcast(sample_sums, annotations ~ variable)
-lakerow <- as.character(lakekey$site[match(colnames(wide_sample_sums), as.character(lakekey$sample))])
-wide_sample_sums <- rbind(lakerow, wide_sample_sums)
-write.table(wide_sample_sums, "C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/funcational_lefse_input.txt")
+# Use Kruskal-Wallis Test to look for significant differences in amounts between lakes
+genes <- c("rubisco", "citrate lyase", "urease", "nitrogenase", "nitrate reductase", "nitrite reductase", "nitric oxide reductase", "nitrous oxide reductase", "SOX", "sulfate adenylyltransferase", "sulfide quinone reductase", "sulfite reductase")
+
+for(i in 1:length(genes)){
+  gene <- genes[i]
+  genetable <- plot.boxes[which(plot.boxes$annotations == gene), ]
+  x <- pairwise.wilcox.test(x = genetable$value, g = genetable$lake, p.adj = "bonf", paired = F)
+  stat.table <- x$p.value
+  item1 <- paste(gene, colnames(stat.table)[1], rownames(stat.table)[1], round(stat.table[1,1], 2))
+  item2 <- paste(gene, colnames(stat.table)[2], rownames(stat.table)[2], round(stat.table[2,2], 2))
+  print(item1)
+  print(item2)
+}
 
 # Panel D (or B) - the tree
 # Load data
@@ -408,10 +436,10 @@ dev.off()
 # Figure 5
 # Trace Cyanobacteria over time in Mendota
 
-Mendota_raw_input <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/time_series_mapping/Mendota_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
-Mendota_dates <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/time_series_mapping/ME.sampledata.filtered.tsv", sep = "\t", header = T)
+Mendota_raw_input <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/Mendota_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
+Mendota_dates <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/time_series_mapping/ME.sampledata.filtered.tsv", sep = "\t", header = T)
 Mendota_dates$sample <- as.character(Mendota_dates$sample)
-metadata <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
+metadata <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
 
 # Convert to RPKM (reads per kilobase per million reads) ish - not really RPKM because it's for metagenomes
 # general form: RPKM =   numReads / ( genomeLength/1000 * totalNumReads/1,000,000 )
@@ -447,12 +475,18 @@ trace1$line <- c(trace1$input[1], rollmean(trace1$input, 2))
 
 p1 <- ggplot(data = ME_results[which(ME_results$phylum == "Cyanobacteria" & ME_results$year == "2008" & ME_results$MAG == "2582580518"), ], aes(x = Julian_Date, y = RPKM, color = MAG)) + geom_point(size = 2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = "Date") + scale_x_continuous(breaks = pretty(ME_results$Julian_Date, 30), limits = c(75, 334)) + geom_rect(data = seasons, inherit.aes = FALSE, aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), alpha = 0.1, fill = c("skyblue", "springgreen", "goldenrod"), color = "black") + geom_line(data = trace1, aes(y = line, x = dates, color = OID), size = 2) + labs(title = "2008") + scale_color_manual(values = c("#a6611a")) + labs(x = NULL, y = NULL)
 
+corrdata08 <- ME_results[which(ME_results$phylum == "Cyanobacteria" & ME_results$year == "2008" & ME_results$MAG == "2582580518"), ]
+corrdata08 <- corrdata08[order(corrdata08$Date), ]
+
 trace4 <- trace2009[which(trace2009$OID == "2582580537"), ]
 
 trace4 <- trace4[order(trace4$dates),]
 trace4$line <- c(trace4$input[1], rollmean(trace4$input, 2))
 
 p2 <- ggplot(data = ME_results[which(ME_results$phylum == "Cyanobacteria" & ME_results$year == "2009" & ME_results$MAG == "2582580537"), ], aes(x = Julian_Date, y = RPKM, color = MAG)) + geom_point(size = 2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = "Date") + scale_x_continuous(breaks = pretty(ME_results$Julian_Date, 30), limits = c(75, 334)) + geom_rect(data = seasons, inherit.aes = FALSE, aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), alpha = 0.1, fill = c("skyblue", "springgreen", "goldenrod"), color = "black") + geom_line(data = trace4, aes(y = line, x = dates, color = OID), size = 2) + labs(title = "2009") + scale_color_manual(values = c("#018571")) + labs(x = NULL, y = NULL)
+
+corrdata09 <- ME_results[which(ME_results$phylum == "Cyanobacteria" & ME_results$year == "2009" & ME_results$MAG == "2582580537"), ]
+corrdata09 <- corrdata09[order(corrdata09$Date), ]
 
 trace5 <- trace2010[which(trace2010$OID == "2582580551"), ]
 
@@ -462,6 +496,9 @@ trace5$line <- c(trace5$input[1], rollmean(trace5$input, 2))
 
 p3 <- ggplot(data = ME_results[which(ME_results$phylum == "Cyanobacteria" & ME_results$year == "2010" & ME_results$MAG == "2582580551"), ], aes(x = Julian_Date, y = RPKM, color = MAG)) + geom_point(size = 2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = "Date") + scale_x_continuous(breaks = pretty(ME_results$Julian_Date, 30), limits = c(75, 334)) + geom_rect(data = seasons, inherit.aes = FALSE, aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), alpha = 0.1, fill = c("skyblue", "springgreen", "goldenrod"), color = "black") + geom_line(data = trace5, aes(y = line, x = dates, color = OID), size = 2) + labs(title = "2010") + scale_color_manual(values = c("#4dac26")) + labs(x = NULL, y = NULL)
 
+corrdata10 <- ME_results[which(ME_results$phylum == "Cyanobacteria" & ME_results$year == "2010" & ME_results$MAG == "2582580551"), ]
+corrdata10 <- corrdata10[order(corrdata10$Date), ]
+
 trace1 <- trace2011[which(trace2011$OID == "2582580518"), ]
 
 trace1 <- trace1[order(trace1$dates),]
@@ -470,6 +507,9 @@ trace1$line <- c(trace1$input[1], rollmean(trace1$input, 2))
 
 p4 <- ggplot(data = ME_results[which(ME_results$phylum == "Cyanobacteria" & ME_results$year == "2011" & ME_results$MAG == "2582580518"), ], aes(x = Julian_Date, y = RPKM, color = MAG)) + geom_point(size = 2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = "Date") + scale_x_continuous(breaks = pretty(ME_results$Julian_Date, 30), limits = c(75, 334)) + geom_rect(data = seasons, inherit.aes = FALSE, aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), alpha = 0.1, fill = c("skyblue", "springgreen", "goldenrod"), color = "black") + geom_line(data = trace1, aes(y = line, x = dates, color = OID), size = 2) + labs(title = "2011") + scale_color_manual(values = c("#a6611a")) + labs(x = NULL, y = NULL)
 
+corrdata11 <- ME_results[which(ME_results$phylum == "Cyanobacteria" & ME_results$year == "2011" & ME_results$MAG == "2582580518"), ]
+corrdata11 <- corrdata11[order(corrdata11$Date), ]
+
 trace10 <- trace2012[which(trace2012$OID == "2582580584"), ]
 
 trace10 <- trace10[order(trace10$dates),]
@@ -477,13 +517,16 @@ trace10$line <- c(trace10$input[1], rollmean(trace10$input, 2))
 
 p5 <- ggplot(data = ME_results[which(ME_results$phylum == "Cyanobacteria" & ME_results$year == "2012" & ME_results$MAG == "2582580584"), ], aes(x = Julian_Date, y = RPKM, color = MAG)) + geom_point(size = 2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = "Date") + scale_x_continuous(breaks = pretty(ME_results$Julian_Date, 30), limits = c(75, 334)) + geom_rect(data = seasons, inherit.aes = FALSE, aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), alpha = 0.1, fill = c("skyblue", "springgreen", "goldenrod"), color = "black") + geom_line(data = trace10, aes(y = line, x = dates, color = OID), size = 2) + labs(title = "2012") + scale_color_manual(values = c("#d01c8b")) + labs(x = NULL, y = NULL)
 
+corrdata12 <- ME_results[which(ME_results$phylum == "Cyanobacteria" & ME_results$year == "2012" & ME_results$MAG == "2582580584"), ]
+corrdata12 <- corrdata12[order(corrdata12$Date), ]
+
 all <- plot_grid(p1, p2, p3, p4, p5, nrow = 5, labels = c("A", "B", "C", "D", "E"))
 
 # Add right panel of nitrogenase counts by year
-table <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/marker_gene_table.txt", header = T, row.names = 1)
-lakekey <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/metagenome_metadata.csv", header = T)
+table <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/Data_files/marker_gene_table.txt", header = T, row.names = 1)
+lakekey <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Data_files/metagenome_metadata.csv", header = T)
 lakerow <- as.character(lakekey$site[match(colnames(table), as.character(lakekey$sample))])
-genedata <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/metabolic_gene_info.txt", fill = TRUE)
+genedata <- read.table("C:/Users/Alex/Desktop/MAGstravaganza/Data_files/metabolic_gene_info.txt", fill = TRUE)
 
 genes2keep <- genedata$V1[grep("nitrogenase", as.character(genedata$V3))]
 table2 <- table[match(genes2keep, rownames(table)), which(lakerow == "ME_epi")]
@@ -524,6 +567,13 @@ trace <- rbind(trace1, trace2, trace3)
 
 p6 <- ggplot(data = table2[which(table2$year == "2008"), ], aes(x = Julian_Date, y = value, color = genes)) + geom_point(size = 2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + scale_x_continuous(breaks = pretty(table2$Julian_Date, 30), limits = c(75, 334)) + geom_rect(data = seasons, inherit.aes = FALSE, aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), alpha = 0.1, fill = c("skyblue", "springgreen", "goldenrod"), color = "black") + geom_line(data = trace, aes(y = line, x = Julian_Date, color = genes), size = 2) + labs(title = "2008") + scale_color_manual(values = c("#b2182b", "#2166ac", "#542788")) + labs(x = NULL, y = NULL)
 
+corrdata08$Gene1 <- trace1$value
+corrdata08$Gene2 <- trace2$value
+corrdata08$Gene3 <- trace3$value
+cor(corrdata08$RPKM, corrdata08$Gene1)
+cor(corrdata08$RPKM, corrdata08$Gene2)
+cor(corrdata08$RPKM, corrdata08$Gene3)
+
 trace1 <- trace2009[which(trace2009$genes == "TIGR01286-sample1"), ]
 trace2 <- trace2009[which(trace2009$genes == "TIGR01282-sample1"), ]
 trace3 <- trace2009[which(trace2009$genes == "TIGR01287-sample1"), ]
@@ -538,6 +588,13 @@ trace <- rbind(trace1, trace2, trace3)
 
 
 p7 <- ggplot(data = table2[which(table2$year == "2009"), ], aes(x = Julian_Date, y = value, color = genes)) + geom_point(size = 2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + scale_x_continuous(breaks = pretty(table2$Julian_Date, 30), limits = c(75, 334)) + geom_rect(data = seasons, inherit.aes = FALSE, aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), alpha = 0.1, fill = c("skyblue", "springgreen", "goldenrod"), color = "black") + geom_line(data = trace, aes(y = line, x = Julian_Date, color = genes), size = 2) + labs(title = "2009") + scale_color_manual(values = c("#b2182b", "#2166ac", "#542788")) + labs(x = NULL, y = NULL)
+
+corrdata09$Gene1 <- trace1$value
+corrdata09$Gene2 <- trace2$value
+corrdata09$Gene3 <- trace3$value
+cor(corrdata09$RPKM, corrdata09$Gene1)
+cor(corrdata09$RPKM, corrdata09$Gene2)
+cor(corrdata09$RPKM, corrdata09$Gene3)
 
 trace1 <- trace2010[which(trace2010$genes == "TIGR01286-sample1"), ]
 trace2 <- trace2010[which(trace2010$genes == "TIGR01282-sample1"), ]
@@ -554,6 +611,13 @@ trace <- rbind(trace1, trace2, trace3)
 
 p8 <- ggplot(data = table2[which(table2$year == "2010"), ], aes(x = Julian_Date, y = value, color = genes)) + geom_point(size = 2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + scale_x_continuous(breaks = pretty(table2$Julian_Date, 30), limits = c(75, 334)) + geom_rect(data = seasons, inherit.aes = FALSE, aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), alpha = 0.1, fill = c("skyblue", "springgreen", "goldenrod"), color = "black") + geom_line(data = trace, aes(y = line, x = Julian_Date, color = genes), size = 2) + labs(title = "2010") + scale_color_manual(values = c("#b2182b", "#2166ac", "#542788")) + labs(x = NULL, y = NULL)
 
+corrdata10$Gene1 <- trace1$value
+corrdata10$Gene2 <- trace2$value
+corrdata10$Gene3 <- trace3$value
+cor(corrdata10$RPKM, corrdata10$Gene1)
+cor(corrdata10$RPKM, corrdata10$Gene2)
+cor(corrdata10$RPKM, corrdata10$Gene3)
+
 trace1 <- trace2011[which(trace2011$genes == "TIGR01286-sample1"), ]
 trace2 <- trace2011[which(trace2011$genes == "TIGR01282-sample1"), ]
 trace3 <- trace2011[which(trace2011$genes == "TIGR01287-sample1"), ]
@@ -568,6 +632,13 @@ trace <- rbind(trace1, trace2, trace3)
 
 
 p9 <- ggplot(data = table2[which(table2$year == "2011"), ], aes(x = Julian_Date, y = value, color = genes)) + geom_point(size = 2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + scale_x_continuous(breaks = pretty(table2$Julian_Date, 30), limits = c(75, 334)) + geom_rect(data = seasons, inherit.aes = FALSE, aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), alpha = 0.1, fill = c("skyblue", "springgreen", "goldenrod"), color = "black") + geom_line(data = trace, aes(y = line, x = Julian_Date, color = genes), size = 2) + labs(title = "2011") + scale_color_manual(values = c("#b2182b", "#2166ac", "#542788")) + labs(x = NULL, y = NULL)
+
+corrdata11$Gene1 <- trace1$value
+corrdata11$Gene2 <- trace2$value
+corrdata11$Gene3 <- trace3$value
+cor(corrdata11$RPKM, corrdata11$Gene1)
+cor(corrdata11$RPKM, corrdata11$Gene2)
+cor(corrdata11$RPKM, corrdata11$Gene3)
 
 trace1 <- trace2012[which(trace2012$genes == "TIGR01286-sample1"), ]
 trace2 <- trace2012[which(trace2012$genes == "TIGR01282-sample1"), ]
@@ -584,7 +655,14 @@ trace <- rbind(trace1, trace2, trace3)
 
 p10 <- ggplot(data = table2[which(table2$year == "2012"), ], aes(x = Julian_Date, y = value, color = genes)) + geom_point(size = 2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + scale_x_continuous(breaks = pretty(table2$Julian_Date, 30), limits = c(75, 334)) + geom_rect(data = seasons, inherit.aes = FALSE, aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), alpha = 0.1, fill = c("skyblue", "springgreen", "goldenrod"), color = "black") + geom_line(data = trace, aes(y = line, x = Julian_Date, color = genes), size = 2) + labs(title = "2012") + scale_color_manual(values = c("#b2182b", "#2166ac", "#542788")) + labs(x = NULL, y = NULL)
 
+corrdata12$Gene1 <- trace1$value
+corrdata12$Gene2 <- trace2$value
+corrdata12$Gene3 <- trace3$value
+cor(corrdata12$RPKM, corrdata12$Gene1)
+cor(corrdata12$RPKM, corrdata12$Gene2)
+cor(corrdata12$RPKM, corrdata12$Gene3)
+
 all <- plot_grid(p1, p6, p2, p7, p3, p8, p4, p9, p5, p10, nrow = 5, labels = c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"))
 
 
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/Fig5.pdf", all, base_height = 10, base_aspect_ratio = 1.25)
+save_plot("C:/Users/Alex/Desktop/MAGstravaganza/Manuscript_plots/Fig5.pdf", all, base_height = 10, base_aspect_ratio = 1.25)
