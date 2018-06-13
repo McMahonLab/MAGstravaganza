@@ -74,7 +74,7 @@ plot.boxes <- aggregate(value ~ variable + annotations + lake, table2keep, sum)
 # 
 # fig1 <- plot_grid(p1, p2, nrow = 2, axis = "l", rel_heights = c(1.75, 4), align = "v")
 
-fig1 <- ggplot(data = plot.boxes, aes(x = annotations, y = value, fill = lake)) + geom_boxplot() + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#1f78b4")) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = NULL, y = "Normalized Counts per Metagenome") + coord_flip() + scale_y_continuous(limits = c(0, 0.00000000003))
+fig1 <- ggplot(data = plot.boxes, aes(x = annotations, y = value, fill = lake)) + geom_boxplot() + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#1f78b4")) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = NULL, y = "Normalized Counts per Metagenome") + coord_flip()
 
 save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/fig1.pdf", fig1, base_height = 6, base_aspect_ratio = 1.5)
 
@@ -92,48 +92,106 @@ for(i in 1:length(genes)){
   print(item2)
 }
 
+# For a few more genes, just calculate significance without plotting
+genes2keep <- genedata$V1[c(grep("FeFe_hydrogenase", genedata$V3), grep("hydrogenase_group1", genedata$V3), grep("hydrogenase_group2a", genedata$V3), grep("hydrogenase_group2b", genedata$V3), grep("hydrogenase_group3a", genedata$V3), grep("hydrogenase_group3b", genedata$V3), grep("hydrogenase_group3c", genedata$V3), grep("hydrogenase_group3d", genedata$V3), grep("hydrogenase_group4", genedata$V3))]
+
+table2keep <- table[match(genes2keep, rownames(table)),]
+table2keep$genes <- rownames(table2keep)
+table2keep <- melt(table2keep)
+table2keep$annotations <- genedata$V3[match(table2keep$genes, genedata$V1)]
+table2keep$lake <- as.character(lakekey$site[match(table2keep$variable, as.character(lakekey$sample))])
+table2keep <- table2keep[which(is.na(table2keep$lake) == F),]
+
+plot.boxes <- aggregate(value ~ variable + annotations + lake, table2keep, sum)
+genes <- c("FeFe_hydrogenase", "hydrogenase_group1", "hydrogenase_group2a", "hydrogenase_group2b", "hydrogenase_group3a", "hydrogenase_group3b", "hydrogenase_group3c", "hydrogenase_group3d", "hydrogenase_group4")
+
+for(i in 1:length(genes)){
+  gene <- genes[i]
+  genetable <- plot.boxes[which(plot.boxes$annotations == gene), ]
+  x <- pairwise.wilcox.test(x = genetable$value, g = genetable$lake, p.adj = "bonf", paired = F)
+  stat.table <- x$p.value
+  item1 <- paste(gene, colnames(stat.table)[1], rownames(stat.table)[1], round(stat.table[1,1], 2))
+  item2 <- paste(gene, colnames(stat.table)[2], rownames(stat.table)[2], round(stat.table[2,2], 2))
+  print(item1)
+  print(item2)
+} 
+
 
 
 ### Fig 2. 16S vs metagenomic read classifications
 
+substrRight <- function(x, n){
+  substr(x, nchar(x)-n+1, nchar(x))
+}
+
 # Read in tag data. Note that TB and ME were amplified with different primers (ugh)
 
-mendota_tags <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/mendota_taxonomy_phylum_bacteria_archaea_L2.csv", header = T, row.names = 1)
-trout_tags <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/Trout_Bog_220_10_pyroclust.phylum_classification_percent.csv", header = T, row.names = 1, fill = TRUE)
+mendota_tags <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/Mendota_OTUtable.csv", header = T)
+trout_tags <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/TroutBog_OTUtable.csv", header = T)
 trout_tags[is.na(trout_tags)] <- 0
 #Split Trout Bog data into epi and hypo
 substrRight <- function(x, n){
   substr(x, nchar(x)-n+1, nchar(x))
 }
 
+me_tags <- mendota_tags[, 10:dim(mendota_tags)[2]]
 tbe_tags <- trout_tags[,which(substrRight(colnames(trout_tags), 1) == "E")]
 tbh_tags <- trout_tags[,which(substrRight(colnames(trout_tags), 1) == "H")]
 
+# Get phylum names - make sure to replace Proteobacteria names with class instead
+
+me_phyla <- as.character(mendota_tags$phylum)
+tb_phyla <- as.character(trout_tags$phylum)
+
+me_phyla[which(me_phyla == "p__Proteobacteria")] <- as.character(mendota_tags$class[which(me_phyla == "p__Proteobacteria")])
+tb_phyla[which(tb_phyla == "p__Proteobacteria")] <- as.character(trout_tags$class[which(tb_phyla == "p__Proteobacteria")])
+
+me_tags$phyla <- me_phyla
+tbe_tags$phyla <- tbh_tags$phyla <- tb_phyla
+
+me_tags <- melt(me_tags)
+me_tags <- aggregate(value ~ variable + phyla, me_tags, sum)
+me_tags <- reshape(me_tags, idvar = "phyla", timevar = "variable", direction = "wide")
+rownames(me_tags) <- me_tags$phyla
+me_tags <- me_tags[, 2:dim(me_tags)[2]]
+
+tbe_tags <- melt(tbe_tags)
+tbe_tags <- aggregate(value ~ variable + phyla, tbe_tags, sum)
+tbe_tags <- reshape(tbe_tags, idvar = "phyla", timevar = "variable", direction = "wide")
+rownames(tbe_tags) <- tbe_tags$phyla
+tbe_tags <- tbe_tags[, 2:dim(tbe_tags)[2]]
+
+tbh_tags <- melt(tbh_tags)
+tbh_tags <- aggregate(value ~ variable + phyla, tbh_tags, sum)
+tbh_tags <- reshape(tbh_tags, idvar = "phyla", timevar = "variable", direction = "wide")
+rownames(tbh_tags) <- tbh_tags$phyla
+tbh_tags <- tbh_tags[, 2:dim(tbh_tags)[2]]
+
 # Get average % of community for each phylum, and switch to long format
 
-mendota_tag_totals <- rowSums(mendota_tags)/dim(mendota_tags)[2]
+mendota_tag_totals <- rowSums(me_tags)/dim(me_tags)[2]
 tbe_tag_totals <- rowSums(tbe_tags)/dim(tbe_tags)[2]
 tbh_tag_totals <- rowSums(tbh_tags)/dim(tbh_tags)[2]
 
-phylum_names <- c(rownames(mendota_tags), rownames(tbe_tags), rownames(tbh_tags))
+phylum_names <- c(rownames(me_tags), rownames(tbe_tags), rownames(tbh_tags))
 phylum_percents <- c(mendota_tag_totals, tbe_tag_totals, tbh_tag_totals)
 phylum_lake <- c(rep("Mendota", length(mendota_tag_totals)), rep("Trout Bog Epilimnion", length(tbe_tag_totals)), rep("Trout Bog Hypolimnion", length(tbh_tag_totals)))
 
 tag_data <- data.frame(phylum_names, phylum_percents, phylum_lake)
 tag_data <- tag_data[which(tag_data$phylum_percents >= 1), ]
+tag_data$phylum_names <- gsub("c__|p__", "", tag_data$phylum_names)
 
 # Keep phyla and match order to the MAGs plot, then add a few of the most abundant or so
 # Which are most abundant?
 head(tag_data[order(tag_data$phylum_percents, decreasing = T), ], 50)
-tag_data <- tag_data[which(tag_data$phylum_names == "Acidobacteria" | tag_data$phylum_names == "Actinobacteria" | tag_data$phylum_names == "Bacteroidetes" | tag_data$phylum_names == "Chlamydiae" | tag_data$phylum_names == "Chlorobi" | tag_data$phylum_names == "Cyanobacteria" | tag_data$phylum_names == "Ignavibacteria" | tag_data$phylum_names == "Planctomycetes" | tag_data$phylum_names == "Proteobacteria" | tag_data$phylum_names == "Tenericutes" | tag_data$phylum_names == "Verrucomicrobia" | tag_data$phylum_names == "Cryptophyta" | tag_data$phylum_names == "stramenopiles" | tag_data$phylum_names == "Firmicutes"),]
+tag_data <- tag_data[which(tag_data$phylum_names == "Acidobacteria" | tag_data$phylum_names == "Actinobacteria" | tag_data$phylum_names == "Bacteroidetes" | tag_data$phylum_names == "Chlamydiae" | tag_data$phylum_names == "Chlorobi" | tag_data$phylum_names == "Cyanobacteria" | tag_data$phylum_names == "Ignavibacteria" | tag_data$phylum_names == "Planctomycetes" | tag_data$phylum_names == "Proteobacteria" | tag_data$phylum_names == "Tenericutes" | tag_data$phylum_names == "Verrucomicrobia" | tag_data$phylum_names == "Alphaproteobacteria" | tag_data$phylum_names == "Betaproteobacteria" | tag_data$phylum_names == "Deltaproteobacteria" | tag_data$phylum_names == "Gammaproteobacteria" | tag_data$phylum_names == "Epsilonproteobacteria"),]
 # Order the same as the MAGs plot and change names or add zeroes as necessary
 tag_data$phylum_names <- as.character(tag_data$phylum_names)
-tag_data$phylum_names[which(tag_data$phylum_names == "stramenopiles")] <- "Heterokonta"
 
 # Add blank rows for things that were in the MAGs but not in 16S
-zeroes <- c(0, 0, 0, 0, 0, 0, 0, 0, 0)
-zphyla <- c("Chlamydiae", "Chlamydiae", "Chlamydiae", "Tenericutes", "Tenericutes", "Tenericutes", "Ignavibacteria", "Ignavibacteria", "Ignavibacteria")
-zlakes <- c("Mendota", "Trout Bog Epilimnion", "Trout Bog Hypolimnion", "Mendota", "Trout Bog Epilimnion", "Trout Bog Hypolimnion", "Mendota", "Trout Bog Epilimnion", "Trout Bog Hypolimnion")
+zeroes <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+zphyla <- c("Chlamydiae", "Chlamydiae", "Chlamydiae", "Tenericutes", "Tenericutes", "Tenericutes", "Ignavibacteria", "Ignavibacteria", "Ignavibacteria", "Acidobacteria", "Acidobacteria", "Acidobacteria", "Epsilonproteobacteria", "Epsilonproteobacteria", "Epsilonproteobacteria")
+zlakes <- c("Mendota", "Trout Bog Epilimnion", "Trout Bog Hypolimnion", "Mendota", "Trout Bog Epilimnion", "Trout Bog Hypolimnion", "Mendota", "Trout Bog Epilimnion", "Trout Bog Hypolimnion", "Mendota", "Trout Bog Epilimnion", "Trout Bog Hypolimnion", "Mendota", "Trout Bog Epilimnion", "Trout Bog Hypolimnion")
 zdata <- data.frame(zphyla, zeroes, zlakes)
 colnames(zdata) <- colnames(tag_data)
 tag_data <- rbind(tag_data, zdata)
@@ -153,9 +211,9 @@ for(i in 1:length(phyla)){
 tag_data$phylum_percents <- as.numeric(tag_data$phylum_percents)
 tag_data$phylum_percents[which(tag_data$phylum_percents > 40)] <- 35
 
-tag_data$phylum_names <- factor(tag_data$phylum_names, levels = c("Acidobacteria", "Actinobacteria", "Bacteroidetes", "Chlamydiae", "Chlorobi", "Cyanobacteria", "Ignavibacteria", "Planctomycetes", "Proteobacteria", "Tenericutes", "Verrucomicrobia", "Cryptophyta", "Heterokonta", "Firmicutes"))
+tag_data$phylum_names <- factor(tag_data$phylum_names, levels = c("Acidobacteria", "Actinobacteria", "Alphaproteobacteria", "Bacteroidetes", "Betaproteobacteria", "Chlamydiae", "Chlorobi", "Cyanobacteria", "Deltaproteobacteria", "Epsilonproteobacteria", "Gammaproteobacteria", "Ignavibacteria", "Planctomycetes", "Proteobacteria", "Tenericutes", "Verrucomicrobia"))
 
-panelA <- ggplot(data = tag_data, aes(x = phylum_names, y = phylum_percents, fill = phylum_lake)) + geom_col(position = "dodge") + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + labs(y = "Mean Percent of Reads", x = NULL) + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#1f78b4"))  + geom_vline(xintercept = c(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5), col='grey', lwd=1, linetype="dotted") + scale_y_continuous(expand = c(0, 0), limits = c(0, 40)) + guides(fill=guide_legend(title="Lake"))
+panelA <- ggplot(data = tag_data, aes(x = phylum_names, y = phylum_percents, fill = phylum_lake)) + geom_col(position = "dodge") + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + labs(y = "Mean Percent of Reads", x = NULL) + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#1f78b4"))  + geom_vline(xintercept = c(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5), col='grey', lwd=1, linetype="dotted") + scale_y_continuous(expand = c(0, 0), limits = c(0, 40)) + guides(fill=guide_legend(title="Lake"))
 
 
 
@@ -204,6 +262,8 @@ TH_results <- TH_results[which(is.na(TH_results$Date) == F),]
 
 # Get taxonomy
 metadata$phylum <- sapply(strsplit(as.character(metadata$Taxonomy),";"), `[`, 1)
+# Switch Proteobacteria to class
+metadata$phylum[which(metadata$phylum == "Proteobacteria")] <- sapply(strsplit(as.character(metadata$Taxonomy[which(metadata$phylum == "Proteobacteria")]),";"), `[`, 2)
 
 ME_results$phylum <- metadata$phylum[match(ME_results$MAG, metadata$IMG_OID)]
 TE_results$phylum <- metadata$phylum[match(TE_results$MAG, metadata$IMG_OID)]
@@ -240,16 +300,19 @@ for(i in 1:length(phyla)){
 agg_phyla$RPKM <- as.numeric(agg_phyla$RPKM)
 agg_phyla$RPKM[which(agg_phyla$RPKM > 4)] <- 3.5
 
-panelB <- ggplot(data = agg_phyla, aes(x = phylum, y = RPKM, fill = Lake)) + geom_col(position = "dodge") + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + labs(y = "Mean Normalized Reads", x = NULL) + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#1f78b4")) + geom_vline(xintercept = c(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5), col='grey', lwd=1, linetype="dotted") + scale_y_continuous(expand = c(0, 0), limits = c(0, 4)) + theme(legend.text=element_text(size=12))
+panelB <- ggplot(data = agg_phyla, aes(x = phylum, y = RPKM, fill = Lake)) + geom_col(position = "dodge") + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + labs(y = "Mean Normalized Reads", x = NULL) + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#1f78b4")) + geom_vline(xintercept = c(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5), col='grey', lwd=1, linetype="dotted") + scale_y_continuous(expand = c(0, 0), limits = c(0, 4)) + theme(legend.text=element_text(size=12))
 
+legend <- get_legend(panelA)
 panelA <- panelA + theme(legend.position = "none")
+panelB <- panelB + theme(legend.position = "none")
 # panelA <- ggdraw(panelA) + draw_text("Community Composition by 16S rRNA", 
 #                       x = 0.01, y = 0.98, hjust = -0.25, vjust = 0.1,
 #                       size = 16)
 # panelB <- ggdraw(panelB) + draw_text("Community Composition by MAG Coverage", 
 #                                      x = 0.01, y = 0.98, hjust = -0.25, vjust = 0.1,
 #                                      size = 16)
-fig2 <- plot_grid(panelA, panelB, ncol = 1, align = "h", labels = c("A. 16S rRNA", "B. MAG coverage"), scale = 0.85)
+fig2_nolegend <- plot_grid(panelA, panelB, ncol = 1, align = "h", scale = 0.9)
+fig2 <- plot_grid(fig2_nolegend, legend, ncol = 2, rel_widths = c(1, .2))
 save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/fig2.pdf", fig2, base_height = 8, base_aspect_ratio = 1.6)
 
 
