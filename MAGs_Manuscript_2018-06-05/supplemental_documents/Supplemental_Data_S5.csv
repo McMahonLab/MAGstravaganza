@@ -1,4 +1,4 @@
-IMG_OID,Genome_Name,Lake,Taxonomy,Genome_Size,Est_Completeness,GC_Content,Codon_Usage,Amino_Acid_Bias,Gene_Count
+IMG_Genome_ID,Genome_Name,Lake,Taxonomy,Genome_Size,Est_Completeness,GC_Content,Codon_Usage,Amino_Acid_Bias,Gene_Count
 2582580512,ME10020,Mendota,Planctomycetes;Planctomycetia;Planctomycetales;;;,2684295,65.53,0.5441,0.168827,1.723,2450
 2582580513,ME10152,Mendota,Actinobacteria;Actinobacteria;Actinomycetales;;;,2093635,57.05,0.67,0.374611,1.67,2111
 2582580514,ME10417,Mendota,Tenericutes;Mollicutes;Mycoplasmatales;;;,852268,83.91,0.3942,0.2853,1.636,895
