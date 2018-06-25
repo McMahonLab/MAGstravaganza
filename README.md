@@ -1,15 +1,15 @@
 # MAGstravaganza
-Investigation of how freshwater nutrient cycling is linked at the organism level.
+We propose that the name for a group of MAGs (metagenome-assembled genomes) is a MAGstravaganza, like a gaggle of geese or a congress of owls. Using time-series metagenomes and time-series resolved MAGs from three different freshwater environments, we analyze predicted functions and how these function co-occur in genomes. This reveals how carbon and nutrient cycles are connected by microbes in freshwater.
 
-The goal of this analysis is to determine pathway presence/absence in genomes assembled from metagenomes (MAGs) in two lakes with very different environmental conditions.
-We hypothesize that the pathways present in genomes will reflect the functioning of the ecosystem where those genomes belong.
+"Connections between freshwater carbon and nutrient cycles revealed through time series metagenomics." Linz, A.M., He, S., Stevens, S.L.R., Anatharaman, K. Rohwer, R.R., Malmstrom, R.R., Bertilsson, S., McMahon, K.D. Submitted. 2018.
 
 Copyright (c) 2018, Katherine McMahon, Alex Linz, and friends
 
 Repo Structure
 ------------------------------
-/MAGstravaganza						We propose that the name for a group of MAGs is a MAGstravaganza, like a gaggle of geese or a congress of owls
-- README.md						This file
+					
+- README.md
+	-This file
 - Code/							Scripts used in analysis of the MAGs. The "MAGstravaganza_manuscript_plots" files will be most interesting, as these are the analysis presented in the manuscript.
 - Manuscript_drafts/					See the evolution of the manuscript!
 - time_series_mapping/					Results and preliminary analysis of mapping the time series metagenomes to the MAGs
