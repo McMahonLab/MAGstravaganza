@@ -6,6 +6,16 @@ The publication associated with this GitHub repo is:
 
 Copyright (c) 2018, Katherine McMahon, Alex Linz, and friends
 
+#### Are you looking to use data or code from our paper?
+You're in the right place. Raw data is located in IMG (https://img.jgi.doe.gov/cgi-bin/mer/main.cgi) or on our lab fileshare.
+- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_2018-06-05/supplemental_documents/Supplemental_Data_S1.csv" to download the metagenomic time series.
+- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_2018-06-05/supplemental_documents/Supplemental_Data_S1.csv" to download MAGs.
+- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_2018-06-05/supplemental_documents/Supplemental_Table_S2.csv" to download pooled metagenome assemblies.
+- If you're looking for intermediate files or code, check the list of files in this repo below.
+
+Not seeing what you're looking for? Feel free to email us at amlinz@wisc.edu or trina.mcmahon@wisc.edu.
+
+
 Repo Structure
 ------------------------------
 					
@@ -19,14 +29,17 @@ Repo Structure
     - chtc-kraken.sh: Code to run kraken on metagenomes in high throughput (not included in manuscript)
     - kraken_report_processing.R: Code to take kraken output and make it into dataframes or plots
     - thesis_pie_charts.R: Alternative view of MAG diversity made for A. Linz's thesis
+    - genome_size_figure.R: Initial testing of genome size vs. number of proposed substrates
   - ANI_between_genomes.R: Make supplemental table of ANI from calculation output
   - MAGstravaganza_manuscript_plots.R: Code to generate all plots in the manuscript
   - amino_acid_bias.sh: Code to calculate amino acid bias from open reading frames
-
-
-- Manuscript_drafts/					See the evolution of the manuscript!
+  - process_tag_data.R: process .rData files that were output by TaxAss 16S classification
+- Manuscript_drafts/
+  - See the evolution of the manuscript!
 - time_series_mapping/					Results and preliminary analysis of mapping the time series metagenomes to the MAGs
-- dbCAN_results/					Output of annotating CAZy enzymes in the MAGs, one file per MAG
-- Mansucript_plots/					Intermediate and file versions of plots in the mansucript
+- dbCAN_results/
+ - Output of annotating CAZy enzymes in the MAGs, one file per MAG
+- Mansucript_plots/
+ - Intermediate files of plots in the mansucript
 - Pathway_analysis					Data sheets and results used for calculating pathway presence/absence
 - Supplemental/						Supplemental files accompanying the manuscript
