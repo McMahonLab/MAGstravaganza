@@ -69,12 +69,18 @@ plot.boxes <- aggregate(value ~ variable + annotations + lake, table2keep, sum)
 # plot.boxes1 <- plot.boxes[which(plot.boxes$annotations == "sulfide quinone reductase" | plot.boxes$annotations == "sulfate adenylyltransferase" | plot.boxes$annotations == "SOX"), ]
 # plot.boxes2 <- plot.boxes[which(plot.boxes$annotations != "sulfide quinone reductase" & plot.boxes$annotations != "sulfate adenylyltransferase" & plot.boxes$annotations != "SOX"), ]
 # 
-# p1 <- ggplot(data = plot.boxes1, aes(x = annotations, y = value, fill = lake)) + geom_boxplot() + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#1f78b4")) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = NULL, y = "Counts per Metagenome") + coord_flip()
-# p2 <- ggplot(data = plot.boxes2, aes(x = annotations, y = value, fill = lake)) + geom_boxplot() + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#1f78b4")) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = NULL, y = "Counts per Metagenome") + coord_flip()
+# p1 <- ggplot(data = plot.boxes1, aes(x = annotations, y = value, fill = lake)) + geom_boxplot() + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#8856a7")) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = NULL, y = "Counts per Metagenome") + coord_flip()
+# p2 <- ggplot(data = plot.boxes2, aes(x = annotations, y = value, fill = lake)) + geom_boxplot() + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#8856a7")) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = NULL, y = "Counts per Metagenome") + coord_flip()
 # 
 # fig1 <- plot_grid(p1, p2, nrow = 2, axis = "l", rel_heights = c(1.75, 4), align = "v")
 
-fig1 <- ggplot(data = plot.boxes, aes(x = annotations, y = value, fill = lake)) + geom_boxplot() + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#1f78b4")) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = NULL, y = "Normalized Counts per Metagenome") + coord_flip()
+fig1 <- ggplot(data = plot.boxes, aes(x = annotations, y = value, fill = lake)) + geom_boxplot() + scale_fill_manual(values = c("#b2df8a", "#2166ac", "#8856a7")) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + labs(x = NULL, y = "Normalized Counts per Metagenome") + coord_flip()
+
+#"#a6cee3"
+# "#8856a7"
+
+fig1 <- add_sub(fig1, "Figure 1. Analysis of marker gene abundances reveals differences between lakes and layers.", x = -0.25, hjust = 0, vjust = 1.5, fontface = "bold")
+ggdraw(fig1)
 
 save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/fig1.pdf", fig1, base_height = 6, base_aspect_ratio = 1.5)
 
@@ -213,7 +219,7 @@ tag_data$phylum_percents[which(tag_data$phylum_percents > 40)] <- 35
 
 tag_data$phylum_names <- factor(tag_data$phylum_names, levels = c("Acidobacteria", "Actinobacteria", "Alphaproteobacteria", "Bacteroidetes", "Betaproteobacteria", "Chlamydiae", "Chlorobi", "Cyanobacteria", "Deltaproteobacteria", "Epsilonproteobacteria", "Gammaproteobacteria", "Ignavibacteria", "Planctomycetes", "Proteobacteria", "Tenericutes", "Verrucomicrobia"))
 
-panelA <- ggplot(data = tag_data, aes(x = phylum_names, y = phylum_percents, fill = phylum_lake)) + geom_col(position = "dodge") + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + labs(y = "Mean Percent of Reads", x = NULL) + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#1f78b4"))  + geom_vline(xintercept = c(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5), col='grey', lwd=1, linetype="dotted") + scale_y_continuous(expand = c(0, 0), limits = c(0, 40)) + guides(fill=guide_legend(title="Lake"))
+panelA <- ggplot(data = tag_data, aes(x = phylum_names, y = phylum_percents, fill = phylum_lake)) + geom_col(position = "dodge") + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + labs(y = "Mean Percent of Reads", x = NULL) + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#8856a7"))  + geom_vline(xintercept = c(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5), col='grey', lwd=1, linetype="dotted") + scale_y_continuous(expand = c(0, 0), limits = c(0, 40)) + guides(fill=guide_legend(title="Lake"))
 
 
 
@@ -300,7 +306,7 @@ for(i in 1:length(phyla)){
 agg_phyla$RPKM <- as.numeric(agg_phyla$RPKM)
 agg_phyla$RPKM[which(agg_phyla$RPKM > 4)] <- 3.5
 
-panelB <- ggplot(data = agg_phyla, aes(x = phylum, y = RPKM, fill = Lake)) + geom_col(position = "dodge") + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + labs(y = "Mean Normalized Reads", x = NULL) + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#1f78b4")) + geom_vline(xintercept = c(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5), col='grey', lwd=1, linetype="dotted") + scale_y_continuous(expand = c(0, 0), limits = c(0, 4)) + theme(legend.text=element_text(size=12))
+panelB <- ggplot(data = agg_phyla, aes(x = phylum, y = RPKM, fill = Lake)) + geom_col(position = "dodge") + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + labs(y = "Mean Normalized Reads", x = NULL) + scale_fill_manual(values = c("#b2df8a", "#a6cee3", "#8856a7")) + geom_vline(xintercept = c(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5), col='grey', lwd=1, linetype="dotted") + scale_y_continuous(expand = c(0, 0), limits = c(0, 4)) + theme(legend.text=element_text(size=12))
 
 legend <- get_legend(panelA)
 panelA <- panelA + theme(legend.position = "none")
@@ -313,11 +319,136 @@ panelB <- panelB + theme(legend.position = "none")
 #                                      size = 16)
 fig2_nolegend <- plot_grid(panelA, panelB, ncol = 1, align = "h", scale = 0.9)
 fig2 <- plot_grid(fig2_nolegend, legend, ncol = 2, rel_widths = c(1, .2))
+fig2 <- add_sub(fig2, "Figure 2. How representative are the MAGs of the microbial communities?", x = 0, hjust = 0, vjust = 1, fontface = "bold")
+
 save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/fig2.pdf", fig2, base_height = 8, base_aspect_ratio = 1.6)
+
+################
+### Fig 3. Metabolism chart
+
+#Load data
+table <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Pathway_analysis/consolidated_pathway_data.csv", header = T)
+metadata <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/MAG_information.csv")
+
+#make a long format table - for each phylum and lake, count how many times each pathway appears.
+metadata$Taxonomy <- gsub("Proteobacteria;", "", metadata$Taxonomy)
+
+phylum <- sapply(strsplit(as.character(metadata$Taxonomy),";"), `[`, 1)
+class<- sapply(strsplit(as.character(metadata$Taxonomy),";"), `[`, 2)
+order <- sapply(strsplit(as.character(metadata$Taxonomy),";"), `[`, 3)
+
+colnames(table) <- gsub("X", "", colnames(table))
+table <- table[1:61,]
+for(i in 3:dim(table)[2]){
+  column <- table[,i]
+  column[which(is.na(column) == T)] <- 0
+  table[,i] <- column
+}
+
+# reductive TCA vs regular TCA is distinguished by a single gene - remove partial pathways here
+rTCA <- table[2,3:196]
+rTCA[which(rTCA < 100)] <- 0
+table[2,3:196] <- rTCA
+
+# Not distinguishing between different nitrogenase types - that's a separate paper!
+table$Pathway <- gsub("(*)", "", table$Pathway)
+table <- table[which(table$Pathway != "Nitrogen fixation, Fe-only"), ]
+table$Pathway[which(table$Pathway == "Nitrogen fixation, Mo-Fe")] <- "Nitrogen fixation"
+ME.MAGs <- table[,which(is.na(match(colnames(table), metadata$IMG_OID[which(metadata$Lake == "Mendota")])) == F)]
+ME.MAGs$Pathways <- make.unique(table$Pathway)
+
+# Convert to long format for plotting
+ME.long <- melt(ME.MAGs)
+ME.long$Pathways <- factor(ME.long$Pathways, levels = table$Pathway)
+ME.long$variable <- factor(ME.long$variable, levels = colnames(table))
+ME.long$Taxonomy <- phylum[match(ME.long$variable, metadata$IMG_OID)]
+ME.long$Taxonomy[which(ME.long$Taxonomy == "[Blank]")] <- "Unclassified"
+ME.long <- ME.long[which(is.na(ME.long$Pathways) == F), ]
+ME.agg <- aggregate(value ~ Pathways + Taxonomy, ME.long, mean)
+
+table(phylum[metadata$Lake == "Mendota"])
+ME.agg$Taxonomy <- gsub("Actinobacteria", "Actinobacteria (17)", ME.agg$Taxonomy)
+ME.agg$Taxonomy <- gsub("Unclassified", "Unclassified (4)", ME.agg$Taxonomy)
+ME.agg$Taxonomy <- gsub("Bacteroidetes", "Bacteroidetes (32)", ME.agg$Taxonomy)
+ME.agg$Taxonomy <- gsub("Chlamydiae", "Chlamydiae (1)", ME.agg$Taxonomy)
+ME.agg$Taxonomy <- gsub("Cyanobacteria", "Cyanobacteria (11)", ME.agg$Taxonomy)
+ME.agg$Taxonomy <- gsub("Planctomycetes", "Planctomycetes (12)", ME.agg$Taxonomy)
+ME.agg$Taxonomy <- gsub("Alphaproteobacteria", "Alphaproteobacteria (1)", ME.agg$Taxonomy)
+ME.agg$Taxonomy <- gsub("Betaproteobacteria", "Betaproteobacteria (7)", ME.agg$Taxonomy)
+ME.agg$Taxonomy <- gsub("Deltaproteobacteria", "Deltaproteobacteria (1)", ME.agg$Taxonomy)
+ME.agg$Taxonomy <- gsub("Gammaproteobacteria", "Gammaproteobacteria (2)", ME.agg$Taxonomy)
+ME.agg$Taxonomy <- gsub("Tenericutes", "Tenericutes (2)", ME.agg$Taxonomy)
+ME.agg$Taxonomy <- gsub("Verrucomicrobia", "Verrucomicrobia (8)", ME.agg$Taxonomy)
+
+
+ME.heatmap <- ggplot(data = ME.agg, aes(y = Pathways, x = Taxonomy, fill = value)) + geom_tile(color = "black") + labs(x = "", y = "") + scale_fill_gradient2(low = "white", high = "#b2df8a", midpoint = 25) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), axis.text.y = element_text(size = 10))
+
+save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/ME.heatmap.pdf", ME.heatmap, base_height = 8, base_aspect_ratio = 0.7)
+
+TE.MAGs <- table[,which(is.na(match(colnames(table), metadata$IMG_OID[which(metadata$Lake == "Trout Bog Epilimnion")])) == F)]
+TE.MAGs$Pathways <- make.unique(table$Pathway)
+
+TE.long <- melt(TE.MAGs)
+TE.long$Pathways <- factor(TE.long$Pathways, levels = table$Pathway)
+TE.long$variable <- factor(TE.long$variable, levels = colnames(table))
+TE.long$Taxonomy <- phylum[match(TE.long$variable, metadata$IMG_OID)]
+TE.long$Taxonomy[which(TE.long$Taxonomy == "[Blank]")] <- "Unclassified"
+TE.long <- TE.long[which(is.na(TE.long$Pathways) == F), ]
+TE.agg <- aggregate(value ~ Pathways + Taxonomy, TE.long, mean)
+
+# Chlorobi has homologs for these pathways, but likely not the actual pathways
+# The RuBisCO homolog is not involved in CBB based on other isolates
+# The dissimilatory sulfate reductase works in reverse to run photosynthesis in Chlorobi
+TE.agg$value[which(TE.agg$Pathways == "Calvin Cycle" & TE.agg$Taxonomy == "Chlorobi")] <- 0
+TE.agg$value[which(TE.agg$Pathways == "Dissimilatory sulfate reduction" & TE.agg$Taxonomy == "Chlorobi")] <- 0
+table(phylum[which(metadata$Lake == "Trout Bog Epilimnion")])
+TE.agg$Taxonomy <- gsub("Acidobacteria", "Acidobacteria (2)", TE.agg$Taxonomy)
+TE.agg$Taxonomy <- gsub("Actinobacteria", "Actinobacteria (8)", TE.agg$Taxonomy)
+TE.agg$Taxonomy <- gsub("Alphaproteobacteria", "Alphaproteobacteria (3)", TE.agg$Taxonomy)
+TE.agg$Taxonomy <- gsub("Bacteroidetes", "Bacteroidetes (3)", TE.agg$Taxonomy)
+TE.agg$Taxonomy <- gsub("Betaproteobacteria", "Betaproteobacteria (7)", TE.agg$Taxonomy)
+TE.agg$Taxonomy <- gsub("Chlorobi", "Chlorobi (2)", TE.agg$Taxonomy)
+TE.agg$Taxonomy <- gsub("Deltaproteobacteria", "Deltaproteobacteria (1)", TE.agg$Taxonomy)
+TE.agg$Taxonomy <- gsub("Gammaproteobacteria", "Gammaproteobacteria (3)", TE.agg$Taxonomy)
+TE.agg$Taxonomy <- gsub("Verrucomicrobia", "Verrucomicrobia (2)", TE.agg$Taxonomy)
+
+TE.heatmap <- ggplot(data = TE.agg, aes(y = Pathways, x = Taxonomy, fill = value)) + geom_tile(color = "black") + labs(x = "", y = "") + scale_fill_gradient2(low = "white", high = "#a6cee3", midpoint = 25) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), axis.text.y = element_text(size = 10))
+save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/TE.heatmap.pdf", TE.heatmap, base_height = 8, base_aspect_ratio = 0.65)
+
+TH.MAGs <- table[,which(is.na(match(colnames(table), metadata$IMG_OID[which(metadata$Lake == "Trout Bog Hypolimnion")])) == F)]
+TH.MAGs$Pathways <- make.unique(table$Pathway)
+
+TH.long <- melt(TH.MAGs)
+TH.long$Pathways <- factor(TH.long$Pathways, levels = table$Pathway)
+TH.long$variable <- factor(TH.long$variable, levels = colnames(table))
+TH.long$Taxonomy <- phylum[match(TH.long$variable, metadata$IMG_OID)]
+TH.long$Taxonomy[which(TH.long$Taxonomy == "[Blank]")] <- "Unclassified"
+TH.long <- TH.long[which(is.na(TH.long$Pathways) == F), ]
+TH.agg <- aggregate(value ~ Pathways + Taxonomy, TH.long, mean)
+
+TH.agg$value[which(TH.agg$Pathways == "Dissimilatory sulfate reduction" & TH.agg$Taxonomy == "Chlorobi")] <- 0
+TH.agg$value[which(TH.agg$Pathways == "Calvin Cycle" & TH.agg$Taxonomy == "Chlorobi")] <- 0
+
+table(phylum[which(metadata$Lake == "Trout Bog Hypolimnion")])
+TH.agg$Taxonomy <- gsub("Unclassified", "Unclassified (5)", TH.agg$Taxonomy)
+TH.agg$Taxonomy <- gsub("Acidobacteria", "Acidobacteria (3)", TH.agg$Taxonomy)
+TH.agg$Taxonomy <- gsub("Actinobacteria", "Actinobacteria (8)", TH.agg$Taxonomy)
+TH.agg$Taxonomy <- gsub("Alphaproteobacteria", "Alphaproteobacteria (3)", TH.agg$Taxonomy)
+TH.agg$Taxonomy <- gsub("Bacteroidetes", "Bacteroidetes (9)", TH.agg$Taxonomy)
+TH.agg$Taxonomy <- gsub("Betaproteobacteria", "Betaproteobacteria (13)", TH.agg$Taxonomy)
+TH.agg$Taxonomy <- gsub("Chlorobi", "Chlorobi (2)", TH.agg$Taxonomy)
+TH.agg$Taxonomy <- gsub("Deltaproteobacteria", "Deltaproteobacteria (4)", TH.agg$Taxonomy)
+TH.agg$Taxonomy <- gsub("Epsilonproteobacteria", "Epsilonproteobacteria (1)", TH.agg$Taxonomy)
+TH.agg$Taxonomy <- gsub("Gammaproteobacteria", "Gammaproteobacteria (5)", TH.agg$Taxonomy)
+TH.agg$Taxonomy <- gsub("Ignavibacteria", "Ignavibacteria (2)", TH.agg$Taxonomy)
+TH.agg$Taxonomy <- gsub("Verrucomicrobia", "Verrucomicrobia (8)", TH.agg$Taxonomy)
+
+TH.heatmap <- ggplot(data = TH.agg, aes(y = Pathways, x = Taxonomy, fill = value)) + geom_tile(color = "black") + labs(x = "", y = "") + scale_fill_gradient2(low = "white", high = "#8856a7", midpoint = 25) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), axis.text.y = element_text(size = 10))
+save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/TH.heatmap.pdf", TH.heatmap, base_height = 8, base_aspect_ratio = .7)
 
 
 ################
-# Fig 3. Glycoside hydrolases
+# Fig 4. Glycoside hydrolases
 
 # Load data
 mag_data <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/MAG_information.csv", header = T)
@@ -373,7 +504,7 @@ write.csv(gh_df, file = "C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supple
 # Plot the heatmap
 gh.agg <- aggregate(Density ~ Lake + Order, data = gh_df, mean)
 gh_density_plot <- ggplot(data = gh.agg[which(gh.agg$Order != "[Blank]" & is.na(gh.agg$Order) == F), ], aes(x = Lake, y = Order, fill = Density)) + geom_tile(color = "black") + scale_fill_gradient2(low = "white", mid = "#8c96c6", high = "#810f7c", midpoint = 4) + labs(x = "", y = "") + background_grid(major = "xy") + theme(axis.text.y = element_text(size = 10), axis.text.x = element_text(size = 10, angle = 45, hjust = 1))
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/Fig3_panelA.pdf", gh_density_plot, base_height = 5, base_aspect_ratio = 0.7)
+save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/Fig4_panelA.pdf", gh_density_plot, base_height = 5, base_aspect_ratio = 0.7)
 
 # Correlation of density and diversity
 cor.test(gh_df$Gene_Count, gh_df$Density)
@@ -406,90 +537,9 @@ part2 <- plot_grid(panelB, panelC, panelD, nrow = 3, labels = c("B", "C", "D"), 
 
 # Put it all together
 
-fig3 <- plot_grid(gh_density_plot, part2, labels = c("A", ""), ncol = 2)
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/Fig3.pdf", fig3, base_height = 6, base_aspect_ratio = 1.25)
+fig4 <- plot_grid(gh_density_plot, part2, labels = c("A", ""), ncol = 2)
+save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/Fig4.pdf", fig4, base_height = 6, base_aspect_ratio = 1.25)
 ############
-### Fig 4. Metabolism chart
-
-#Load data
-table <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Pathway_analysis/consolidated_pathway_data.csv", header = T)
-metadata <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/MAG_information.csv")
-
-#make a long format table - for each phylum and lake, count how many times each pathway appears.
-
-phylum <- sapply(strsplit(as.character(metadata$Taxonomy),";"), `[`, 1)
-class<- sapply(strsplit(as.character(metadata$Taxonomy),";"), `[`, 2)
-order <- sapply(strsplit(as.character(metadata$Taxonomy),";"), `[`, 3)
-
-colnames(table) <- gsub("X", "", colnames(table))
-table <- table[1:61,]
-for(i in 3:dim(table)[2]){
-  column <- table[,i]
-  column[which(is.na(column) == T)] <- 0
-  table[,i] <- column
-}
-
-# reductive TCA vs regular TCA is distinguished by a single gene - remove partial pathways here
-rTCA <- table[2,3:196]
-rTCA[which(rTCA < 100)] <- 0
-table[2,3:196] <- rTCA
-
-# Not distinguishing between different nitrogenase types - that's a separate paper!
-table$Pathway <- gsub("(*)", "", table$Pathway)
-table <- table[which(table$Pathway != "Nitrogen fixation, Fe-only"), ]
-table$Pathway[which(table$Pathway == "Nitrogen fixation, Mo-Fe")] <- "Nitrogen fixation"
-ME.MAGs <- table[,which(is.na(match(colnames(table), metadata$IMG_OID[which(metadata$Lake == "Mendota")])) == F)]
-ME.MAGs$Pathways <- make.unique(table$Pathway)
-
-# Convert to long format for plotting
-ME.long <- melt(ME.MAGs)
-ME.long$Pathways <- factor(ME.long$Pathways, levels = table$Pathway)
-ME.long$variable <- factor(ME.long$variable, levels = colnames(table))
-ME.long$Taxonomy <- phylum[match(ME.long$variable, metadata$IMG_OID)]
-ME.long$Taxonomy[which(ME.long$Taxonomy == "[Blank]")] <- "Unclassified"
-ME.long <- ME.long[which(is.na(ME.long$Pathways) == F), ]
-ME.agg <- aggregate(value ~ Pathways + Taxonomy, ME.long, mean)
-
-ME.heatmap <- ggplot(data = ME.agg, aes(y = Pathways, x = Taxonomy, fill = value)) + geom_tile(color = "black") + labs(x = "", y = "") + scale_fill_gradient2(low = "white", high = "#b2df8a", midpoint = 25) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), axis.text.y = element_text(size = 10))
-
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/ME.heatmap.pdf", ME.heatmap, base_height = 7.5, base_aspect_ratio = 0.75)
-
-TE.MAGs <- table[,which(is.na(match(colnames(table), metadata$IMG_OID[which(metadata$Lake == "Trout Bog Epilimnion")])) == F)]
-TE.MAGs$Pathways <- make.unique(table$Pathway)
-
-TE.long <- melt(TE.MAGs)
-TE.long$Pathways <- factor(TE.long$Pathways, levels = table$Pathway)
-TE.long$variable <- factor(TE.long$variable, levels = colnames(table))
-TE.long$Taxonomy <- phylum[match(TE.long$variable, metadata$IMG_OID)]
-TE.long$Taxonomy[which(TE.long$Taxonomy == "[Blank]")] <- "Unclassified"
-TE.long <- TE.long[which(is.na(TE.long$Pathways) == F), ]
-TE.agg <- aggregate(value ~ Pathways + Taxonomy, TE.long, mean)
-
-# Chlorobi has homologs for these pathways, but likely not the actual pathways
-# The RuBisCO homolog is not involved in CBB based on other isolates
-# The dissimilatory sulfate reductase works in reverse to run photosynthesis in Chlorobi
-TE.agg$value[which(TE.agg$Pathways == "Calvin Cycle" & TE.agg$Taxonomy == "Chlorobi")] <- 0
-TE.agg$value[which(TE.agg$Pathways == "Dissimilatory sulfate reduction" & TE.agg$Taxonomy == "Chlorobi")] <- 0
-
-TE.heatmap <- ggplot(data = TE.agg, aes(y = Pathways, x = Taxonomy, fill = value)) + geom_tile(color = "black") + labs(x = "", y = "") + scale_fill_gradient2(low = "white", high = "#a6cee3", midpoint = 25) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), axis.text.y = element_text(size = 10))
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/TE.heatmap.pdf", TE.heatmap, base_height = 7.5, base_aspect_ratio = 0.67)
-
-TH.MAGs <- table[,which(is.na(match(colnames(table), metadata$IMG_OID[which(metadata$Lake == "Trout Bog Hypolimnion")])) == F)]
-TH.MAGs$Pathways <- make.unique(table$Pathway)
-
-TH.long <- melt(TH.MAGs)
-TH.long$Pathways <- factor(TH.long$Pathways, levels = table$Pathway)
-TH.long$variable <- factor(TH.long$variable, levels = colnames(table))
-TH.long$Taxonomy <- phylum[match(TH.long$variable, metadata$IMG_OID)]
-TH.long$Taxonomy[which(TH.long$Taxonomy == "[Blank]")] <- "Unclassified"
-TH.long <- TH.long[which(is.na(TH.long$Pathways) == F), ]
-TH.agg <- aggregate(value ~ Pathways + Taxonomy, TH.long, mean)
-
-TH.agg$value[which(TH.agg$Pathways == "Dissimilatory sulfate reduction" & TH.agg$Taxonomy == "Chlorobi")] <- 0
-TH.agg$value[which(TH.agg$Pathways == "Calvin Cycle" & TH.agg$Taxonomy == "Chlorobi")] <- 0
-
-TH.heatmap <- ggplot(data = TH.agg, aes(y = Pathways, x = Taxonomy, fill = value)) + geom_tile(color = "black") + labs(x = "", y = "") + scale_fill_gradient2(low = "white", high = "#1f78b4", midpoint = 25) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), axis.text.y = element_text(size = 10))
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/TH.heatmap.pdf", TH.heatmap, base_height = 7.5, base_aspect_ratio = .73)
 
 
 ##################
@@ -726,7 +776,7 @@ key <- data.frame(tips, lakes, Nfix)
 lake.colors <- c()
 lake.colors[which(key$lakes == "Mendota" & key$Nfix == TRUE)] <- "#b2df8a"
 lake.colors[which(key$lakes == "Trout Bog Epilimnion" & key$Nfix == TRUE)] <- "#a6cee3"
-lake.colors[which(key$lakes == "Trout Bog Hypolimnion" & key$Nfix == TRUE)] <- "#1f78b4"
+lake.colors[which(key$lakes == "Trout Bog Hypolimnion" & key$Nfix == TRUE)] <- "#8856a7"
 lake.colors[which(is.na(key$lakes) == T | key$Nfix == FALSE)] <- "white"
 
 m1 <- match(colnames(table)[3:196], metadata$IMG_OID)
@@ -745,7 +795,7 @@ key <- data.frame(tips, lakes, Nfix)
 lake.colors2 <- c()
 lake.colors2[which(key$lakes == "Mendota")] <- "#b2df8a"
 lake.colors2[which(key$lakes == "Trout Bog Epilimnion")] <- "#a6cee3"
-lake.colors2[which(key$lakes == "Trout Bog Hypolimnion")] <- "#1f78b4"
+lake.colors2[which(key$lakes == "Trout Bog Hypolimnion")] <- "#8856a7"
 
 plot(treefile, type = "fan", show.tip.label = F, main = "", edge.width = 3)
 tiplabels(pch = 21, col = "black", bg = lake.colors2, cex = 2)
