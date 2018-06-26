@@ -11,17 +11,17 @@ Repo Structure
 					
 - README.md: This file
 - Code/
--- Tree_building/
--- Functional_marker_genes/
---- lefse_input.R: Code to take BLAST output table and format for input into LEfSe
---- process_lefse_output.R: Code to turn LEfSe output into a dataframe suitable for R plotting
--- Unused_analyses/
---- chtc-kraken.sh: Code to run kraken on metagenomes in high throughput (not included in manuscript)
---- kraken_report_processing.R: Code to take kraken output and make it into dataframes or plots
---- thesis_pie_charts.R: Alternative view of MAG diversity made for A. Linz's thesis
--- ANI_between_genomes.R: Make supplemental table of ANI from calculation output
--- MAGstravaganza_manuscript_plots.R: Code to generate all plots in the manuscript
--- amino_acid_bias.sh: Code to calculate amino acid bias from open reading frames
+  - Tree_building/
+  - Functional_marker_genes/
+    - lefse_input.R: Code to take BLAST output table and format for input into LEfSe
+    - process_lefse_output.R: Code to turn LEfSe output into a dataframe suitable for R plotting
+  - Unused_analyses/
+    - chtc-kraken.sh: Code to run kraken on metagenomes in high throughput (not included in manuscript)
+    - kraken_report_processing.R: Code to take kraken output and make it into dataframes or plots
+    - thesis_pie_charts.R: Alternative view of MAG diversity made for A. Linz's thesis
+  - ANI_between_genomes.R: Make supplemental table of ANI from calculation output
+  - MAGstravaganza_manuscript_plots.R: Code to generate all plots in the manuscript
+  - amino_acid_bias.sh: Code to calculate amino acid bias from open reading frames
 
 
 - Manuscript_drafts/					See the evolution of the manuscript!
