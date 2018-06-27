@@ -21,7 +21,7 @@ Repo Structure
 					
 - README.md: This file
 - Code/
-  - Tree_building/
+  - Tree_building/: Scripts to build a rough tree from MAGs. Full instructions available at https://github.com/McMahonLab/Scripts/tree/master/Phylogeny
   - Functional_marker_genes/
     - lefse_input.R: Code to take BLAST output table and format for input into LEfSe
     - process_lefse_output.R: Code to turn LEfSe output into a dataframe suitable for R plotting
@@ -36,10 +36,15 @@ Repo Structure
   - process_tag_data.R: process .rData files that were output by TaxAss 16S classification
 - Manuscript_drafts/
   - See the evolution of the manuscript!
-- time_series_mapping/					Results and preliminary analysis of mapping the time series metagenomes to the MAGs
+- time_series_mapping/
+  - Data files with metagenome information (ie dates, sizes, and library codes)
 - dbCAN_results/
- - Output of annotating CAZy enzymes in the MAGs, one file per MAG
+  - Output of annotating CAZy enzymes in the MAGs, one file per MAG
 - Mansucript_plots/
- - Intermediate files of plots in the mansucript
-- Pathway_analysis					Data sheets and results used for calculating pathway presence/absence
-- Supplemental/						Supplemental files accompanying the manuscript
+  - Intermediate files of plots in the mansucript
+- Pathway_analysis
+  - IMG_function_data.csv: annotations downloaded from IMG
+  - consolidated_pathway_data.csv/xls: aggregated pathway prediction data for input into Figure 3
+  - *.xls files with lake, phylum, and "pathways in the name are the pathwya prediction files
+  - *.csv files with lake and phylum have pathway data aggregated by phylum
+- Supplemental/
