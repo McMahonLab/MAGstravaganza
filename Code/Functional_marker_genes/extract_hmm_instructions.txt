@@ -1,0 +1,20 @@
+#Used Karthik's custom database of marker genes, Metabolic_genes_hmm.tar.gz
+#Received in early May 2018
+
+#Extract faa sequences using hmmemit from hmmer
+
+#Install hmmer:
+
+wget http://eddylab.org/software/hmmer3/3.1b2/hmmer-3.1b2-linux-intel-x86_64.tar.gz
+tar xzf hmmer-3.1b2-linux-intel-x86_64.tar.gz
+
+#Unzip Karthik's database
+tar xvzf Metabolic_genes_hmm.tar.gz
+
+for file in Metabolic_genes_hmms/*; do
+	gene=$(basename $file);
+	./hmmer-3.1b2-linux-intel-x86_64/binaries/hmmemit -o $gene.faa $file;
+done
+cat *faa > Karthik_metabolic_genes.faa
+
+

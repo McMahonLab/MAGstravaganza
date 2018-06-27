@@ -1,0 +1,31 @@
+# marker_blast.sub
+#
+#
+# Specify the HTCondor Universe
+universe = vanilla
+log = marker_blast_$(Cluster).log
+error = marker_blast_$(Cluster)_$(Process).err
+requirements = (OpSys == "LINUX")
+#
+# Specify your executable, arguments, and a file for HTCondor to store standard
+#  output.
+executable = MAGstravaganza/marker_blast.sh
+arguments = $(metaG)
+output = marker_blast_$(Cluster).out
+#
+# Specify that HTCondor should transfer files to and from the
+#  computer where each job runs.
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = MAGstravaganza/ncbi-blast-2.7.1+-x64-linux.tar.gz,split_prodigal/$(metaG),http://proxy.chtc.wisc.edu/SQUID/amlinz/metabolic_genes.tar.gz,MAGstravaganza/metabolic_gene_info.txt
+transfer_output_files = $(metaG).out
+#
+# Tell HTCondor what amount of compute resources
+#  each job will need on the computer where it runs.
+request_cpus = 1
+request_memory = 100MB
+request_disk = 1.5GB
+#
+# Tell HTCondor to run every faa file in the provided list:
+queue metaG from MAGstravaganza/split_prodigal_list.txt
+
