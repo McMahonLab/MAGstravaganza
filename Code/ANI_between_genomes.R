@@ -2,13 +2,18 @@
 
 #Load up the ANI matrix
 
-ANImatrix <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Data_files/ANI_matrix.csv", header = T, row.names = 1)
-
+ANImatrix <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/ANI/ANI_matrix.csv", header = T, row.names = 1)
+metadata <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supplemental/MAG_information.csv")
 # remove x and .fna from row and column names
 
 rownames(ANImatrix) <- gsub(".fna", "", rownames(ANImatrix))
 colnames(ANImatrix) <- gsub("X", "", colnames(ANImatrix))
 colnames(ANImatrix) <- gsub(".fna", "", colnames(ANImatrix))
+
+# Only keep MAGs that met MIMARKs medium definition for inclusion in the manuscript
+
+ANImatrix <- ANImatrix[which(rownames(ANImatrix) %in% metadata$IMG_OID), which(colnames(ANImatrix) %in% metadata$IMG_OID)]
+
 
 # For every MAG, find the other MAGs with greater than 95% ANI - excluding the match to itself
 
@@ -24,6 +29,7 @@ for(i in 1:dim(ANImatrix)[2]){
   }
 }
 
-#Output a csv file so I can copy/paste into my combined genome data file
 
-write.csv(data.frame(colnames(ANImatrix), hits), "C:/Users/Alex/Desktop/MAGstravaganza/Data_files/ANI_95.csv")
+# Output a csv file
+
+write.csv(data.frame(colnames(ANImatrix), hits), "C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/ANI/ANI_95.csv")
