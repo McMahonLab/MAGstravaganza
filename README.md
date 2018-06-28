@@ -1,4 +1,5 @@
-#Connections between freshwater carbon and nutrient cycles revealed through reconstructed community genomes
+# Connections between freshwater carbon and nutrient cycles revealed through reconstructed community genomes
+
 We propose that the name for a group of MAGs (metagenome-assembled genomes) is a MAGstravaganza, like a gaggle of geese or a congress of owls. Using time-series metagenomes and time-series resolved MAGs from three different freshwater environments, we analyze predicted functions and how these function co-occur in genomes. This reveals how carbon and nutrient cycles are connected by microbes in freshwater.
 
 The publication associated with this GitHub repo is:
