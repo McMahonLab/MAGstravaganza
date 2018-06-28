@@ -15,14 +15,14 @@ library(zoo)
 
 # Read in datasets of marker gene counts
 
-table <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/marker_gene_table.txt", header = T, row.names = 1)
+table <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/Functional_marker_gene_analysis/marker_gene_table.txt", header = T, row.names = 1)
 lakekey <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/metagenome_metadata.csv", header = T)
 lakerow <- as.character(lakekey$site[match(colnames(table), as.character(lakekey$sample))])
 
 # epilefse <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/marker_genes_LDA_significance.csv", header = T)
 # TBlefse <- read.csv("C:/Users/Alex/Desktop/MAGstravaganza/Supplemental/TBmarker_genes_LDA_significance.csv", header = T)
 
-genedata <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/metabolic_gene_info.txt", fill = TRUE)
+genedata <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/Functional_marker_gene_analysis/metabolic_gene_info.txt", fill = TRUE)
 
 # Normalize gene hits by metagenome size
 Mendota_raw_input <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/time_series_mapping/Mendota_results.txt", colClasses = c("character", "character", "numeric", "numeric"))
@@ -121,8 +121,6 @@ for(i in 1:length(genes)){
   print(item1)
   print(item2)
 } 
-
-
 
 
 ################
@@ -306,7 +304,7 @@ write.csv(gh_df, file = "C:/Users/Goose and Gander/Desktop/MAGstravaganza/Supple
 # Plot the heatmap
 gh.agg <- aggregate(Density ~ Lake + Order, data = gh_df, mean)
 gh_density_plot <- ggplot(data = gh.agg[which(gh.agg$Order != "[Blank]" & is.na(gh.agg$Order) == F), ], aes(x = Lake, y = Order, fill = Density)) + geom_tile(color = "black") + scale_fill_gradient2(low = "white", mid = "#8c96c6", high = "#810f7c", midpoint = 4) + labs(x = "", y = "") + background_grid(major = "xy") + theme(axis.text.y = element_text(size = 10), axis.text.x = element_text(size = 10, angle = 45, hjust = 1))
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/Fig3_panelA.pdf", gh_density_plot, base_height = 5, base_aspect_ratio = 0.7)
+#save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/Fig3_panelA.pdf", gh_density_plot, base_height = 5, base_aspect_ratio = 0.7)
 
 # Correlation of density and diversity
 cor.test(gh_df$Gene_Count, gh_df$Density)
@@ -340,7 +338,7 @@ part2 <- plot_grid(panelB, panelC, panelD, nrow = 3, labels = c("B", "C", "D"), 
 # Put it all together
 
 fig3 <- plot_grid(gh_density_plot, part2, labels = c("A", ""), ncol = 2)
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/Fig3.pdf", fig4, base_height = 6, base_aspect_ratio = 1.25)
+save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/Fig3.pdf", fig3, base_height = 6, base_aspect_ratio = 1.25)
 
 ##################
 # Figure 4
@@ -420,8 +418,8 @@ p5 <- ggplot(data = ME_results[which(ME_results$phylum == "Cyanobacteria" & ME_r
 all <- plot_grid(p1, p2, p3, p4, p5, nrow = 5, labels = c("A", "B", "C", "D", "E"))
 
 # Add right panel of nitrogenase counts by year
-table <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/marker_gene_table.txt", header = T, row.names = 1)
-lakekey <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/metagenome_metadata.csv", header = T)
+table <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/Functional_marker_gene_analysis/marker_gene_table.txt", header = T, row.names = 1)
+lakekey <- read.csv("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/Functional_marker_gene_analysis/metagenome_metadata.csv", header = T)
 lakerow <- as.character(lakekey$site[match(colnames(table), as.character(lakekey$sample))])
 genedata <- read.table("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/metabolic_gene_info.txt", fill = TRUE)
 
@@ -805,9 +803,8 @@ panelB <- panelB + theme(legend.position = "none")
 # panelB <- ggdraw(panelB) + draw_text("Community Composition by MAG Coverage", 
 #                                      x = 0.01, y = 0.98, hjust = -0.25, vjust = 0.1,
 #                                      size = 16)
-fig2_nolegend <- plot_grid(panelA, panelB, ncol = 1, align = "h", scale = 0.9)
-fig2 <- plot_grid(fig2_nolegend, legend, ncol = 2, rel_widths = c(1, .2))
-fig2 <- add_sub(fig2, "Figure 2. How representative are the MAGs of the microbial communities?", x = 0, hjust = 0, vjust = 1, fontface = "bold")
+figS2_nolegend <- plot_grid(panelA, panelB, ncol = 1, align = "h", scale = 0.9)
+figS2 <- plot_grid(figS2_nolegend, legend, ncol = 2, rel_widths = c(1, .2))
 
-save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/fig2.pdf", fig2, base_height = 8, base_aspect_ratio = 1.6)
+save_plot("C:/Users/Goose and Gander/Desktop/MAGstravaganza/Manuscript_plots/figS2.pdf", figS2, base_height = 8, base_aspect_ratio = 1.6)
 
