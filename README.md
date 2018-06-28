@@ -1,4 +1,3 @@
-# MAGstravaganza
 We propose that the name for a group of MAGs (metagenome-assembled genomes) is a MAGstravaganza, like a gaggle of geese or a congress of owls. Using time-series metagenomes and time-series resolved MAGs from three different freshwater environments, we analyze predicted functions and how these function co-occur in genomes. This reveals how carbon and nutrient cycles are connected by microbes in freshwater.
 
 The publication associated with this GitHub repo is:
@@ -38,6 +37,7 @@ Repo Structure
   - See the evolution of the manuscript!
 - time_series_mapping/
   - Data files with metagenome information (ie dates, sizes, and library codes)
+  - Lake_results.txt files have the number of reads mapping to each MAG from each metagenome, and the size of the metagenome
 - dbCAN_results/
   - Output of annotating CAZy enzymes in the MAGs, one file per MAG
 - Mansucript_plots/
@@ -47,4 +47,7 @@ Repo Structure
   - consolidated_pathway_data.csv/xls: aggregated pathway prediction data for input into Figure 3
   - *.xls files with lake, phylum, and "pathways in the name are the pathwya prediction files
   - *.csv files with lake and phylum have pathway data aggregated by phylum
+  - split_by_lake_phylum.R: split the IMG_function_data by lake and phylum
+  - pathways_template.xls: Template for running pathway prediction. Paste IMG function data into the 1st worksheet to use.
 - Supplemental/
+  - Assorted files used for supplemental tables, figures, and datasets. Mostly redundant with supplemental info accompanying the manuscript.
