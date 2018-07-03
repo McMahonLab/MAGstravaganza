@@ -33,3 +33,4 @@ for(i in 1:dim(ANImatrix)[2]){
 # Output a csv file
 
 write.csv(data.frame(colnames(ANImatrix), hits), "C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/ANI/ANI_95.csv")
+write.csv(ANImatrix, "C:/Users/Goose and Gander/Desktop/MAGstravaganza/Data_files/ANI/ANI_matrix.csv")
