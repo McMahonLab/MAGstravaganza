@@ -261,86 +261,43 @@ mag_data$Lake <- as.character(mag_data$Lake)
 gh_df <- mag_data[,c(1,3,4,10)]
 gh_density <- c()
 gh_diversity <- c()
-tophit <- c()
-tophit_counts <- c()
-endoglucanase <- c()
-nag <- c()
-glycosylase <- c()
-other <- c()
+
 
 # Read in each MAG's CAZy results and store GH information
 for(i in 1:dim(mag_data)[1]){
-  datafile <- read.table(paste("/Users/Alex/Desktop/MAGstravaganza/dbCAN_results/", mag_data$IMG_OID[i], ".txt", sep = ""))
-  hits <- sub(".hmm", "", datafile$V2)
-  types <- substr(hits, start = 1, stop = 2)
-  gh_hits <- hits[which(types == "GH")]
-  gh_density[i] <- length(gh_hits)/mag_data$Gene_Count[i]*100
-  gh_diversity[i] <- length(unique(gh_hits))
-  gh_counts <- table(gh_hits)
-  tophit[i] <- names(gh_counts)[which(gh_counts == max(gh_counts))]
-  tophit_counts[i] <- as.numeric(gh_counts[which(gh_counts == max(gh_counts))])
-  endoglucanase[i] <- length(which(hits == "GH74"))
-  nag[i] <- length(which(hits == "GH109"))
-  glycosylase[i] <- length(which(hits == "GH23"))
-  other[i] <- length(which(hits != "GH23" & hits != "GH109" & hits != "GH74"))
+  datafile <- read.table(paste("/Users/Alex/Desktop/MAGstravaganza/dbCAN2_results/", mag_data$IMG_OID[i], ".txt", sep = ""), sep = "\t", header = T)
+  # Calculate density - how many genes hit a GH?
+  enzyme_type <- substr(datafile$HMM.Profile, start = 1, stop = 2)
+  genes <- datafile$Gene.ID[which(enzyme_type == "GH")]
+  genes <- sapply(strsplit(as.character(genes), "_"), `[`, 1)
+  genes <- unique(genes)
+  gh_density[i] <- length(genes)/mag_data$Gene_Count[i] * 100
+  gh_diversity[i] <- length(unique(datafile$HMM.Profile[which(enzyme_type == "GH")]))
 }
+
 
 gh_df$Diversity <- gh_diversity
 gh_df$Density <- gh_density
-gh_df$TopGHHit <- tophit
-gh_df$TopGHHit_Count <- tophit_counts
-
-enzymes <- c(rep("GH74", length(endoglucanase)), rep("GH109", length(nag)), rep("GH23", length(glycosylase)), rep("other", length(other)))
-enzyme_counts <- c(endoglucanase, nag, glycosylase, other)
-mags <- rep(gh_df$IMG_OID, 4)
-gh_profiles <- data.frame(mags, enzymes, enzyme_counts)
-gh_profiles$Lake <- gh_df$Lake[match(gh_profiles$mags, gh_df$IMG_OID)]
 
 gh_df$Order <- sapply(strsplit(mag_data$Taxonomy, ";"), "[", 3)
-gh_profiles$Order <- gh_df$Order[match(gh_profiles$mags, gh_df$IMG_OID)]
 gh_df$Order <- factor(gh_df$Order, levels = rev(c("Actinomycetales", "Chlamydiales", "Cytophagales", "Mycoplasmatales", "Planctomycetales", "Puniceicoccales", "Rhodocyclales", "Sphingomonadales", "Xanthomonadales", "Solibacterales", "Bdellovibrionales", "Chlorobiales", "Holophagales", "Rickettsiales", "Bacteroidales", "Campylobacterales", "Desulfobacterales", "Desulfuromonadales", "Gallionellales", "Ignavibacteriales", "Legionellales", "Nitrosomonadales", "Pseudomonadales", "Rhizobiales", "Solirubrobacterales", "Flavobacteriales", "Acidimicrobiales", "Burkholderiales", "Methylococcales", "Methylophilales", "Sphingobacteriales", "Verrucomicrobiales")))
 
 # Output data at this stage for supplemental file
-write.csv(gh_df, file = "/Users/Alex/Desktop/MAGstravaganza/Supplemental/dbCANN_results.csv", quote = F, row.names = F)
+write.csv(gh_df, file = "/Users/Alex/Desktop/MAGstravaganza/Supplemental/dbCAN2_results.csv", quote = F, row.names = F)
+
+gh_df <- read.csv(file = "/Users/Alex/Desktop/MAGstravaganza/Supplemental/dbCAN2_results.csv", header = T)
 
 # Plot the heatmap
 gh.agg <- aggregate(Density ~ Lake + Order, data = gh_df, mean)
-gh_density_plot <- ggplot(data = gh.agg[which(gh.agg$Order != "[Blank]" & is.na(gh.agg$Order) == F), ], aes(x = Lake, y = Order, fill = Density)) + geom_tile(color = "black") + scale_fill_gradient2(low = "white", mid = "#8c96c6", high = "#810f7c", midpoint = 4) + labs(x = "", y = "") + background_grid(major = "xy") + theme(axis.text.y = element_text(size = 10), axis.text.x = element_text(size = 10, angle = 45, hjust = 1))
+fig3 <- ggplot(data = gh.agg[which(gh.agg$Order != "[Blank]" & is.na(gh.agg$Order) == F), ], aes(x = Lake, y = Order, fill = Density)) + geom_tile(color = "black") + scale_fill_gradient2(low = "white", mid = "#8c96c6", high = "#810f7c", midpoint = 4) + labs(x = "", y = "") + background_grid(major = "xy") + theme(axis.text.y = element_text(size = 10), axis.text.x = element_text(size = 10, angle = 45, hjust = 1))
 #save_plot("/Users/Alex/Desktop/MAGstravaganza/Manuscript_plots/Fig3_panelA.pdf", gh_density_plot, base_height = 5, base_aspect_ratio = 0.7)
 
 # Correlation of density and diversity
-cor.test(gh_df$Gene_Count, gh_df$Density)
+cor.test(gh_df$Diversity, gh_df$Density)
 
-# Plot GH profile for high density groups by lake
-# Note: these panels were removed per reviews due to concerns about the accuracy of GH family functional predictions
-# panelB_data <- aggregate(enzyme_counts ~ Lake + Order + enzymes, data = gh_profiles, sum)
-# 
-# ME_plot <- panelB_data[which(panelB_data$Order == "Cytophagales" | panelB_data$Order == "Mycoplasmatales" | panelB_data$Order == "Planctomycetales" | panelB_data$Order == "Puniceicoccales" | panelB_data$Order == "Flavobacteriales" | panelB_data$Order == "Sphingobacteriales" | panelB_data$Order == "Verrucomicrobiales"), ]
-# ME_plot <- ME_plot[which(ME_plot$Lake == "Mendota"), ]
-# ME_plot$Order <- factor(ME_plot$Order, levels = rev(c("Cytophagales", "Mycoplasmatales", "Planctomycetales", "Puniceicoccales", "Flavobacteriales", "Sphingobacteriales", "Verrucomicrobiales")))
-# 
-# panelB <- ggplot(ME_plot, aes(x = Order, y = enzyme_counts, fill = enzymes)) + geom_col(position = "fill") + coord_flip() + scale_fill_manual(values = c("#fb9a99", "#e31a1c", "#fdbf6f", "grey")) + labs(y = NULL, x = NULL, title = "Mendota")
-# part2_legend <- get_legend(panelB)
-# panelB <- panelB + theme(legend.position = "none")
-# 
-# TBE_plot <- panelB_data[which(panelB_data$Order == "Solibacterales" | panelB_data$Order == "Sphingobacteriales" | panelB_data$Order == "Verrucomicrobiales"), ]
-# TBE_plot <- TBE_plot[which(TBE_plot$Lake == "Trout Bog Epilimnion"), ]
-# TBE_plot$Order <- factor(TBE_plot$Order, levels = rev(c("Solibacterales", "Sphingobacteriales", "Verrucomicrobiales")))
-# 
-# panelC <- ggplot(TBE_plot, aes(x = Order, y = enzyme_counts, fill = enzymes)) + geom_col(position = "fill") + coord_flip() + scale_fill_manual(values = c("#fb9a99", "#e31a1c", "#fdbf6f", "grey")) + labs(y = NULL, x = NULL, title = "Trout Bog Epilimnion") + theme(legend.position = "none")
-# 
-# TBH_plot <- panelB_data[which(panelB_data$Order == "Bacteroidales" | panelB_data$Order == "Ignavibacteriales" | panelB_data$Order == "Flavobacteriales" | panelB_data$Order == "Sphingobacteriales" | panelB_data$Order == "Verrucomicrobiales"), ]
-# TBH_plot <- TBH_plot[which(TBH_plot$Lake == "Trout Bog Hypolimnion"), ]
-# TBH_plot$Order <- factor(TBH_plot$Order, levels = rev(c("Bacteroidales", "Ignavibacteriales", "Flavobacteriales", "Sphingobacteriales", "Verrucomicrobiales")))
-# 
-# panelD <- ggplot(TBH_plot, aes(x = Order, y = enzyme_counts, fill = enzymes)) + geom_col(position = "fill") + coord_flip() + scale_fill_manual(values = c("#fb9a99", "#e31a1c", "#fdbf6f", "grey")) + labs(y = "GH Proportion", x = NULL, title = "Trout Bog Hypolimnion") + theme(legend.position = "none")
-# 
-# part2 <- plot_grid(panelB, panelC, panelD, nrow = 3, labels = c("B", "C", "D"), rel_heights = c(7, 4, 6))
-
-# Put it all together
 
 #fig3 <- plot_grid(gh_density_plot, part2, labels = c("A", ""), ncol = 2)
-save_plot("/Users/Alex/Desktop/MAGstravaganza/Manuscript_plots/Fig3.pdf", fig3, base_height = 6, base_aspect_ratio = 1.25)
+save_plot("/Users/Alex/Desktop/MAGstravaganza/Manuscript_plots/Fig3_revised.pdf", fig3, base_height = 6, base_aspect_ratio = 0.6)
 
 ##################
 # Figure 4
@@ -421,9 +378,9 @@ all <- plot_grid(p1, p2, p3, p4, p5, nrow = 5, labels = c("A", "B", "C", "D", "E
 
 # Add right panel of nitrogenase counts by year
 table <- read.table("/Users/Alex/Desktop/MAGstravaganza/Data_files/Functional_marker_gene_analysis/marker_gene_table.txt", header = T, row.names = 1)
-lakekey <- read.csv("/Users/Alex/Desktop/MAGstravaganza/Data_files/Functional_marker_gene_analysis/metagenome_metadata.csv", header = T)
+lakekey <- read.csv("/Users/Alex/Desktop/MAGstravaganza/Data_files/metagenome_metadata.csv", header = T)
 lakerow <- as.character(lakekey$site[match(colnames(table), as.character(lakekey$sample))])
-genedata <- read.table("/Users/Alex/Desktop/MAGstravaganza/Data_files/metabolic_gene_info.txt", fill = TRUE)
+genedata <- read.table("/Users/Alex/Desktop/MAGstravaganza/Data_files/Functional_marker_gene_analysis/metabolic_gene_info.txt", fill = TRUE)
 
 genes2keep <- genedata$V1[grep("nitrogenase", as.character(genedata$V3))]
 table2 <- table[match(genes2keep, rownames(table)), which(lakerow == "ME_epi")]
@@ -524,7 +481,9 @@ trace <- rbind(trace1, trace2, trace3)
 
 p10 <- ggplot(data = table2[which(table2$year == "2012"), ], aes(x = Julian_Date, y = value, color = genes)) + geom_point(size = 2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none") + scale_x_continuous(breaks = pretty(table2$Julian_Date, 30), limits = c(75, 334)) + geom_rect(data = seasons, inherit.aes = FALSE, aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), alpha = 0.1, fill = c("skyblue", "springgreen", "goldenrod"), color = "black") + geom_line(data = trace, aes(y = value, x = Julian_Date, color = genes), size = 2) + labs(title = "2012") + scale_color_manual(values = c("#b2182b", "#2166ac", "#542788")) + labs(x = NULL, y = NULL)
 
-all <- plot_grid(p1, p6, p2, p7, p3, p8, p4, p9, p5, p10, nrow = 5, labels = c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"))
+all <- plot_grid(p1, p6, p2, p7, p3, p8, p4, p9, p5, p10, nrow = 5, labels = c("A", "F", "B", "G", "C", "H", "D", "I", "E", "J"))
+
+
 
 
 save_plot("/Users/Alex/Desktop/MAGstravaganza/Manuscript_plots/Fig4_revised.pdf", all, base_height = 10, base_aspect_ratio = 1.25)
