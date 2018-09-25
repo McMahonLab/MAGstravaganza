@@ -1,0 +1,130 @@
+Name	Length	Category	Wilcoxon_group
+4-hydroxybutyryl-CoA-synthetase	480	alt_carbon_fix	not_plotted
+aclA_alignment-sample1	646	citrate_lyase	not_plotted
+aclB_alignment-sample1	436	citrate_lyase	not_plotted
+TIGR02061-sample1	628	adenylylsulfate_reductase	sulfate adenylyltransferase
+TIGR02689-sample1	128	arsenate_reductase	not_plotted
+TIGR02693-sample1	832	arsenite_oxidation	not_plotted
+TIGR02694-sample1	131	arsenite_oxidation	not_plotted
+TIGR02691-sample1	124	arsenate_reductase	not_plotted
+TIGR02910-sample1	339	sulfite_reductase	sulfite reductase
+TIGR02911-sample1	259	sulfite_reductase	sulfite reductase
+TIGR00014-sample1	109	arsenate_reductase	not_plotted
+TIGR02912-sample1	332	sulfite_reductase	sulfite reductase
+TIGR02416-sample1	781	carbon_monoxide_dehydrogenase	not_plotted
+coxM_alignment-sample1	286	carbon_monoxide_dehydrogenase	not_plotted
+coxS_alignment-sample1	163	carbon_monoxide_dehydrogenase	not_plotted
+TIGR00780-sample1	490	cbb3_cytochrome_c_oxidase	ccb3 cytochrome c
+TIGR00781-sample1	233	cbb3_cytochrome_c_oxidase	cbb3 cytochrome c
+TIGR00782-sample1	286	cbb3_cytochrome_c_oxidase	cbb3 cytochrome c
+PF06778_seed-sample1	197	chlorite dismutase	not_plotted
+TIGR01702-sample1	626	carbon_monoxide_dehydrogenase	not_plotted
+TIGR00316-sample1	471	carbon_monoxide_dehydrogenase	not_plotted
+TIGR00381-sample1	407	carbon_monoxide_dehydrogenase	not_plotted
+TIGR02891-sample1	511	cytochrome_oxidase_c	not_plotted
+TIGR02866-sample1	198	cytochrome_oxidase_c	not_plotted
+PF01654_seed-sample1	437	cytochrome_bd_terminal_oxidase	cytochrome bd
+TIGR00203-sample1	388	cytochrome_d_ubiquinol_oxidase	cytochrome d
+TIGR01433-sample1	229	cytochrome_o_ubiquinol_oxidase	cytochrome o
+TIGR02847-sample1	98	cytochrome_o_ubiquinol_oxidase	cytochrome o
+TIGR01473-sample1	277	protoheme_IX_farnesyltransferase	not_plotted
+TIGR00455-sample1	181	adenylyl-sulfate_kinase	not_plotted
+TIGR02034-sample1	426	sulfate_adenylyltransferase	sulfate adenylyltransferase
+TIGR02064-sample1	402	dissimilatory_sulfite_reductase 
+TIGR02066-sample1	355	dissimilatory_sulfite_reductase
+dsrD_PF08679_stockholm-sample1	68	dissimilatory_sulfite_reductase	sulfite reductase
+TIGR03126-sample1	164	formaldehyde_activating_enzyme	not_plotted
+fcc_interpro-sample1	438	flavocytochrome_sulfide_dehydrogenase	not_plotted
+TIGR01591-sample1	684	formate_dehydrogenase	not_plotted
+TIGR01582-sample1	286	formate_dehydrogenase	not_plotted
+TIGR01583-sample1	221	formate_dehydrogenase	not_plotted
+TIGR02819-sample1	409	formaldehyde_dehydroganse	not_plotted
+TIGR02512-sample1	378	FeFe_hydrogenase	FeFe hydrogenase
+TIGR04105-sample1	463	FeFe_hydrogenase	FeFe hydrogenase
+TIGR03119-sample1	294	formylmethanofuran_tetrahydromethanoptern_N-formyltransferase	not_plotted
+TIGR01428-sample1	201	haloacid_dehalogenase	not_plotted
+hzoA_alignment-sample1	578	hydrazine-oxidizing_enzyme	not_plotted
+hzsA_alignment-sample1	846	hydrazine-oxidizing_enzyme	not_plotted
+Hydrogenase_Vignais_Group_1_alignment-sample1	548	hydrogenase_group1	hydrogenase group1
+Hydrogenase_Vignais_Group_2a_alignment-sample1	523	hydrogenase_group2a	hydrogenase group2a
+Hydrogenase_Vignais_Group_2b_alignment-sample1	504	hydrogenase_group2b	hydrogenase group2b
+Hydrogenase_Vignais_Group_3a_alignment-sample1	434	hydrogenase_group3a	hydrogenase group3a
+Hydrogenase_Vignais_Group_3b_alignment-sample1	429	hydrogenase_group3b	hydrogenase group3b
+Hydrogenase_Vignais_Group_3c_alignment-sample1	481	hydrogenase_group3c	hydrogenase group3c
+Hydrogenase_Vignais_Group_3d_alignment-sample1	487	hydrogenase_group3d	hydrogenase group3d
+Hydrogenase_Vignais_Group_4_alignment-sample1	482	hydrogenase_group4	hydrogenase group4
+TIGR02659-sample1	188	methylamine_dehydrogenase	not_plotted
+TIGR02658-sample1	382	methylamine_dehydrogenase	not_plotted
+malonyl-CoA-reductase_alignment-sample1	1246	malonyl-CoA-reductase	not_plotted
+TIGR03256-sample1	550	methyl-coenzyme_M_reductase	not_plotted
+TIGR03257-sample1	441	methyl-coenzyme_M_reductase	not_plotted
+MmoB_PF02406_full.stockholm-sample1	92	methane_monooxygenase	not_plotted
+TIGR04550-sample1	69	soluble_methane_monooxygenase	not_plotted
+TIGR03120-sample1	314	methenyltetrahydromethanopterin_cyclohydrolase	not_plotted
+TIGR03259-sample1	250	methyl-coenzyme_M_reductase	not_plotted
+pqq_xoxF_mxaF_alignment-sample1	615	methanol_dehydrogenase	not_plotted
+TIGR03507-sample1	688	decaheme_c-type_cytochrome	not_plotted
+TIGR03509-sample1	672	decaheme-associated_outer_membrane_protein	not_plotted
+TIGR01706-sample1	829	periplasmic_nitrate_reductase	nitrate reductase
+NapB_PF03892_full.stockholm-sample1	154	nitrate_reductase_cytochrome_c-type	nitrate reductase
+TIGR01580-sample1	1287	nitrate_reductase	nitrate reductase
+TIGR01660-sample1	511	nitrate_reductase	nitrate reductase
+TIGR04266-sample1	433	NDMA-dependent_methanol_dehydrogenase	not_plotted
+TIGR01861-sample1	521	Fe-only_nitrogenase	nitrogenase
+TIGR01282-sample1	483	nitrogenase_MoFe	nitrogenase
+TIGR01860-sample1	468	nitrogenase_VaFe	nitrogenase
+TIGR02931-sample1	462	Fe-only_nitrogenase	nitrogenase
+TIGR01286-sample1	512	nitrogenase_MoFe	nitrogenase
+TIGR02932-sample1	472	nitrogenase_VaFe	nitrogenase
+TIGR02929-sample1	116	Fe-only_nitrogenase	nitrogenase
+TIGR02930-sample1	107	nitrogenase_VaFe	nitrogenase
+TIGR01287-sample1	289	nitrogenase_iron_protein	nitrogenase
+TIGR02374-sample1	796	nitrite_reductase	nitrite reductase
+TIGR02378-sample1	110	nitrite_reductase	nitrite reductase
+TIGR02376-sample1	327	nitrite_reductase	nitrite reductase
+norB_alignment-sample1	753	nitric_oxide_reductase	nitric oxide reductase
+norC_alignment-sample1	148	nitric_oxide_reductase	nitric oxide reductase
+nxrA_alignment-sample1	1180	nitrite_oxidotreductase	not_plotted
+nxrB_alignment-sample1	434	nitrite_oxidotreductase	not_plotted
+nirS_alignment-sample1	568	nitrite_reductase	nitrite reductase
+TIGR04247-sample1	380	nitrous_oxide_reductase	nitrous oxide reductase
+TIGR04246-sample1	599	nitrous_oxide_reductase	nitrous oxide reductase
+NrfA_PF02335_full..stockholm-sample1	433	cytochrome_c_nitrite_reductase	nitrite reductase
+TIGR03152-sample1	450	formate_dependent_cytochrome_c_nitrite_reductase	nitrite reductase
+TIGR03148-sample1	323	cytochrome_c_nitrite_reductase	nitrite reductase
+TIGR03153-sample1	145	cytochrome_c_nitrite_reductase	nitrite reductase
+TIGR01323-sample1	192	nitrile_hydratase	not_plotted
+TIGR03888-sample1	220	nitrile_hydratase	not_plotted
+TIGR04315-sample1	449	octaheme_c-type_cytochrome	not_plotted
+TIGR03479-sample1	920	DMSO_reductase	not_plotted
+TIGR03478-sample1	332	DMSO_reductase	not_plotted
+TIGR03080-sample1	237	methane_ammonia_monooxygenase	not_plotted
+TIGR03079-sample1	399	methane_ammonia_monooxygenase	not_plotted
+TIGR03078-sample1	232	methane_ammonia_monooxygenase	not_plotted
+propionyl-CoA-synthase_alignment-sample1	1855	alt_carbon_fixation	not_plotted
+TIGR01432-sample1	236	cytochrome_aa3_quinol_oxidase 	cytochrome aa3
+TIGR02882-sample1	647	cytochrome_aa3_quinol_oxidase	cytochrome aa3
+TIGR02486-sample1	302	reductive_dehalogenase	not_plotted
+rubisco_form_I_alignment-sample1	499	rubisco	RuBisCO
+rubisco_form_II_alignment-sample1	468	rubisco	RuBisCO
+rubisco_form_III_alignment-sample1	460	rubisco	RuBisCO
+rubisco_form_II_III_alignment-sample1	485	rubisco	RuBisCO
+rubisco_form_IV_alignment-sample1	437	rubisco	RuBisCO
+TIGR00339-sample1	397	sulfate_adenylyltranferase	sulfate ademylyltransferase
+TIGR03313-sample1	979	selenate_reductase	not_plotted
+TIGR02821-sample1	284	s-formylglutathione_hydrolase	not_plotted
+TIGR02818-sample1	388	s-hydroxymethylglutathione_dehydrogenase	not_plotted
+TIGR03451-sample1	378	s-hydroxymethylmycothiol_dehydrogenase	not_plotted
+sor_PF07682_full.stockholm-sample1	316	sulfur_oxygenase_reductase	not_plotted
+TIGR04486-sample1	573	thiosulfohydrolase_SoxB	SOX
+TIGR04555-sample1	407	sulfite_dehydrogenase_SoxC	SOX
+TIGR04488-sample1	150	thiosulfate_oxidation_carrier_SoxY SOX
+sulfur_dioxygenase_sdo_alignment-sample1	245	sulfur_dioxygenase	not_plotted
+thiosulfate_reductase_phsA_alignment-sample1	778	thiosulfate_reductase	not_plotted
+TIGR00193-sample1	103	urease	not_plotted
+TIGR00192-sample1	107	urease	not_plotted
+TIGR01792-sample1	582	urease	not_plotted
+TIGR03315-sample1	1024	selenate reductase	not_plotted
+TIGR03312-sample1	257	selenate reductase	not_plotted
+gi|118567952|gb|ABL02757.1|sqr	431	sulfide_quinone_reductase	sulfide quinone reductase
+gi|500800570|ref|WP_011998629.1|4-hydroxybutyryl-CoA-dehydratase	512	alt_carbon_fixation	not_plotted
