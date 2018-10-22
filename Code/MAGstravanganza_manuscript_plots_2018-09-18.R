@@ -264,6 +264,8 @@ gh_diversity <- c()
 
 
 # Read in each MAG's CAZy results and store GH information
+supp_data <- read.table(paste("/Users/Alex/Desktop/MAGstravaganza/dbCAN2_results/", mag_data$IMG_OID[1], ".txt", sep = ""), sep = "\t", header = T)
+supp_data$Genome <- mag_data$IMG_OID[1]
 for(i in 1:dim(mag_data)[1]){
   datafile <- read.table(paste("/Users/Alex/Desktop/MAGstravaganza/dbCAN2_results/", mag_data$IMG_OID[i], ".txt", sep = ""), sep = "\t", header = T)
   # Calculate density - how many genes hit a GH?
@@ -273,8 +275,13 @@ for(i in 1:dim(mag_data)[1]){
   genes <- unique(genes)
   gh_density[i] <- length(genes)/mag_data$Gene_Count[i] * 100
   gh_diversity[i] <- length(unique(datafile$HMM.Profile[which(enzyme_type == "GH")]))
+  datafile$Genome <- mag_data$IMG_OID[i]
+  supp_data <- rbind(supp_data, datafile)
 }
 
+# remove intializing dataset from the supp data
+supp_data <- supp_data[c(59:dim(supp_data)[1]),]
+write.csv(supp_data, file = "/Users/Alex/Desktop/MAGstravaganza/Supplemental/Supplemental_DataS7.csv", quote = F, row.names = F)
 
 gh_df$Diversity <- gh_diversity
 gh_df$Density <- gh_density
