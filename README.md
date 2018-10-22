@@ -1,4 +1,4 @@
-# Connections between freshwater carbon and nutrient cycles revealed through reconstructed community genomes
+# Freshwater carbon and nutrient cycles revealed through reconstructed community genomes
 
 We propose that the name for a group of MAGs (metagenome-assembled genomes) is a MAGstravaganza, like a gaggle of geese or a congress of owls. Using time-series metagenomes and time-series resolved MAGs from three different freshwater environments, we analyze predicted functions and how these function co-occur in genomes. This reveals how carbon and nutrient cycles are connected by microbes in freshwater.
 
@@ -9,9 +9,9 @@ Copyright (c) 2018, Katherine McMahon, Alex Linz, and friends
 
 #### Are you looking to use data or code from our paper?
 You're in the right place. Raw data is located in IMG (https://img.jgi.doe.gov/cgi-bin/mer/main.cgi) or on our lab fileshare.
-- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_2018-06-05/supplemental_documents/Supplemental_Data_S1.csv" to download the metagenomic time series.
-- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_2018-06-05/supplemental_documents/Supplemental_Data_S1.csv" to download MAGs.
-- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_2018-06-05/supplemental_documents/Supplemental_Table_S2.csv" to download pooled metagenome assemblies.
+- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_revised_2018-10-22/supplemental_documents/Supplemental_Data_S1.csv" to download the metagenomic time series.
+- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_revised_2018-10-22/supplemental_documents/Supplemental_Data_S2.csv" to download MAGs.
+- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_revised_2018-10-22/supplemental_documents/Supplemental_Table_S2.csv" to download pooled metagenome assemblies.
 - If you're looking for intermediate files or code, check the list of files in this repo below.
 
 Not seeing what you're looking for? Feel free to email us at amlinz@wisc.edu or trina.mcmahon@wisc.edu.
@@ -35,12 +35,10 @@ Repo Structure
   - MAGstravaganza_manuscript_plots.R: Code to generate all plots in the manuscript
   - amino_acid_bias.sh: Code to calculate amino acid bias from open reading frames
   - process_tag_data.R: process .rData files that were output by TaxAss 16S classification
-- Manuscript_drafts/
-  - See the evolution of the manuscript!
 - time_series_mapping/
   - Data files with metagenome information (ie dates, sizes, and library codes)
   - Lake_results.txt files have the number of reads mapping to each MAG from each metagenome, and the size of the metagenome
-- dbCAN_results/
+- dbCAN2_results/
   - Output of annotating CAZy enzymes in the MAGs, one file per MAG
 - Mansucript_plots/
   - Intermediate files of plots in the mansucript
@@ -53,3 +51,7 @@ Repo Structure
   - pathways_template.xls: Template for running pathway prediction. Paste IMG function data into the 1st worksheet to use.
 - Supplemental/
   - Assorted files used for supplemental tables, figures, and datasets. Mostly redundant with supplemental info accompanying the manuscript.
+- MAGs_Manuscript_2018-06-28/
+  - The initial submission to PeerJ
+- MAGs_Manuscript_revised_2018-10-22/
+  - The revised version re-submitted to PeerJ
