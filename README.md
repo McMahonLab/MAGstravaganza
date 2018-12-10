@@ -3,13 +3,13 @@
 We propose that the name for a group of MAGs (metagenome-assembled genomes) is a MAGstravaganza, like a gaggle of geese or a congress of owls. Using time-series metagenomes and time-series resolved MAGs from three different freshwater environments, we analyze predicted functions and how these function co-occur in genomes. This reveals how carbon and nutrient cycles are connected by microbes in freshwater.
 
 The publication associated with this GitHub repo is:
-"Freshwater carbon and nutrient cycles revealed through time series metagenomics." Linz, A.M., He, S., Stevens, S.L.R., Anantharaman, K. Rohwer, R.R., Malmstrom, R.R., Bertilsson, S., McMahon, K.D. PeerJ. 2018.
+Linz AM, He S, Stevens SLR, Anantharaman K, Rohwer RR, Malmstrom RR, Bertilsson S, McMahon KD. 2018. Freshwater carbon and nutrient cycles revealed through reconstructed population genomes. PeerJ 6:e6075 https://doi.org/10.7717/peerj.6075
 
 Copyright (c) 2018, Katherine McMahon, Alex Linz, and friends
 
 #### Are you looking to use data or code from our paper?
 You're in the right place. Raw data is located in IMG (https://img.jgi.doe.gov/cgi-bin/mer/main.cgi) or on our lab fileshare.
-- Use "IMG_Genome_ID" from the file "Publication//supplemental_documents/Supplemental_Data_S1.csv" to download the metagenomic time series.
+- Use "IMG_Genome_ID" from the file "Publication/supplemental_documents/Supplemental_Data_S1.csv" to download the metagenomic time series.
 - Use "IMG_Genome_ID" from the file "Publication/supplemental_documents/Supplemental_Data_S2.csv" to download MAGs.
 - Use "IMG_Genome_ID" from the file "Publication/supplemental_documents/Supplemental_Table_S2.csv" to download pooled metagenome assemblies.
 - If you're looking for intermediate files or code, check the list of files in this repo below.
