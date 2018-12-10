@@ -9,9 +9,9 @@ Copyright (c) 2018, Katherine McMahon, Alex Linz, and friends
 
 #### Are you looking to use data or code from our paper?
 You're in the right place. Raw data is located in IMG (https://img.jgi.doe.gov/cgi-bin/mer/main.cgi) or on our lab fileshare.
-- Use "IMG_Genome_ID" from the file "Publication/supplemental_documents/Supplemental_Data_S1.csv" to download the metagenomic time series.
-- Use "IMG_Genome_ID" from the file "Publication/supplemental_documents/Supplemental_Data_S2.csv" to download MAGs.
-- Use "IMG_Genome_ID" from the file "Publication/supplemental_documents/Supplemental_Table_S2.csv" to download pooled metagenome assemblies.
+- Use "IMG_Genome_ID" from the file "Publication/Supplemental_Data_S1.csv" to download the metagenomic time series.
+- Use "IMG_Genome_ID" from the file "Publication/Supplemental_Data_S2.xlsx" to download MAGs.
+- Use "IMG Genome ID" from the file "PublicationSupplemental_Table_S2.docx" to download pooled metagenome assemblies.
 - If you're looking for intermediate files or code, check the list of files in this repo below.
 
 Not seeing what you're looking for? Feel free to email us at amlinz@wisc.edu or trina.mcmahon@wisc.edu.
