@@ -3,15 +3,15 @@
 We propose that the name for a group of MAGs (metagenome-assembled genomes) is a MAGstravaganza, like a gaggle of geese or a congress of owls. Using time-series metagenomes and time-series resolved MAGs from three different freshwater environments, we analyze predicted functions and how these function co-occur in genomes. This reveals how carbon and nutrient cycles are connected by microbes in freshwater.
 
 The publication associated with this GitHub repo is:
-"Connections between freshwater carbon and nutrient cycles revealed through time series metagenomics." Linz, A.M., He, S., Stevens, S.L.R., Anantharaman, K. Rohwer, R.R., Malmstrom, R.R., Bertilsson, S., McMahon, K.D. Submitted. 2018.
+Linz AM, He S, Stevens SLR, Anantharaman K, Rohwer RR, Malmstrom RR, Bertilsson S, McMahon KD. 2018. Freshwater carbon and nutrient cycles revealed through reconstructed population genomes. PeerJ 6:e6075 https://doi.org/10.7717/peerj.6075
 
 Copyright (c) 2018, Katherine McMahon, Alex Linz, and friends
 
 #### Are you looking to use data or code from our paper?
 You're in the right place. Raw data is located in IMG (https://img.jgi.doe.gov/cgi-bin/mer/main.cgi) or on our lab fileshare.
-- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_revised_2018-10-22/supplemental_documents/Supplemental_Data_S1.csv" to download the metagenomic time series.
-- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_revised_2018-10-22/supplemental_documents/Supplemental_Data_S2.csv" to download MAGs.
-- Use "IMG_Genome_ID" from the file "MAGs_Manuscript_revised_2018-10-22/supplemental_documents/Supplemental_Table_S2.csv" to download pooled metagenome assemblies.
+- Use "IMG_Genome_ID" from the file "Publication/Supplemental_Data_S1.csv" to download the metagenomic time series.
+- Use "IMG_Genome_ID" from the file "Publication/Supplemental_Data_S2.xlsx" to download MAGs.
+- Use "IMG Genome ID" from the file "PublicationSupplemental_Table_S2.docx" to download pooled metagenome assemblies.
 - If you're looking for intermediate files or code, check the list of files in this repo below.
 
 Not seeing what you're looking for? Feel free to email us at amlinz@wisc.edu or trina.mcmahon@wisc.edu.
@@ -45,13 +45,18 @@ Repo Structure
 - Pathway_analysis
   - IMG_function_data.csv: annotations downloaded from IMG
   - consolidated_pathway_data.csv/xls: aggregated pathway prediction data for input into Figure 3
-  - *.xls files with lake, phylum, and "pathways in the name are the pathwya prediction files
+  - *.xls files with lake, phylum, and "pathways in the name are the pathway prediction files
   - *.csv files with lake and phylum have pathway data aggregated by phylum
   - split_by_lake_phylum.R: split the IMG_function_data by lake and phylum
   - pathways_template.xls: Template for running pathway prediction. Paste IMG function data into the 1st worksheet to use.
 - Supplemental/
   - Assorted files used for supplemental tables, figures, and datasets. Mostly redundant with supplemental info accompanying the manuscript.
-- MAGs_Manuscript_2018-06-28/
-  - The initial submission to PeerJ
-- MAGs_Manuscript_revised_2018-10-22/
-  - The revised version re-submitted to PeerJ
+- Manuscript_drafts/
+  - MAGs_Manuscript_2018-06-28/
+    - The initial submission to PeerJ
+  - MAGs_Manuscript_revised_2018-10-22/
+    - The revised version re-submitted to PeerJ
+  - MAGs_Manuscript_revised_2018-11-01/
+    - The version accepted by PeerJ
+- Publication
+  - Materials published by PeerJ
